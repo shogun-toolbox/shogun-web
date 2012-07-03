@@ -1,0 +1,15 @@
+Author : Bernard Hernandez
+Description : Shogun web, done in django.
+
+Notes :
+	- All the pages are considered as a list of articles.
+	- Each article has the attribtues :
+		page     - main page of the navigation bar.
+		subpage  - subpage of the navigation bar
+		date     -
+		author   -
+		title    -
+		content  - if you want table, links, ... you need to know html code.
+
+
+	- All the admins can add an remove articles.
