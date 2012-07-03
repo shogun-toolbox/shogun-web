@@ -1,0 +1,26 @@
+﻿{% extends "subpage.html" %}
+
+    {% block subcategories %}
+
+        <h1>{{ page }}</h1>
+        
+        <p id="subnav">
+            <a href="/page/documentation/information">Information</a> <span>|</span>
+            <a href="/page/documentation/samples"><strong>Samples</strong><a> <span>|</span>
+            <a href="/page/documentation/downloads">Downloads</a> <span>|</span>
+        </p>
+    {% endblock %}
+
+    {% block content %}
+                
+            <!-- Perex -->
+            <div class="perex"><p>Description of this section.</p></div>
+            <!-- /perex -->
+
+            <!-- Write the list of articles -->
+            {% for article in articles %}
+                <dt><h3>{{ article.title }}</h3></dt>
+                <p align="justify">{{ article.content|safe }}</p><hr>
+            {% endfor %}
+
+    {% endblock %}

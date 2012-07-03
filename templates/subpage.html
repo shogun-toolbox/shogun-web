@@ -1,0 +1,67 @@
+{% extends "page.html" %}
+
+    {% block subpage %}
+
+    <hr class="noscreen" />
+
+    <!-- Title + Subcategories -->
+    <div id="title" class="box">
+    	{% block subcategories %}{% endblock %}
+    </div> 
+    <!-- /title -->
+
+    <!-- Breadcrumbs -->
+    <p id="breadcrumbs"><strong>Your are here:</strong> <a href="/page/{{ page }}/information/">{{ page }}</a> &nbsp;/&nbsp; <strong>{{ category }}</strong></p>
+
+     <!-- Columns -->
+    <div class="cols-top"></div>
+    <div class="cols box">
+
+        <!-- Content -->
+        <div class="content">
+            {% block content %} {% endblock %}          
+        </div> 
+        <!-- /content -->
+
+        <!-- Sidebar -->
+        <div class="aside">
+
+            <h2>What´s New</h2>
+
+            <ul class="ul-news">
+                <!-- Write the list of news (last articles) -->
+                {% for new in news %}
+                    <li><strong>{{ new.date }}</strong><a href="#">{{ new.title }}</a></li>
+                {% endfor %}
+            </ul>
+            
+            <p class="t-right"><a href="#"><img src="/static/design/btn-more.gif" alt="" /></a></p>
+
+            <h2>Newsletter</h2>
+            
+            <div class="aside-box box">
+            
+                <form action="#" method="get">
+                    <div class="f-left"><input type="text" size="30" name="" class="input" style="width:170px;" /></div>
+                    <div class="f-right"><input type="image" src="/static/design/btn-ok.gif" value="OK" /></div>
+                </form>
+            
+            </div> <!-- /aside-box -->
+
+            <h2>Mobile version</h2>
+            
+            <div style="padding:25px 0 25px 100px; background:url(/static/tmp/70x80.gif) 15px 50% no-repeat;" class="box">
+            
+                <p><strong>Check our mobile version</strong><br />
+                Visit us here: <a href="#">m.server.com</a></p>
+            
+            </div>
+
+        </div> <!-- /aside -->
+
+    </div> <!-- /cols -->
+    <div class="cols-bottom"></div>
+
+    <hr class="noscreen" />
+
+    {% endblock %}

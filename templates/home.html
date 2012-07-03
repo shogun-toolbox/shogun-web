@@ -1,0 +1,172 @@
+﻿{% extends "page.html" %}
+
+    {% block subpage %}
+
+    <hr class="noscreen" />
+
+    <!-- Box 01 -->
+    <div class="box-01">
+
+        <!-- Slogan (design/hx-slogan.gif) -->
+        <div id="slogan"><h1><span></span>Say Hello.<br />New version is available.</h1></div>
+
+        <hr class="noscreen" />
+
+        <!-- Ribbon (design/box-01-ribbon.gif) -->
+        <div id="ribbon"><h4 class="hidden">Price: $5,95</h4></div>
+
+        <!-- Button ("Purchase") -->
+        <p id="button"><a href="#"><img src="/static/design/box-01-button.gif" alt="" /></a></p>
+
+        <hr class="noscreen" />
+
+        <!-- News -->
+        <div id="news"><strong>What´s New:</strong> <a href="#">Version 1.5 is available for download on AppStore for $5,95</a></div>
+
+        <!-- Twitter -->
+        <div id="twitter"><a href="#">Follow us on Twitter</a></div>
+
+    </div> <!-- /box-01 -->
+
+    <hr class="noscreen" />
+
+    <!-- Box 02 -->
+    <div class="box-02-top"></div>
+    <div class="box-02 box">
+
+        <!-- Left column -->
+        <div class="col left">
+
+            <div class="in">
+            
+                <h2>Product Features</h2>
+                <p><strong>Lorem ipsum dolor sit amet consectetur elite.</strong> Nulla adipising telus non massa vestibulum est ultrices ege ta este commodo cons.</p>
+                
+            </div> <!-- /in -->
+
+            <p class="nom"><a href="#"><img src="/static/design/btn-more.gif" alt="More" /></a></p>
+
+        </div> <!-- /col -->
+
+        <!-- Center column -->
+        <div class="col center">
+
+            <div class="in">
+            
+                <h2>Preview</h2>
+                <p><strong>Lorem ipsum dolor sit amet consectetur elite.</strong> Nulla adipising telus non massa vestibulum es ultrices ege ta este commodo cons.</p>
+                
+            </div> <!-- /in -->
+
+            <p class="nom"><a href="#"><img src="/static/design/btn-more.gif" alt="More" /></a></p>
+
+        </div> <!-- /col -->
+
+        <!-- Right column -->
+        <div class="col right">
+
+            <div class="in">
+                <h2>What´s New</h2>
+                <ul class="ul-news">
+                    <!-- Write the list of news (last articles) -->
+                    {% for new in news %}
+                        <li><strong>{{ new.date }}</strong><a href="#">{{ new.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div> <!-- /in -->
+
+            <p class="nom"><a href="#"><img src="/static/design/btn-more.gif" alt="More" /></a></p>
+
+        </div> <!-- /col -->
+
+    </div> <!-- /box-02 -->
+    <div class="box-02-bottom"></div>
+
+    <hr class="noscreen" />
+
+    <!-- Box 03 -->
+    <div class="box-03-top"></div>
+    <div class="box-03 box">
+
+        <!-- Slider -->
+        <div id="loopedSlider" class="box">
+            <div class="container">
+                <div class="slides">
+                
+                    <!-- first 5 items -->
+                    <div>
+                        <ul class="list box">
+                            <li><a href="#"><img src="/static/design/slider-1.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-2.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-3.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-4.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-5.jpg" alt="" /></a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- next 5 items -->
+                    <div>
+                        <ul class="list box">
+                            <li><a href="#"><img src="/static/design/slider-6.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-7.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-8.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-9.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-10.jpg" alt="" /></a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- and next 5 items -->
+                    <div>
+                        <ul class="list box">
+                            <li><a href="#"><img src="/static/design/slider-11.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-12.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-13.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-14.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="/static/design/slider-15.jpg" alt="" /></a></li>
+                        </ul>
+                    </div>
+                    
+                </div> <!-- /slides -->
+            </div> <!-- /container -->
+
+            <!-- Arrows (left, right) -->
+            <a href="#" class="previous"><img src="/static/design/arrow-left.gif" alt="&laquo;" /></a>
+            <a href="#" class="next"><img src="/static/design/arrow-right.gif" alt="&laquo;" /></a>
+
+            <!-- Pagination -->
+            <ul class="pagination">
+                <li><a href="#"><span>1</span></a></li>
+                <li><a href="#"><span>2</span></a></li>
+                <li><a href="#"><span>3</span></a></li>
+            </ul>
+        </div> <!-- /looperslider -->
+
+        <script type="text/javascript" charset="utf-8">
+        $(function(){
+        $('#loopedSlider').loopedSlider();
+        });
+        </script>
+
+    </div> <!-- /box-03 -->
+    <div class="box-03-bottom"></div>
+
+    <hr class="noscreen" />
+
+    <!-- Box 04 -->
+    <div class="box-04 box">
+
+        <div class="box-04-title"><h3><span>Check also these great products&hellip;</span></h3></div>
+        
+        <p class="box-04-links">
+            <a href="#">Lorem ipsum</a> <span>|</span>
+            <a href="#">Lorem ipsum</a> <span>|</span>
+            <a href="#">Lorem ipsum</a> <span>|</span>
+            <a href="#">Lorem ipsum</a> <span>|</span>
+            <a href="#">Lorem ipsum</a>
+        </p>
+
+    </div> <!-- /box-04 -->
+
+    <hr class="noscreen" />
+
+    {% endblock %}
