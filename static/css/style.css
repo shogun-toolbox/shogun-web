@@ -1,0 +1,55 @@
+body {background-color:#E9E9E9; color:#000;}
+a {color:#000;}
+a:hover, a:active, a:focus {color:#ccad00;}
+
+/* ----------------------------------------------------------------------------------------------------------
+Layout
+---------------------------------------------------------------------------------------------------------- */
+
+#header #nav a {color:#303030;}
+#header #nav a:hover, #header #nav a:hover span {color:#000;}
+#header #nav li.active a, #header #nav li.active a span {color:#fff;}
+#footer p.f-left, #footer p.f-left a {color:#7f7f7f;}
+#footer p.f-left strong, #footer p.f-left strong a {color:#3f3f3f;}
+#footer p.f-right, #footer p.f-right a {color:#7f7f7f;}
+#footer a:hover {color:#000 !important;}
+
+/* ----------------------------------------------------------------------------------------------------------
+Page: Homepage
+---------------------------------------------------------------------------------------------------------- */
+
+.box-01 {background-color:#dfdfdf;}
+.box-02 .col h2 {color:#ccad00;}
+.box-02, .box-02-top, .box-02-bottom {background-color:#fff;}
+.box-03, .box-03-top, .box-03-bottom {background-color:#fff;}
+.box-04 {background-color:#dfdfdf;}
+.box-04 .box-04-title h3 {color:#fff;}
+.box-04 .box-04-links span {color:#afafaf;}
+
+/* ----------------------------------------------------------------------------------------------------------
+Page: Subpage
+---------------------------------------------------------------------------------------------------------- */
+
+#title {background-color:#000;}
+#title h1 {color:#fff;}
+#title #subnav strong {color:#fd4;}
+#title #subnav a {color:#fff;}
+#title #subnav a:hover {color:#fd4;}
+#title #subnav span {color:#3f3f3f;}
+.cols, .cols-top, .cols-bottom {background-color:#fff;}
+.content .content-box {border-top:1px solid #d0d0d0; border-bottom:1px solid #d0d0d0; background:#f5f5f5;}
+.content .perex {border-bottom:1px solid #d0d0d0;}
+.content table {border:1px solid #d0d0d0;}
+.content table th, .content table td {border-right:1px solid #d0d0d0;}
+.content table th {background-color:#000; color:#fff;}
+.content table tr.odd td {background:#f0f0f0;}
+.content dt {color:#ccad00;}
+.aside h2 {color:#ccad00;}
+.aside .aside-box {border-top:1px solid #d0d0d0; border-bottom:1px solid #d0d0d0; background:#f5f5f5;}
+
+/* ----------------------------------------------------------------------------------------------------------
+Others
+---------------------------------------------------------------------------------------------------------- */
+
+.input {border:1px solid #afafaf; background-color:#fff;}
+.border {border:1px solid #ccc;}

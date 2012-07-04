@@ -18,12 +18,14 @@ CURRENT_PATH = os.path.dirname(__file__)
 
 ROOT_PATH = "/".join(CURRENT_PATH.split("/")[0:-1])
 
+DATABASE_PATH = ROOT_PATH + '/shogun.sqlite'
+
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/bernard/Escritorio/MyDjangoProjects/shogun-web/shogun.sqlite', # Or path to database file if using sqlite3.
+        'NAME': DATABASE_PATH,           # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -172,3 +174,4 @@ LOGGING = {
 print('\nSettings.py path is ' + CURRENT_PATH)
 print('Root path is '+ ROOT_PATH)
 print('Static files path is ' + STATIC_ROOT)
+print('Data base path is ' + DATABASE_PATH)

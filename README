@@ -2,7 +2,9 @@ Author : Bernard Hernandez
 Description : Shogun web, done in django.
 
 Notes :
-	- All the pages are considered as a list of articles.
+	- All the pages are considered as a list of articles, now all are handle in the same way in the file urls.py, but is easy to add/change urls. Each page (home,about,documentation, ... has its own template).
+
+
 	- Each article has the attribtues :
 		page     - main page of the navigation bar.
 		subpage  - subpage of the navigation bar
@@ -12,4 +14,6 @@ Notes :
 		content  - if you want table, links, ... you need to know html code.
 
 
-	- All the admins can add an remove articles.
+	- All the admins can add an remove articles, very easy to edit the webpage.
+
+	-http://ip:port/admin/ - access to the admin interface.

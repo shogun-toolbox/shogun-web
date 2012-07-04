@@ -70,7 +70,7 @@
                 <ul class="ul-news">
                     <!-- Write the list of news (last articles) -->
                     {% for new in news %}
-                        <li><strong>{{ new.date }}</strong><a href="#">{{ new.title }}</a></li>
+                        <li><strong>{{ new.date }}</strong><a href="/page/{{ new.page }}/{{ new.category }}/">{{ new.title }}</a></li>
                     {% endfor %}
                 </ul>
             </div> <!-- /in -->
