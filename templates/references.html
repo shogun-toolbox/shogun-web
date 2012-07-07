@@ -1,19 +1,6 @@
 ﻿{% extends "subpage.html" %}
 
-    {% block subcategories %}
-
-        <h1>{{ page }}</h1>
-        
-        <p id="subnav">
-            <a href="/page/references/mainlist">Main List</a> <span>|</span>
-        </p>
-    {% endblock %}
-
     {% block content %}
-                
-            <!-- Perex -->
-            <div class="perex"><p>Description of this section.</p></div>
-            <!-- /perex -->
 
             <!-- Write the list of articles -->
             {% for article in articles %}
