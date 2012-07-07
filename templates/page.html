@@ -31,12 +31,15 @@
 
         <!-- Navigation -->
         <ul id="nav">
-            <li><a href="/"><span>Home</span></a></li>
-            <li><a href="/page/about/information"><span>About</span></a></li>
-            <li><a href="/page/documentation/information"><span>Documentation</span></a></li>
-            <li><a href="/page/references/mainlist"><span>References</span></a></li>
-            <li><a href="/page/contact/irc"><span>Contact</span></a></li>
-            <li><a href="/page/weblog/shogun"><span>Weblog</span></a></li>
+            {% for navpage in all_pages %}
+                {% ifequal navpage.path current_page_path  %}
+                    <li class="active">
+                {% else %}
+                    <li>
+                {% endifequal %}
+
+                <a href="/page/{{ navpage.path }}/{{ navpage.defaultSubpagePath }}"><span>{{ navpage.title }}</span></a></li>
+            {% endfor %}
         </ul>
 
     </div> 
