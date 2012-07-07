@@ -3,7 +3,7 @@
 from django.http import HttpResponse,HttpResponseNotFound
 from django.http import HttpResponseRedirect,HttpResponseNotAllowed
 
-# Librerias para renderizar los html.
+# HTML rendering libraries.
 from django.template.loader import get_template
 from django.template import Context
 
@@ -11,6 +11,9 @@ from django.template import Context
 from pages.models import Page
 from pages.models import Subpage 
 from pages.models import Article 
+
+# News downloads library.
+import httplib
 
 # ----------------------------------------------------------------------
 #                                HOME
@@ -26,7 +29,8 @@ def home(request):
 		allpages = Page.objects.all()
 		
 		# Get the last five news (articles).
-		news = Article.objects.order_by('-date')[:5]
+		news = Article.objects.order_by('-date')[:5]  
+
 	except (NameError, ValueError):
 		print(NameError + " - " + ValueError)
 
@@ -62,7 +66,7 @@ def pageHandler(request,page,subpage):
 		articles = Article.objects.filter(rootsubpage__rootpage__path__exact=page, rootsubpage__path__exact=subpage)
 
 		# Get the last 5 articles modified.
-		news = Article.objects.order_by('-date')[:5]
+		news = Article.objects.order_by('-date')[:5]  
 
 	except (NameError, ValueError):
 		print(NameError + " - " + ValueError)
