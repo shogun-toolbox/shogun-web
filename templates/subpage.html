@@ -6,12 +6,31 @@
 
     <!-- Title + Subcategories -->
     <div id="title" class="box">
-    	{% block subcategories %}{% endblock %}
+    	
+        <h1>{{ current_subpage_page }}</h1>
+        
+        <p id="subnav">
+
+            {% for navsubpage in all_subpages %}
+
+                <a href="/page/{{ current_page_path }}/{{ navsubpage.path }}">
+
+                {% ifequal navsubpage.path current_subpage_path  %}   
+                    <strong>{{ navsubpage.title }}</strong>
+                {% else %}
+                    {{ navsubpage.title }}
+                {% endifequal %}
+
+                <a/><span>|</span>
+
+            {% endfor %}
+        </p>
     </div> 
     <!-- /title -->
 
     <!-- Breadcrumbs -->
-    <p id="breadcrumbs"><strong>Your are here:</strong> <a href="/page/{{ page }}/information/">{{ page }}</a> &nbsp;/&nbsp; <strong>{{ category }}</strong></p>
+    <p id="breadcrumbs"><strong>Your are here:</strong> <a href="/page/{{ current_page_path }}/information/">
+                                   {{ current_page_path }}</a> &nbsp;/&nbsp; <strong>{{ current_subpage_path }}</strong></p>
 
      <!-- Columns -->
     <div class="cols-top"></div>
@@ -31,7 +50,7 @@
             <ul class="ul-news">
                 <!-- Write the list of news (last articles) -->
                 {% for new in news %}
-                    <li><strong>{{ new.date }}</strong><a href="/page/{{ new.page }}/{{ new.category }}/">{{ new.title }}</a></li>
+                    <li><strong>{{ new.date }}</strong><a href="/page/{{ new.page }}/{{ new.category }}/"><font size=1>{{ new.title }}</font></a></li>
                 {% endfor %}
             </ul>
             

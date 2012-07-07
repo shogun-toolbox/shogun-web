@@ -8,6 +8,8 @@ from django.template.loader import get_template
 from django.template import Context
 
 # Data Base libraries.
+from pages.models import Page
+from pages.models import Subpage 
 from pages.models import Article 
 
 # ----------------------------------------------------------------------
@@ -19,13 +21,18 @@ def home(request):
 	# choose the template.
 	template = get_template("home.html")
 
-	# Find the news (last articles updated)
 	try:
+		# Get all the pages.
+		allpages = Page.objects.all()
+		
+		# Get the last five news (articles).
 		news = Article.objects.order_by('-date')[:5]
 	except (NameError, ValueError):
 		print(NameError + " - " + ValueError)
 
-	return HttpResponse(template.render(Context({'news' : news})))  
+	return HttpResponse(template.render(Context({'current_page_path' : "home",
+												 'all_pages' : allpages,
+												 'news' : news})))  
 
 
 # ----------------------------------------------------------------------
@@ -35,23 +42,37 @@ def home(request):
 def pageHandler(request,page,subpage):
 	
 	# Choose the template.
-	template = get_template(page + ".html")
-
-	# Find the articles.
 	try:
-		articles = Article.objects.filter(page=page, category=subpage).order_by('order')
-	except (NameError, ValueError):
-		print(NameError + " - " + ValueError) 
+		template = get_template(page + ".html")
+	except (ValueError):
+		template = get_template("default.html")
 
-	# Find the news (last articles updated)
+	# Find the pages.
 	try:
+		# Get all the pages.
+		allpages = Page.objects.order_by('order')
+
+		# Get default subpages.
+		defaultsubpages = Subpage.objects.filter(order=1)
+
+		# Get all the subpages.
+		allsubpages = Subpage.objects.filter(rootpage__path__exact=page).order_by('order')
+
+		# Get the articles that are in page/subpage.
+		articles = Article.objects.filter(rootsubpage__rootpage__path__exact=page, rootsubpage__path__exact=subpage)
+
+		# Get the last 5 articles modified.
 		news = Article.objects.order_by('-date')[:5]
+
 	except (NameError, ValueError):
 		print(NameError + " - " + ValueError)
 
-	return HttpResponse(template.render(Context({'articles' : articles,
-		                                         'news' : news,
-					     					     'page' : page,
-					    						 'category' : subpage})))  
+	return HttpResponse(template.render(Context({'current_page_path' : page,
+												 'current_subpage_path' : subpage,
+												 'default_subpages' : defaultsubpages,
+												 'all_pages' : allpages,
+												 'all_subpages' : allsubpages,
+												 'articles' : articles,
+		                                         'news' : news})))  
 
 
