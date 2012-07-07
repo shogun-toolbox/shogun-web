@@ -49,7 +49,7 @@ def pageHandler(request,page,subpage):
 	try:
 		template = get_template(page + ".html")
 	except (ValueError):
-		template = get_template("default.html")
+		print(ValueError)
 
 	# Find the pages.
 	try:
