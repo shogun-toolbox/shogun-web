@@ -1,0 +1,21 @@
+﻿{% extends "subpage.html" %}
+
+    {% block content %}
+                
+            <!-- Perex -->
+            <!--<div class="perex"><p>Description of this section.</p></div>-->
+            <!-- /perex -->
+
+            <!-- Write the list of articles -->
+            {% for article in articles %}
+                <dt><h3>{{ article.updated_date }} Shoeren Sonnenburg sonne@debian.org</h3></dt>
+                <p align="justify">
+                    SHOGUN Release version {{ article.sg_ver }} ( libshogun {{ article.libshogun_ver }},
+                        data {{ article.data_ver }}, parameter {{ article.param_ver }})
+
+                    <br>
+
+                    {{ article.content|safe }}</p><hr>
+            {% endfor %}
+
+    {% endblock %}
