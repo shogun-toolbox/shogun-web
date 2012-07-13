@@ -124,6 +124,9 @@ def pageHandler(request,page,subpage):
 			if subpage == 'onenew':
 				# Get the last new.
 				articles = [New.objects.order_by('-updated_date')[0]]
+			elif subpage == 'newslist':
+				# Get all news.
+				articles = New.objects.order_by('-updated_date')
 			else:
 				# Get all the news for a year.
 				articles = New.objects.filter(updated_date__year=subpage).order_by('-updated_date')
