@@ -55,11 +55,11 @@
             <ul class="ul-news">
                 <!-- Write the list of news (last articles) -->
                 {% for new in news %}
-                    <li><strong>{{ new.date }}</strong><a href="/page/{{ new.page }}/{{ new.category }}/"><font size=1>{{ new.title }}</font></a></li>
+                    <li><strong>{{ new.updated_date }}</strong><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN release version {{ new.sg_ver }}</font></a></li>
                 {% endfor %}
             </ul>
             
-            <p class="t-right"><a href="#"><img src="/static/design/btn-more.gif" alt="" /></a></p>
+            <p class="t-right"><a href="/page/news/allnews/"><img src="/static/design/btn-more.gif" alt="" /></a></p>
 
             <h2>Newsletter</h2>
             

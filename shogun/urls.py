@@ -20,6 +20,9 @@ urlpatterns = patterns('',
     url(r'^home', 'pages.views.home'),
     url(r'^page/(?P<page>[\w|\d]+)/(?P<subpage>[\w|\d]+)', 'pages.views.pageHandler'),
 
+    # News:
+    url(r'^new/(?P<newID>[\w|\d]+)', 'pages.views.showNew'),
+
     # Main page.
     (r'^', 'pages.views.home'),
 )

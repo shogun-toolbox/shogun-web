@@ -34,3 +34,18 @@ class Article (models.Model):
 	
 	def __unicode__(self):
 		return self.rootsubpage.rootpage.path + "/" + self.rootsubpage.path + " - " + self.title
+
+# New class.
+class New (models.Model):
+	stored_date = models.CharField(max_length=20)
+	sg_ver = models.CharField(max_length=20);          # Shogun version.
+	sg_bver = models.CharField(max_length=20);         # Shogun bversion.
+	libshogun_ver = models.CharField(max_length=20);   # Libshogun version.
+	data_ver = models.CharField(max_length=20);        # Data version.
+	param_ver = models.CharField(max_length=20);       # Parameter version
+	updated_date = models.CharField(max_length=20, unique=True);  # Date
+	content = models.TextField();                      # Content
+
+	def __unicode__(self):
+		return self.updated_date + ' - shogun ' + self.sg_ver
+

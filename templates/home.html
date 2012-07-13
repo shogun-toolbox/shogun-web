@@ -21,7 +21,9 @@
         <hr class="noscreen" />
 
         <!-- News -->
-        <div id="news"><strong>What´s New:</strong> <a href="#">Version 1.5 is available for download on AppStore for $5,95</a></div>
+        <div id="news"><strong>What´s New:</strong> <a href="/new/{{ lastnew.pk }}"> SHOGUN Release version 
+            {{ lastnew.sg_ver }} (libshogun {{ lastnew.libshogun_ver }}, data {{ lastnew.data_ver }}, 
+            parameter {{ lastnew.param_ver }})</a></div>
 
         <!-- Twitter -->
         <div id="twitter"><a href="#">Follow us on Twitter</a></div>
@@ -70,7 +72,7 @@
                 <ul class="ul-news">
                     <!-- Write the list of news (last articles) -->
                     {% for new in news %}
-                        <li><strong>{{ new.date }}</strong><a href="/page/{{ new.page }}/{{ new.category }}/">{{ new.title }}</a></li>
+                        <li><strong>{{ new.updated_date }}</strong><a href="/new/{{ new.pk }}/">SHOGUN release version {{ new.sg_ver }}</a></li>
                     {% endfor %}
                 </ul>
             </div> <!-- /in -->
