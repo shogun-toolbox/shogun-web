@@ -29,4 +29,5 @@
 			- Fix reading strings from file, when strings don't have the same length.
 			- Fix massive slowdown in modular interfaces for WD based kernels (it
 			is 5-30 times faster now).
+	</content>
 </new>

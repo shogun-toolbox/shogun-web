@@ -46,7 +46,7 @@ class New (models.Model):
 	param_ver = models.CharField(max_length=20);       # Parameter version
 	updated_date = models.DateField(max_length=20, unique=True);  # Date
 	author = models.CharField(max_length=20);          # Author
-	mail = models.CharField(max_length=20);            # Mail
+	mail = models.CharField(max_length=50);            # Mail
 	content = models.TextField();                      # Content
 
 	def __unicode__(self):

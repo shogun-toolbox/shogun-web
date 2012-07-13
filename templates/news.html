@@ -8,7 +8,10 @@
 
             <!-- Write the list of articles -->
             {% for article in articles %}
-                <dt><h3>{{ article.updated_date }} Shoeren Sonnenburg sonne@debian.org</h3></dt>
+                <dt><h4>
+                    {{ article.updated_date }} -
+                    {{ article.author }} - 
+                    {{ article.mail }}</h4></dt>
                 <p align="justify">
                     SHOGUN Release version {{ article.sg_ver }} ( libshogun {{ article.libshogun_ver }},
                         data {{ article.data_ver }}, parameter {{ article.param_ver }})
