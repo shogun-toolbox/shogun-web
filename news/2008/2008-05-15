@@ -1,0 +1,32 @@
+<new>
+	<updated_date>2008-05-15</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>debian@nn7.de</mail>
+
+	<sg_ver>0.6.2</sg_ver>
+	<sg_bver>0.6.2</sg_bver>
+	<libshogun_ver>0.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>0.0</libshogunui>
+
+	<content>
+			- Experimental support for r-modular thanks to the swig team!
+			- All python-modular examples describing the use of kernels,
+			classifier, distributions, features, distances, regression and
+			preprocessors have been ported to r-modular (requires swig from svn).
+			- The 'send_command' legacy is no longer necessary, numbers can be used
+			as such and don't have to be given as strings. All examples for
+			r,python,octave,matlab have been converted to the new syntax.
+			- Resurrected the command line interface. Basic functionionality,
+			like training a classifier on strings/real valued (sparse) features
+			was restored. Readline completion was added.
+			- Documentation updates.
+		* Bugfixes:
+			- The weighted spectrum kernel is now working again.
+			- Fix the testsuite to reliably check methods that use random().
+			- Off-by-one bug fix in FixedDegreeStringKernel.
+			- Fix reading strings from file, when strings don't have the same length.
+			- Fix massive slowdown in modular interfaces for WD based kernels (it
+			is 5-30 times faster now).
+</new>

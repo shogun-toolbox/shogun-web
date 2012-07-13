@@ -1,0 +1,27 @@
+<new>
+	<updated_date>2007-11-23</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>debian@nn7.de</mail>
+
+	<sg_ver>0.4.4</sg_ver>
+	<sg_bver>0.4.4</sg_bver>
+	<libshogun_ver>0.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>0.0</libshogunui>
+
+	<content>
+		* This release contains several bugfixes:
+			- Memory leak fix in libsvm wrapper
+			- Enable error checking in matlab interface
+			- Free memory after batch computation
+			- Parallel (num_threads>1) bug occurring with batch computation
+			- Several python-modular interface cleanups
+			- Fix for Chi2 kernel
+			- Use gcc now to generate build dependencies
+			- Test for existance of log2 (enables building on interix)
+			- Python build fix
+			- Double free fix for combined kernel (python modular interface)
+		* New methods: SVMOcas, GaussianShiftKernel
+	</content>
+</new>

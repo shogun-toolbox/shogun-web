@@ -1,41 +1,52 @@
-2012-09-01 Soeren Sonnenburg <sonne@debian.org>
+<new>
+	<updated_date>2012-09-01</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>sonne@debian.org</mail>
 
-	* SHOGUN Release version 2.0.0 (libshogun 12.0, data 0.3, parameter 1)
-	* This release also contains several enhancements, cleanups and bugfixes:
-	* Features:
-		- This release contains first release of Efficient Dimensionality Reduction Toolkit (EDRT).
-		- Support for new SWIG -builtin python interface feature (SWIG 2.0.4 is required now).
-		- EDRT algorithms are now available using static interfaces such as matlab and octave.
-		- Jensen-Shannon kernel and Homogeneous kernel map preprocessor (thanks to Viktor Gal).
-		- New 'multiclass' module for multiclass classification algorithms, generic linear
-		  and kernel multiclass machines, multiclass LibLinear and OCAS wrappers,
-		  new rejection schemes concept by Sergey Lisitsyn.
-		- Mahalanobis distance, QDA, Stochastic Proximity Embedding,
-		  generic OvO multiclass machine and CoverTree & KNN integation (thanks to Fernando J. Iglesias Garcia).
-		- New regression estimation algorithms.
-		- New graphical python modular examples.
-		- Standard Cross-Validation splitting for regression problems by Heiko Strathmann
-		- New data-locking concept by Heiko Strathmann which allows to tell machines that data
-		  is not going to change during training/testing until unlocked.
-		  KernelMachines now make use of that by not recomputing kernel matrix in cross-validation.
-		- Cross-validation for KernelMachines is now parallelized.
-		- Cross-validation is now possible with custom kernels.
-		- Features may now have arbritarily many index subsets (of subsets (of subsets (...))).
-		- Various clustering measures, Least Angle Regression and new multiclass strategies
-		  concept (thanks to Chiyuan Zhang).
-		- Python Sparse matrix typemap for octave modular interface (thanks to Evgeniy Andreev).
-		- Newton SVM port (thanks to Harshit Syal)
-		- Some progress on native windows compilation using 
-		  cmake and mingw-w64 (thanks to Josh aka jklontz)
-	* Bugfixes:
-		- Fix for bug in the Gaussian Naive Bayes classifier, its domain was
-		  changed to log-space.
-		- Fix for R_static interface installation (thanks Steve Lianoglou).
-		- SVMOcas memsetting and max_train_time bugfix.
-		- Various fixes for compile errors with clang.
-		- Stratified-cross-validation now used different indices for each run.
-	* Cleanup and API Changes:
-		- Various code cleanups by Evan Shelhamer
-		- Parameter migration framework by Heiko Strathmann. From now on,
-		  changes in the shogun objects will not break loading old serialized
-		  files anymore
+	<sg_ver>2.0.0</sg_ver>
+	<sg_bver>2.0.0</sg_bver>
+	<libshogun_ver>12.0</libshogun_ver>
+	<data_ver>0.3</data_ver>
+	<param_ver>1</param_ver>
+
+	<content>
+		* This release also contains several enhancements, cleanups and bugfixes:
+		* Features:
+			- This release contains first release of Efficient Dimensionality Reduction Toolkit (EDRT).
+			- Support for new SWIG -builtin python interface feature (SWIG 2.0.4 is required now).
+			- EDRT algorithms are now available using static interfaces such as matlab and octave.
+			- Jensen-Shannon kernel and Homogeneous kernel map preprocessor (thanks to Viktor Gal).
+			- New 'multiclass' module for multiclass classification algorithms, generic linear
+			  and kernel multiclass machines, multiclass LibLinear and OCAS wrappers,
+			  new rejection schemes concept by Sergey Lisitsyn.
+			- Mahalanobis distance, QDA, Stochastic Proximity Embedding,
+			  generic OvO multiclass machine and CoverTree and KNN integation (thanks to Fernando J. Iglesias Garcia).
+			- New regression estimation algorithms.
+			- New graphical python modular examples.
+			- Standard Cross-Validation splitting for regression problems by Heiko Strathmann
+			- New data-locking concept by Heiko Strathmann which allows to tell machines that data
+			  is not going to change during training/testing until unlocked.
+			  KernelMachines now make use of that by not recomputing kernel matrix in cross-validation.
+			- Cross-validation for KernelMachines is now parallelized.
+			- Cross-validation is now possible with custom kernels.
+			- Features may now have arbritarily many index subsets (of subsets (of subsets (...))).
+			- Various clustering measures, Least Angle Regression and new multiclass strategies
+			  concept (thanks to Chiyuan Zhang).
+			- Python Sparse matrix typemap for octave modular interface (thanks to Evgeniy Andreev).
+			- Newton SVM port (thanks to Harshit Syal)
+			- Some progress on native windows compilation using 
+			  cmake and mingw-w64 (thanks to Josh aka jklontz)
+		* Bugfixes:
+			- Fix for bug in the Gaussian Naive Bayes classifier, its domain was
+			  changed to log-space.
+			- Fix for R_static interface installation (thanks Steve Lianoglou).
+			- SVMOcas memsetting and max_train_time bugfix.
+			- Various fixes for compile errors with clang.
+			- Stratified-cross-validation now used different indices for each run.
+		* Cleanup and API Changes:
+			- Various code cleanups by Evan Shelhamer
+			- Parameter migration framework by Heiko Strathmann. From now on,
+			  changes in the shogun objects will not break loading old serialized
+			  files anymore
+	</content>
+</new>

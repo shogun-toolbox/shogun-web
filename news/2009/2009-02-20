@@ -1,0 +1,47 @@
+<new>
+	<updated_date>2009-02-20</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>debian@nn7.de</mail>
+
+	<sg_ver>0.7.0</sg_ver>
+	<sg_bver>0.7.0</sg_bver>
+	<libshogun_ver>0.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>0.0</libshogunui>
+
+	<content>
+		* This release contains major feature enhancements and bugfixes:
+		* Features:
+			- Implement DotFeatures and CombinedDotFeatures. DotFeatures need
+			  to provide dot-product and similar operations (hence the name).
+			  This enables training of linear methods with mixed datatypes
+			  (sparse and dense and other even the newly implemented string
+			  based SpecFeatures and WDFeatures).
+			- MKL now does not require CPLEX any longer.
+			- Add q-norm MKL support based on internal Newton implementation.
+			- Add 1-norm MKL support based on GLPK.
+			- Add multiclass MKL support based on the GLPK and the GMNP svm solver.
+			- Implement Tensor Product Pair Kernel (TPPK).
+			- Support compilation on the iPhone :)
+			- Add an option to set wds kernel position weights.
+			- Build static libshogun.a for libshogun target.
+			- Testsuite can also test the modular R interface, added test for
+			  OligoKernel.
+			- Ocas and WDOcas can be used with a bias feature now.
+			- Update to LibSVM 2.88.
+			- Enable parallelized HMM code by default.
+		* Cleanup and API Changes:
+			- Shogun has been split up into libshogun and the static and modular
+			interfaces linking to it.
+			- Static interfaces now do proper reference counting.
+			- Remove SparseLinearClassifier: LinearClassifier is a drop-in
+			  replacement.
+			- WDOcas and SVMOcas now have the bias term enabled by default.
+		* Bugfixes:
+			- Fix regression for COMM* kernels (normalization argument was ignored).
+			- Use C99 variadic macros, instead of gcc's own variant.
+			- Disable lp_solve, it is not required as we are using GLPK now.
+			- Fix HMM training.
+	</content>
+</new>

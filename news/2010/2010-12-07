@@ -1,0 +1,40 @@
+<new>
+	<updated_date>2010-12-07</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>sonne@debian.org</mail>
+
+	<sg_ver>0.10.0</sg_ver>
+	<sg_bver>0.10.0</sg_bver>
+	<libshogun_ver>9.0</libshogun_ver>
+	<data_ver>0.1</data_ver>
+	<param_ver></param_ver>
+	<libshogunui>6.0</libshogunui>
+
+	<content>
+		* This release contains several enhancements, cleanups and bugfixes:
+		* Features:
+			- Serialization of objects deriving from CSGObject, i.e. all shogun objects
+			(SVM, Kernel, Features, Preprocessors, ...) as ASCII, JSON, XML and HDF5
+			- Create SVMLightOneClass
+			- Add CustomDistance in analogy to custom kernel
+			- Add HistogramIntersectionKernel (thanks Koen van de Sande for the patch)
+			- Matlab 2010a support
+			- SpectrumMismatchRBFKernel modular support (thanks Rob Patro for the patch)
+			- Add ZeroMeanCenterKernelNormalizer (thanks Gorden Jemwa for the patch)
+			- Swig 2.0 support
+		* Bugfixes:
+			- Custom Kernels can now be > 4G  (thanks Koen van de Sande for the patch)
+			- Set C locale on startup in init_shogun to prevent incompatiblies with
+			ascii floats and fprintf
+			- Compile fix when reference counting is disabled
+			- Fix set_position_weights for wd kernel (reported by Dave duVerle)
+			- Fix set_wd_weights for wd kernel.
+			- Fix crasher in SVMOcas (reported by Yaroslav)
+		* Cleanup and API Changes:
+			- Renamed SVM_light/SVR_light to SVMLight etc.
+			- Remove C prefix in front of non-serializable class names
+			- Drop CSimpleKernel and introduce CDotKernel as its base class. This
+			way all dot-product based kernels can be applied on top of DotFeatures
+			and only a single implementation for such kernels is needed.
+	</content>
+</new>

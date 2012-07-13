@@ -1,0 +1,40 @@
+<new>
+	<updated_date>2008-06-13</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>debian@nn7.de</mail>
+
+	<sg_ver>0.6.3</sg_ver>
+	<sg_bver>0.6.3</sg_bver>
+	<libshogun_ver>0.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>0.0</libshogunui>
+
+	<content>
+		* This release contains several cleanups and bugfixes:
+			- Fail nicely in out of memory situations.
+			- Drop R package, now configure; make; make install will work for all
+			interfaces.
+			- Disable progress output by default. Ocas now uses a progress bar and
+			  hence is less verbose.
+			- Revised directory structure with /doc, /examples, /src, /testsuite.
+			- Add common toy data repository and make all examples from all interfaces
+			use it.
+			- Add examples for cmdline interface.
+			- Dynamically generate a reference documentation for the static interfaces.
+			- Syntax highlight commands again.
+			- Support for cplex 11.
+			- Port MKL examples to R.
+			- Merge structure learning branch.
+		* Bugfixes:
+			- Don't render string if it is not printed in current loglevel anyway
+			and throw exceptions for messages with priority ERROR or higher.
+			- Compile fix when lapack is not available.
+			- Fix when only lapack and blas (but not atlas) are available.
+			- Fix bug in batch/linadd occurring for WD kernel of order 1.
+			- Check that strings have same length on initing WD kernels.
+			- Remove signal handler on Ctrl+C to fix Ctrl+C pressed twice bug.
+			- All derived classes now call their parent class on construction.
+			- Fix a crasher occuring with SVRLight on multiple threads.
+	</content>
+</new>

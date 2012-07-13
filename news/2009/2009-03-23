@@ -1,0 +1,36 @@
+<new>
+	<updated_date>2009-03-23</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>sonne@debian.org</mail>
+
+	<sg_ver>0.7.2</sg_ver>
+	<sg_bver>0.7.2</sg_bver>
+	<libshogun_ver>2.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>1.1</libshogunui>
+
+	<content>
+		* This release contains several cleanups and enhancements:
+		* Features:
+			- Support all data types from python_modular: dense, scipy-sparse
+			csc_sparse matrices and strings of type bool, char, (u)int{8,16,32,64},
+			float{32,64,96}. In addition, individual vectors/strings can now be
+			obtained and even changed.  See examples/python_modular/features_*.py
+			for examples.
+			- AUC maximization now works with arbitrary kernel SVMs.
+			- Documentation updates, many examples have been polished.
+			- Slightly speedup Oligo kernel.
+		* Bugfixes:
+			- Fix reading strings from directory (f.load_from_directory()).
+			- Update copyright to 2009.
+		* Cleanup and API Changes:
+			- Remove {Char,Short,Word,Int,Real}Features and only ever use the
+			templated SimpleFeatures.
+			- Split up examples in examples/python_modular to separate files.
+			- Now use s.set_features(strs) instead of s.set_string_features(strs)
+	          to set string features.
+			- The meaning of the width parameter for the Oligo Kernel changed, the
+			OligoKernel has been renamed to OligoStringKernel.
+	</content>
+</new>

@@ -1,0 +1,28 @@
+<new>
+	<updated_date>2007-09-01</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>debian@nn7.de</mail>
+
+	<sg_ver>0.4.1</sg_ver>
+	<sg_bver>0.4.1</sg_bver>
+	<libshogun_ver>0.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>0.0</libshogunui>
+
+	<content>
+		* This release contains minor bugfixes and improvements:
+		* Fixes for:
+			- SVMLin
+			- python examples
+			- R examples
+			- cplex 10 compatibility fixes
+			- compilation fix when configured with --disable-svm-light
+			- sliding window/position list fixes
+		* New methods
+			- Liblinear
+			- Local Alignment Kernel
+			- support for transfering StringFeatures of type word to matlab
+			- python modular support for custom kernel
+	</content>
+</new>

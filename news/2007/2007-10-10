@@ -1,0 +1,17 @@
+<new>
+	<updated_date>2007-10-10</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>debian@nn7.de</mail>
+
+	<sg_ver>0.4.3</sg_ver>
+	<sg_bver>0.4.3</sg_bver>
+	<libshogun_ver>0.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>0.0</libshogunui>
+
+	<content>
+		* This release contains minor bugfixes for the
+			weighted spectrum kernel and poims
+	</content>
+</new>

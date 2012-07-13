@@ -19,6 +19,7 @@ class newsParser():
 		# General variables.
 		self.DEBUG = False
 
+		# Folder where the news are stored.
 		self.newsfolder = 'news'
 
 		self.filepath = os.path.abspath(__file__)
@@ -31,7 +32,7 @@ class newsParser():
 
 
 	##
-	# Thethos thar parse the news.
+	# Method that parse the news.
 	##
 	def parseNews(self):
 		self.parseFolder(self.newspath)

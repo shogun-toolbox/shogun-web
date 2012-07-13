@@ -1,58 +1,69 @@
-2011-08-31 Soeren Sonnenburg <sonne@debian.org>
+<new>
+	<updated_date>2011-08-31</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>sonne@debian.org</mail>
 
-	* SHOGUN Release version 1.0.0 (libshogun 10.0, data 0.2, parameter 0)
-	* This release contains major enhancements, cleanups and bugfixes:
-	* Features:
-	   - Support for new languages: java, c#, ruby, lua in modular interfaces
-	     (GSoC project of Baozeng Ding)
-	   - Port all examples to the new languages:
-	     Ruby examples with example transition tool (thanks to Justin Patera aka serialhex)
-	   - Dimensionality reduction (manifold learning) algorithms
-	     are now available. In particular: Locally Linear Embedding (LLE), Hessian 
-	     Locally Linear Embedding (HLLE), Local Tangent Space Alignment (LTSA),
-	     Kernel PCA (kPCA), Multidimensional Scaling (MDS, with possible landmark
-	     approximation), Isomap (using Fibonacci Heap Dijkstra for shortest paths),
-	     Laplacian Eigenmaps
-	     (GSoC project of Sergey Lisitsyn)
-	   - Various new kernels: TStudentKernel, CircularKernel, WaveKernel,
-	     SplineKernel, LogKernel, RationalQuadraticKernel, WaveletKernel,
-	     BesselKernel, PowerKernel, ExponentialKernel, CauchyKernel, 
-	     ANOVAKernel, MultiquadricKernel, SphericalKernel, 
-	     DistantSegmentsKernel (thanks GSoC students for the contributions!)
-	   - Streaming / Online Feature Framework for SimpleFeatures,
-	     SparseFeatures, StringFeatures (GSoC project of Shashwat Lal Das)
-	   - SGD-QN, Online SGD, Online Liblinear, Online Vowpal Vabit (GSoC
-	     project of Shashwat Lal Das)
-	   - Model selection framework for arbitrary Machines 
-	     (GSoC project of Heiko Strathmann)
-	   - Gaussian Mixture Models (GSoC project of Alesis Novik)
-	   - FibonacciHeap for efficient shortest-path
-	     problem solving (thanks to Evgeniy Andreev)
-	   - Efficient HashSet (thanks to Evgeniy Andreev)
-	   - ARPACK wrapper (dseupd) for symmetric eigenproblems (both
-	     generalized and non-generalized), 
-	     some new LAPACK wrappers (Sergey Lisitsyn)
-	   - New Statistics module for various statistics measures (Heiko Strathmann)
-	   - Subset support to features (Heiko Strathmann)
-	   - Java externalization support (Sergey Lisitsyn)
-	   - Support matlab 2011a.
-	* Bugfixes:
-	   - Fix build failure with ld --as-needed (thanks Matthias Klose for the
-			   patch).
-	   - Fix initialization error in KRR static interfaces (thanks Maxwell
-			   Collins for the patch).
-	* Cleanup and API Changes:
-	   - Introduce Machine, KernelMachine, LinearMachine, LinearOnlineMachine,
-	     DistanceMachine with train() and apply() functions and drop Classifier.
-	   - Restructure source code layout: Merge libshogunui and libshogun into
-	     src/shogun and move all interfaces into src/shogun. Split up lib into
-	     lib, io and mathematics.
-	   - Create a single 'modshogun' module resembling the functionality found
-	     in libshogun. Now octave_modular and other modular interfaces work reliably.
-	   - Introduce SGVector, SGMatrix, SGNDArray, SGStringList for transfering
-	     object-pointers and meta-data from/to shogun. 
-	   - Classes no longer store copies of e.g. matrices, and just pass
-	     pointers on set/get operations.
-	   - Stop using new[] / delete[] and switch to SG_MALLOC, SG_CALLOC,
-	     SG_REALLOC, SG_FREE macros.
-	   - Preproc renamed to preprocessor, PCACut renamed to PCA
+	<sg_ver>1.0.0</sg_ver>
+	<sg_bver>1.0.0</sg_bver>
+	<libshogun_ver>10.0</libshogun_ver>
+	<data_ver>0.2</data_ver>
+	<param_ver>0</param_ver>
+
+	<content>
+		* This release contains major enhancements, cleanups and bugfixes:
+		* Features:
+		   - Support for new languages: java, c#, ruby, lua in modular interfaces
+		     (GSoC project of Baozeng Ding)
+		   - Port all examples to the new languages:
+		     Ruby examples with example transition tool (thanks to Justin Patera aka serialhex)
+		   - Dimensionality reduction (manifold learning) algorithms
+		     are now available. In particular: Locally Linear Embedding (LLE), Hessian 
+		     Locally Linear Embedding (HLLE), Local Tangent Space Alignment (LTSA),
+		     Kernel PCA (kPCA), Multidimensional Scaling (MDS, with possible landmark
+		     approximation), Isomap (using Fibonacci Heap Dijkstra for shortest paths),
+		     Laplacian Eigenmaps
+		     (GSoC project of Sergey Lisitsyn)
+		   - Various new kernels: TStudentKernel, CircularKernel, WaveKernel,
+		     SplineKernel, LogKernel, RationalQuadraticKernel, WaveletKernel,
+		     BesselKernel, PowerKernel, ExponentialKernel, CauchyKernel, 
+		     ANOVAKernel, MultiquadricKernel, SphericalKernel, 
+		     DistantSegmentsKernel (thanks GSoC students for the contributions!)
+		   - Streaming / Online Feature Framework for SimpleFeatures,
+		     SparseFeatures, StringFeatures (GSoC project of Shashwat Lal Das)
+		   - SGD-QN, Online SGD, Online Liblinear, Online Vowpal Vabit (GSoC
+		     project of Shashwat Lal Das)
+		   - Model selection framework for arbitrary Machines 
+		     (GSoC project of Heiko Strathmann)
+		   - Gaussian Mixture Models (GSoC project of Alesis Novik)
+		   - FibonacciHeap for efficient shortest-path
+		     problem solving (thanks to Evgeniy Andreev)
+		   - Efficient HashSet (thanks to Evgeniy Andreev)
+		   - ARPACK wrapper (dseupd) for symmetric eigenproblems (both
+		     generalized and non-generalized), 
+		     some new LAPACK wrappers (Sergey Lisitsyn)
+		   - New Statistics module for various statistics measures (Heiko Strathmann)
+		   - Subset support to features (Heiko Strathmann)
+		   - Java externalization support (Sergey Lisitsyn)
+		   - Support matlab 2011a.
+		* Bugfixes:
+		   - Fix build failure with ld --as-needed (thanks Matthias Klose for the
+				   patch).
+		   - Fix initialization error in KRR static interfaces (thanks Maxwell
+				   Collins for the patch).
+		* Cleanup and API Changes:
+		   - Introduce Machine, KernelMachine, LinearMachine, LinearOnlineMachine,
+		     DistanceMachine with train() and apply() functions and drop Classifier.
+		   - Restructure source code layout: Merge libshogunui and libshogun into
+		     src/shogun and move all interfaces into src/shogun. Split up lib into
+		     lib, io and mathematics.
+		   - Create a single 'modshogun' module resembling the functionality found
+		     in libshogun. Now octave_modular and other modular interfaces work reliably.
+		   - Introduce SGVector, SGMatrix, SGNDArray, SGStringList for transfering
+		     object-pointers and meta-data from/to shogun. 
+		   - Classes no longer store copies of e.g. matrices, and just pass
+		     pointers on set/get operations.
+		   - Stop using new[] / delete[] and switch to SG_MALLOC, SG_CALLOC,
+		     SG_REALLOC, SG_FREE macros.
+		   - Preproc renamed to preprocessor, PCACut renamed to PCA
+	</content>
+</new>

@@ -14,10 +14,16 @@ from pages.models import Article
 from pages.models import New
 
 # Import the parser.
-import parser
+import parser2
+import datetime
 
 # Global variable to parse.
-newsParser = parser.newsParser();
+try:
+	lastStoredDate = New.objects.order_by('-stored_date')[0].stored_date
+except:
+	lastStoredDate = datetime.date(2000,3,11)
+
+newsParser = parser2.myContentHandler(lastStoredDate);
 
 # ----------------------------------------------------------------------
 #                                HOME
@@ -34,9 +40,18 @@ def home(request):
 
 		# Parse the news.
 		newsParser.parseNews()
-		
+
 		# Get the last five news (articles).
-		news = New.objects.order_by('updated_date')[:5]  
+		try:
+			news = New.objects.order_by('-updated_date')[:5]  
+		except:
+			news = []
+
+		# Last new
+		if len(news)>0:
+			lastnew = news[0]
+		else:
+			lastnew = []
 
 	except (ValueError):
 		print(ValueError)
@@ -44,7 +59,7 @@ def home(request):
 	return HttpResponse(template.render(Context({'current_page_path' : "home",
 												 'all_pages' : allpages,
 												 'news' : news,
-												 'lastnew' : news[0]})))  
+												 'lastnew' : lastnew})))  
 
 
 # ----------------------------------------------------------------------
@@ -74,7 +89,7 @@ def showNew(request,newID):
 		articles = New.objects.filter(pk=newID)
 
 		# Get the last 5 articles modified.
-		news = New.objects.order_by('updated_date')[:5]  
+		news = New.objects.order_by('-updated_date')[:5]  
 
 	except (ValueError):
 		print(ValueError)
@@ -113,16 +128,22 @@ def pageHandler(request,page,subpage):
 		# Finding the articles.
 		if subpage == 'allnews':
 			# Get all the news.
-			articles = New.objects.all().order_by('updated_date')
+			articles = New.objects.all().order_by('-updated_date')
 		elif subpage == 'onenew':
 			# Get the last news.
-			articles = [New.objects.order_by('updated_date')[0]]
+			articles = [New.objects.order_by('-updated_date')[0]]
 		else:
 			# Get the articles that are in page/subpage.
 			articles = Article.objects.filter(rootsubpage__rootpage__path__exact=page, rootsubpage__path__exact=subpage)
 
 		# Get the last 5 articles modified.
-		news = New.objects.order_by('updated_date')[:5]  
+		news = New.objects.order_by('-updated_date')[:5]  
+
+		# Last new
+		if len(news)>0:
+			lastnew = news[0]
+		else:
+			lastnew = []
 
 	except (ValueError):
 		print(ValueError)
@@ -134,6 +155,6 @@ def pageHandler(request,page,subpage):
 												 'all_subpages' : allsubpages,
 												 'articles' : articles,
 		                                         'news' : news,
-		                                         'lastnew' : news[0]})))  
+		                                         'lastnew' : lastnew})))  
 
 

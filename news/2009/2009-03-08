@@ -1,0 +1,35 @@
+<new>
+	<updated_date>2009-03-08</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>debian@nn7.de</mail>
+
+	<sg_ver>0.7.1</sg_ver>
+	<sg_bver>0.7.1</sg_bver>
+	<libshogun_ver>1.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>1.0</libshogunui>
+
+	<content>
+		* This release contains several cleanups and bugfixes:
+		* Features:
+			- configure now detects libshogun/ui installed in /usr/(local/)lib if
+			libshogun/ui dirs are removed.
+			- Improved documentation (and path and doxygen fixes).
+			- Tutorial on how to develop with libshogun and to extend shogun.
+			- Added the elwms (eilergendewollmilchsau) interface that is a
+			chimera that in one file interfaces to python,octave,r,matlab and
+			provides the run_{octave,python,r} command to run code in
+			{octave,python,r} from within octave,r,matlab,python transparently
+			making variables available to the target interface avoiding file i/o.
+			- Implement AttributeFeatures for (attr,value) pairs, trees etc.
+		* Bugfixes:
+			- fix a crasher occurring with combined kernel and multiple threads.
+			- configure now allows building of modular interfaces only.
+			- n-dimensional arrays work now in octave.
+		* Cleanup and API Changes:
+			- Custom Kernel no longer requires features nor initialization, even
+			not when used in CombinedKernel (the combined kernel will skip over
+			custom kernels on init).
+	</content>
+</new>

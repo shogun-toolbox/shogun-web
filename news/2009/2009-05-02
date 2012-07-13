@@ -1,0 +1,27 @@
+<new>
+	<updated_date>2009-05-02</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>sonne@debian.org</mail>
+
+	<sg_ver>0.7.3</sg_ver>
+	<sg_bver>0.7.3</sg_bver>
+	<libshogun_ver>3.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>1.1</libshogunui>
+
+	<content>
+		* This release contains several bugfixes:
+		* Features:
+			- Improve libshogun/developer tutorial.
+			- Implement convenience function for parallel quicksort.
+			- Fasta/fastq file loading for StringFeatures.
+		* Bugfixes:
+			- get_name function was undefined in Evaluation causing the
+			PerformanceMeasures class to be defunct.
+			- Workaround bugs in the std template library for math functions.
+			- Compiles cleanly under OSX now, thanks to James Kyle.
+		* Cleanup and API Changes:
+			- Make sure that all destructors are declared virtual.
+	</content>
+</new>

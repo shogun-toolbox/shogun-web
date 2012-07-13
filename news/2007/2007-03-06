@@ -1,0 +1,30 @@
+<new>
+	<updated_date>2007-03-06</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>debian@nn7.de</mail>
+
+	<sg_ver>0.3.2</sg_ver>
+	<sg_bver>0.3.2</sg_bver>
+	<libshogun_ver>0.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>0.0</libshogunui>
+
+	<content>
+		* new methods: 
+			- SubgradientSVM
+			- GMNPSVM (multiclass b-SVM)
+			- SubgradientLPM
+			- CplexLPM
+			- LPBoost (for LPM)
+			- SVMLin
+			- weighted spectrum kernel
+		* linadd support for GPDTSVM
+		* new commands new_classifier / train_classifier / get_classifier
+		* support for sparse features (from matlab)
+		* cleaned and added many more examples 
+		* removed suffixarray code due to license conflicts
+		* Matlab R2007a support
+		* all string kernels now work on strings (not charfeatures)
+	</content>
+</new>

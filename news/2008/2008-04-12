@@ -1,0 +1,31 @@
+<new>
+	<updated_date>2008-04-12</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>debian@nn7.de</mail>
+
+	<sg_ver>0.6.0</sg_ver>
+	<sg_bver>0.6.0</sg_bver>
+	<libshogun_ver>0.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>0.0</libshogunui>
+
+	<content>
+		* This release contains several major enhancements:
+			- The static R,octave,matlab,python interfaces have been rewritten from
+			scratch simplifying future extensions. They now use the same syntax and
+			support the same set of shogun commands.
+			- Toy examples describing the use of kernels, classifier,
+			distributions, features, distances, regression and preprocessors
+			for the static python, R, octave and matlab interface have been added.
+			- Improved user documentation
+			- Support for ACML and Intel MKL
+		* New methods:
+			- POIMs for python-modular interface
+		* Bugfixes:
+			- Fixed memory leaks in Classifiers, Kernels, Distributions
+			- Fixed severale delete[]/free mismatches
+			- Fixed reading and writing of svm light format
+			- Enable ctrl-c support in octave
+	</content>
+</new>

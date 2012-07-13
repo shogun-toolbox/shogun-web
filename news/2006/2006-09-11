@@ -1,0 +1,28 @@
+<new>
+	<updated_date>2006-09-11</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>Soeren.Sonnenburg@first.fraunhofer.de</mail>
+
+	<sg_ver></sg_ver>
+	<sg_bver></sg_bver>
+	<libshogun_ver>0.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>0.0</libshogunui>
+
+	<content>
+		* incorporated MINDY support
+		* new alphabet class, all string features now have a defined
+		alphabet plus mapping function
+		* RAW (i.e. 8bit) alphabet added
+		* fixes for CommStringUlongKernel (was buggy when strings have different
+				lengths)
+		* new get_WD_scoring function
+		* compile fixes for octave and matlab on osx
+		* configure now scans a number of variants to detect include and library paths
+		* configure obeys INCLUDES LIBS environment variables and optional
+		  paths specified by --libraries --includes 
+		* updated copyright infos
+		* updated license infos
+	</content>
+</new>

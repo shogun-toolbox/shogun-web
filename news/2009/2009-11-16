@@ -1,0 +1,37 @@
+<new>
+	<updated_date>2009-11-16</updated_date> 
+	<author>Soeren Sonnenburg</author>
+	<mail>sonne@debian.org</mail>
+
+	<sg_ver>0.9.1</sg_ver>
+	<sg_bver>0.9.1</sg_bver>
+	<libshogun_ver>6.0</libshogun_ver>
+	<data_ver></data_ver>
+	<param_ver></param_ver>
+	<libshogunui>3.1</libshogunui>
+
+	<content>
+		* This release contains several enhancements, cleanups and bugfixes:
+		* Features:
+			- Integrate LaRank.
+			- Memory Mapped Features (for data sets that don't fit into memory).
+	        - Compressor module with compression and decompression support for
+	        lzo, gzip, bzip2 and lzma.
+			- Compressed String Features with on-the-fly decompression
+			(CDecompressString preproc).
+			- Parallel computation of get_kernel_matrix().
+			- One may now prefix all shogun print/outputs with file name and
+			line number (obj.io.enable_file_and_line())
+			- Chinese Documentation thanks Elpmis Lee.
+		* Bugfixes:
+			- Fix One class MKL testing in static interfaces.
+			- Configure fixes: Let octave not write history on configure; fail
+			when cplex is forcefully enabled but not found; add cplex 12 support.
+			- Fix a problem with regression and CombinedKernels employing only
+			Custom kernels.
+		* Cleanup and API Changes:
+			- String Features now (like SimpleFeatures) upon get_feature_vector
+			require an additional do_free argument and need to be freed using
+			free_feature_vector.
+	</content>
+</new>
