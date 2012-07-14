@@ -20,7 +20,7 @@ class myContentHandler(ContentHandler):
     def __init__ (self, lastStoredDate):
 
         #General variables.
-        self.DEBUG = True
+        self.DEBUG = False
 
         # Create the sax parser.
         self.theParser = make_parser()
@@ -134,6 +134,20 @@ class myContentHandler(ContentHandler):
             #Add html code.
             self.addHTMLContent()
 
+            #If now value in new should be 0.0.
+            if self.sg_ver == '':
+                self.sg_ver = '0.0.0'
+            if self.sg_bver == '':
+                self.sg_bver = '0.0.0'
+            if self.libshogun_ver == '':
+                self.libshogun_ver = '0.0'
+            if self.data_ver == '':
+                self.data_ver = '0.0'
+            if self.param_ver == '':
+                self.param_ver = '0.0'
+            if self.libshogunui == '':
+                self.libshogunui = '0.0'
+      
             #Save in DB.
             updated_date = datetime.strptime(self.updated_date, "%Y-%m-%d")
 
@@ -145,6 +159,7 @@ class myContentHandler(ContentHandler):
                 record.libshogun_ver = self.libshogun_ver
                 record.data_ver = self.data_ver
                 record.param_ver = self.param_ver
+                record.libshogunui = self.libshogunui
                 record.updated_date = updated_date
                 record.author = self.author
                 record.mail = self.mail
@@ -162,6 +177,7 @@ class myContentHandler(ContentHandler):
                             libshogun_ver=self.libshogun_ver, \
                             data_ver=self.data_ver, \
                             param_ver=self.param_ver, \
+                            libshogunui=self.libshogunui,
                             updated_date=updated_date, \
                             author=self.author, \
                             mail=self.mail, \
@@ -178,6 +194,7 @@ class myContentHandler(ContentHandler):
             self.libshogun_ver = ""         # Libshogun version.
             self.data_ver = ""              # Data version.
             self.param_ver = ""             # Param version.
+            self.libshogunui = ""           # Libshogunui version.
             self.updated_date = ""          # Updated date. 
             self.content = ""               # Content.
             self.mail = ""
@@ -201,7 +218,7 @@ class myContentHandler(ContentHandler):
             elif name == "mail":
                 self.in_mail = False
             elif name == "libshogunui":
-                self.in_linshogunui = False
+                self.in_libshogunui = False
             elif name == "content":
                 self.in_content = False         
 
@@ -267,14 +284,15 @@ class myContentHandler(ContentHandler):
     ##
     def parseFile(self, path):
 
-        print(path)
+        if self.DEBUG:
+            print(path)
 
         #Tuples of date.
         timestamp = os.path.getmtime(path)
         mdate = time.gmtime(timestamp)
         ldate = self.lastStoredDate.timetuple()
 
-        #If the modified date is more recent
+        #If the modified date is more recent than the last stored date.
         if (mdate>ldate):
             self.theParser.parse(path)
 
@@ -288,10 +306,18 @@ class myContentHandler(ContentHandler):
         self.content = ""
         stop_tag_ul=''
         stop_tag_li=''
+        first = True
+
         for l in auxcontent:
             s = l.lstrip().rstrip()
-            if s.startswith('* This'):
+            if s.startswith('* This') and first:
                 self.content+=''+s.lstrip('* ')+'\n<ul>\n'
+                first = False
+            elif s.startswith('* ') and first:
+                self.content+='<ul><li><h5>'+s.lstrip('* ')+'</h5>\n<ul>'
+                stop_tag_li=''
+                stop_tag_ul='</ul></li>\n'
+                first = False
             elif s.startswith('* '):
                 self.content+=stop_tag_li + stop_tag_ul
                 self.content+='<li><h5>'+s.lstrip('* ')+'</h5>\n<ul>'
