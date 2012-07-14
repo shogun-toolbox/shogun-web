@@ -42,7 +42,7 @@ def home(request):
 		newsParser.parseNews()
 
 		# Get the last five news (articles).
-		news = New.objects.order_by('-updated_date')[:5]  
+		news = New.objects.order_by('-updated_date')[:7]  
 
 		# Last new.
 		lastnew = news[0]

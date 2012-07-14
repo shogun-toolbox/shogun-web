@@ -11,7 +11,7 @@
 	<libshogunui>0.0</libshogunui>
 
 	<content>
-		* This release contains several bugfixes:
+		* This release contains:
 			- Memory leak fix in libsvm wrapper
 			- Enable error checking in matlab interface
 			- Free memory after batch computation
