@@ -17,10 +17,10 @@ class myContentHandler(ContentHandler):
     ## 
     # Method that is called when the object is created.
     ##
-    def __init__ (self, lastStoredDate):
+    def __init__ (self):
 
         #General variables.
-        self.DEBUG = False
+        self.DEBUG = True
 
         # Create the sax parser.
         self.theParser = make_parser()
@@ -30,6 +30,11 @@ class myContentHandler(ContentHandler):
         self.newsfolder = 'news'
 
         # Last day we stored the news.
+        try:
+            lastStoredDate = New.objects.order_by('-stored_date')[0].stored_date
+        except:
+            lastStoredDate = datetime.date(2000,3,11)
+
         self.lastStoredDate = lastStoredDate.timetuple()
 
         # Getting paths.
@@ -160,7 +165,6 @@ class myContentHandler(ContentHandler):
                 record.data_ver = self.data_ver
                 record.param_ver = self.param_ver
                 record.libshogunui = self.libshogunui
-                record.updated_date = updated_date      # Remove.
                 record.author = self.author
                 record.mail = self.mail
                 record.content = str(self.content)
@@ -268,7 +272,9 @@ class myContentHandler(ContentHandler):
         self.parseFolder(self.newspath)
 
         # Set the last stored date to the actual date (Solve the
-        # problem of loading news and not reset the server).
+        # problem of loading news and not reset the server, note
+        # that we need at least one second of difference).
+        time.sleep(1)
         self.lastStoredDate = datetime.now().timetuple()
 
     ##
@@ -295,7 +301,6 @@ class myContentHandler(ContentHandler):
 
         #Tuples of date.
         timestamp = os.path.getmtime(path)
-        #mdate = time.gmtime(timestamp)
         mdate = time.localtime(timestamp)
 
         #Information.

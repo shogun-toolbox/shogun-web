@@ -18,13 +18,8 @@ import parserHTML
 import datetime
 
 
-# Parse and setting last date we stored news.
-try:
-	lastStoredDate = New.objects.order_by('-stored_date')[0].stored_date
-except:
-	lastStoredDate = datetime.date(2000,3,11)
-
-newsParser = parserHTML.myContentHandler(lastStoredDate);
+# Parse news object.
+newsParser = parserHTML.myContentHandler();
 
 # ----------------------------------------------------------------------
 #                                HOME
