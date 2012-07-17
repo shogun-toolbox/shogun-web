@@ -30,7 +30,7 @@ class myContentHandler(ContentHandler):
         self.newsfolder = 'news'
 
         # Last day we stored the news.
-        self.lastStoredDate = lastStoredDate
+        self.lastStoredDate = lastStoredDate.timetuple()
 
         # Getting paths.
         self.filepath = os.path.abspath(__file__)
@@ -72,7 +72,7 @@ class myContentHandler(ContentHandler):
         self.content = ""               # Content.
         self.in_content = False
 
-        #In new variable.
+        #In 'new' variable.
         self.in_New = False
         
     ##
@@ -160,7 +160,7 @@ class myContentHandler(ContentHandler):
                 record.data_ver = self.data_ver
                 record.param_ver = self.param_ver
                 record.libshogunui = self.libshogunui
-                record.updated_date = updated_date
+                record.updated_date = updated_date      # Remove.
                 record.author = self.author
                 record.mail = self.mail
                 record.content = str(self.content)
@@ -260,7 +260,16 @@ class myContentHandler(ContentHandler):
     # Method that parse the news.
     ##
     def parseNews(self):
+
+        if self.DEBUG:
+            print ("Last stored date : " + time.strftime("%Y-%m-%d %H:%M:%S", self.lastStoredDate))
+        
+        # Parse forlder recursively.
         self.parseFolder(self.newspath)
+
+        # Set the last stored date to the actual date (Solve the
+        # problem of loading news and not reset the server).
+        self.lastStoredDate = datetime.now().timetuple()
 
     ##
     # Method that list the content of the folder.
@@ -284,16 +293,22 @@ class myContentHandler(ContentHandler):
     ##
     def parseFile(self, path):
 
-        if self.DEBUG:
-            print(path)
-
         #Tuples of date.
         timestamp = os.path.getmtime(path)
-        mdate = time.gmtime(timestamp)
-        ldate = self.lastStoredDate.timetuple()
+        #mdate = time.gmtime(timestamp)
+        mdate = time.localtime(timestamp)
+
+        #Information.
+        if self.DEBUG:
+            print(path + " -> " + time.strftime("%Y-%m-%d %H:%M:%S", mdate))
 
         #If the modified date is more recent than the last stored date.
-        if (mdate>ldate):
+        if (mdate>self.lastStoredDate):
+
+            # Change the modify and access time tu current time. (Solve problems 
+            # of reloading news all the times if times in computer are not equals).
+            os.utime(path,None)
+
             self.theParser.parse(path)
 
     ##

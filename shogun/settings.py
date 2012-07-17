@@ -40,7 +40,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = None
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -54,7 +54,7 @@ USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = True
+USE_L10N = False
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False
@@ -171,7 +171,8 @@ LOGGING = {
 }
 
 # Printed information.
-print('\nSettings.py path is ' + CURRENT_PATH)
-print('Root path is '+ ROOT_PATH)
-print('Static files path is ' + STATIC_ROOT)
-print('Data base path is ' + DATABASE_PATH)
+if not DEBUG:
+    print('\nSettings.py path is ' + CURRENT_PATH)
+    print('Root path is '+ ROOT_PATH)
+    print('Static files path is ' + STATIC_ROOT)
+    print('Data base path is ' + DATABASE_PATH)
