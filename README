@@ -1,19 +1,49 @@
-Author : Bernard Hernandez
+Author : Shogun.
 Description : Shogun web, done in django.
 
-Notes :
-	- All the pages are considered as a list of articles, now all are handle in the same way in the file urls.py, but is easy to add/change urls. Each page (home,about,documentation, ... has its own template).
+Explanation of directory content
+================================
+
+	- /news : All news in its respectives years in HTML format.
+
+	- /static :
+		- /admin   : To allow admin user interface works outer than localhost.
+		- /css     : css given by www.nuvio-templates.com.
+		- /design  : images given by www.nuvio-templates.com.
+		- /tmp     : images given by www.nuvio-templates.com.
+		- /figures : The images used in the articles.
+		- /js :
+				- /tiny_mce : HTML editor to make easier to add/edit content in the articles.
+				- /editors  : Database fields with special configuration.
+
+	- /templates : All templates for each different page .
+		- home.html    : Initial page.
+		- page.html    : General html.
+		- subpage.html : Extends page, html of the subpages.
+		- about.html, contact.html, ... : html for each subpage.
+
+	- /pages :
+		- views.py  : Handles the requests.
+		- models.py : DataBase description (Tables, fields, ...).
+		- admin.py  : Define which objects the admin can modify with the admin ui.
+
+	- /shogun :
+		- settings.py : Configuration.
+		- urls.py     : Urls and method in views.py that handles the url.
+
+	- parserHTML.py : Parse the news in "/news" (HTML format).
 
 
-	- Each article has the attribtues :
-		page     - main page of the navigation bar.
-		subpage  - subpage of the navigation bar
-		date     -
-		author   -
-		title    -
-		content  - if you want table, links, ... you need to know html code.
+Explanation of the database
+===========================
 
+	- Pages    : Main possible views (home,about,documentation,references,...).
+	- Subpages : Views inside the pages, for documentation (Information, Samples, Downloads).
+	- News     : News loaded using parserHTML.py from /news.
+	- Articles : Content of each page/subpage.
 
-	- All the admins can add an remove articles, very easy to edit the webpage.
+Explanation for execution
+=========================
 
-	- http://ip:port/admin/ - access to the admin interface.
+	- In root directory : python manage.py runserver port
+	- Admin ui access   : http://ip/port/admin/
