@@ -4,34 +4,34 @@ Description : Shogun web, done in django.
 Explanation of directory content
 ================================
 
-	- /news : All news in its respectives years in HTML format.
+  - /news : All news in its respectives years in HTML format.
 
-	- /static :
-		- /admin   : To allow admin user interface works outer than localhost.
-		- /css     : css given by www.nuvio-templates.com.
-		- /design  : images given by www.nuvio-templates.com.
-		- /tmp     : images given by www.nuvio-templates.com.
-		- /figures : The images used in the articles.
-		- /js :
-				- /tiny_mce : HTML editor to make easier to add/edit content in the articles.
-				- /editors  : Database fields with special configuration.
+  - /static :
+     - /admin   : To allow admin user interface works outer than localhost.
+     - /css     : css given by www.nuvio-templates.com.
+     - /design  : images given by www.nuvio-templates.com.
+     - /tmp     : images given by www.nuvio-templates.com.
+     - /figures : The images used in the articles.
+     - /js :
+         - /tiny_mce : HTML editor to make easier to add/edit content in the articles.
+         - /editors  : Database fields with special configuration.
 
-	- /templates : All templates for each different page .
-		- home.html    : Initial page.
-		- page.html    : General html.
-		- subpage.html : Extends page, html of the subpages.
-		- about.html, contact.html, ... : html for each subpage.
+  - /templates : All templates for each different page .
+     - home.html    : Initial page.
+     - page.html    : General html.
+     - subpage.html : Extends page, html of the subpages.
+     - about.html, contact.html, ... : html for each subpage.
 
-	- /pages :
-		- views.py  : Handles the requests.
-		- models.py : DataBase description (Tables, fields, ...).
-		- admin.py  : Define which objects the admin can modify with the admin ui.
+  - /pages :
+     - views.py  : Handles the requests.
+     - models.py : DataBase description (Tables, fields, ...).
+     - admin.py  : Define which objects the admin can modify with the admin ui.
 
-	- /shogun :
-		- settings.py : Configuration.
-		- urls.py     : Urls and method in views.py that handles the url.
+  - /shogun :
+     - settings.py : Configuration.
+     - urls.py     : Urls and method in views.py that handles the url.
 
-	- parserHTML.py : Parse the news in "/news" (HTML format).
+  - parserHTML.py : Parse the news in "/news" (HTML format).
 
 
 Explanation of the database
