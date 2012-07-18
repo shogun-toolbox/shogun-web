@@ -20,7 +20,7 @@ class myContentHandler(ContentHandler):
     def __init__ (self):
 
         #General variables.
-        self.DEBUG = True
+        self.DEBUG = False
 
         # Create the sax parser.
         self.theParser = make_parser()
