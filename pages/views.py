@@ -53,7 +53,7 @@ def home(request):
 
 
 # ----------------------------------------------------------------------
-#                             PAGE HANDLER
+#                             SHOW NEW
 # ----------------------------------------------------------------------
 # To render correctly the other views (about,documentation,contact,...)
 def showNew(request,newID):
@@ -91,6 +91,37 @@ def showNew(request,newID):
 												 'all_subpages' : allsubpages,
 												 'articles' : articles,
 		                                         'news' : news})))  
+
+# ----------------------------------------------------------------------
+#                             SHOW BIG PICTURE
+# ----------------------------------------------------------------------
+# To render correctly the other views (about,documentation,contact,...)
+def showPicture(request,pictureName):
+
+	# Choose the template.
+	try:
+		template = get_template("bigpicture.html")
+	except (ValueError):
+		print(ValueError)
+
+	# Find the pages.
+	try:
+		# Get all the pages.
+		allpages = Page.objects.order_by('order')
+
+		# Get picture url.
+		picture_url = "/static/figures/" + pictureName
+
+		print pictureName
+
+	except (ValueError):
+		print(ValueError)
+
+	return HttpResponse(template.render(Context({'current_page_path' : 'bigpicture',
+												 'current_subpage_path' : 'bigpicture',
+												 'all_pages' : allpages,
+												 'picture_name' : pictureName,
+												 'picture_url' : picture_url}))) 
 
 # ----------------------------------------------------------------------
 #                             PAGE HANDLER

@@ -17,8 +17,10 @@ urlpatterns = patterns('',
 
     # Other urls:
     # Subpages.
-    url(r'^home', 'pages.views.home'),
     url(r'^page/(?P<page>[\w|\d]+)/(?P<subpage>[\w|\d]+)', 'pages.views.pageHandler'),
+
+    # Big pictures.
+    url(r'^bigpicture/(?P<pictureName>.+)', 'pages.views.showPicture'),
 
     # One new selected (ID):
     url(r'^new/(?P<newID>[\w|\d]+)', 'pages.views.showNew'),

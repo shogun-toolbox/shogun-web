@@ -47,3 +47,9 @@ Explanation for execution
 
 	- In root directory : python manage.py runserver port
 	- Admin ui access   : http://ip/port/admin/
+
+Notes
+=====
+  - When clicks in a picture, see it in a big page.
+    1 - In HTML code : <img src="/bigpicture/namePicture"><src>
+    2 - The picture must be in /static/figures/ with the name namePicture.
