@@ -17,6 +17,10 @@ from pages.models import New
 import parserHTML
 import datetime
 
+
+# Parse news object.
+newsParser = parserHTML.myContentHandler();
+
 # ----------------------------------------------------------------------
 #                                HOME
 # ----------------------------------------------------------------------
@@ -25,14 +29,6 @@ def home(request):
 
 	# choose the template.
 	template = get_template("home.html")
-
-	# Parse and setting last date we stored news.
-	try:
-		lastStoredDate = New.objects.order_by('-stored_date')[0].stored_date
-	except:
-		lastStoredDate = datetime.date(2000,3,11)
-
-	newsParser = parserHTML.myContentHandler(lastStoredDate);
 
 	try:
 		# Get all the pages.
