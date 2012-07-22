@@ -27,7 +27,6 @@ class Article (models.Model):
 	order = models.IntegerField();
 	date = models.DateField();
 	time = models.TimeField();
-	#image = models.ImageField();
 	title = models.CharField(max_length=100);
 	author = models.CharField(max_length=20);
 	content = models.TextField();
@@ -47,8 +46,15 @@ class New (models.Model):
 	updated_date = models.DateField(max_length=20, unique=True);  # Date
 	author = models.CharField(max_length=20);          # Author
 	mail = models.CharField(max_length=50);            # Mail
+
+	ftp_source_code = models.CharField(max_length=500);     
+	ftp_md5sum = models.CharField(max_length=500); 
+	ftp_PGP_signature = models.CharField(max_length=500); 
+	http_source_code = models.CharField(max_length=500); 
+	http_md5sum = models.CharField(max_length=500); 
+	http_PGP_signature = models.CharField(max_length=500); 
+
 	content = models.TextField();                      # Content
 
 	def __unicode__(self):
 		return str(self.updated_date) + ' - shogun ' + str(self.sg_ver)
-
