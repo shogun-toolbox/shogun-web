@@ -17,7 +17,6 @@ from pages.models import New
 import parserHTML
 import datetime
 
-
 # Parse news object.
 newsParser = parserHTML.myContentHandler();
 
@@ -32,7 +31,7 @@ def home(request):
 
 	try:
 		# Get all the pages.
-		allpages = Page.objects.all()
+		allpages = Page.objects.order_by('order')
 
 		# Parse the news.
 		newsParser.parseNews()
@@ -76,7 +75,7 @@ def showNew(request,newID):
 		allsubpages = Subpage.objects.filter(rootpage__path__exact="news").order_by('order')
 
 		# The new selected.
-		articles = New.objects.filter(pk=newID)
+		articles = New.objects.get(pk=newID)
 
 		# Get the last 5 articles modified.
 		news = New.objects.order_by('-updated_date')[:5]  
@@ -89,7 +88,7 @@ def showNew(request,newID):
 												 'default_subpages' : defaultsubpages,
 												 'all_pages' : allpages,
 												 'all_subpages' : allsubpages,
-												 'articles' : articles,
+												 'articles' : [articles],
 		                                         'news' : news})))  
 
 # ----------------------------------------------------------------------
@@ -123,6 +122,60 @@ def showPicture(request,pictureName):
 												 'picture_name' : pictureName,
 												 'picture_url' : picture_url}))) 
 
+# ----------------------------------------------------------------------------------------------------
+#                                           NEWS
+# ----------------------------------------------------------------------------------------------------
+# Method to render correctly the view news, there are three possibilities:
+#	- 'onenew' : show the last new.
+#   - 'newslist' : show the list with all the news.
+#   - Show the news of one year.
+def news(request, subpage):
+
+	# Set the page we are.
+	page = "news"
+
+	# choose the template.
+	template = get_template(page + ".html")
+
+	try:
+		# Get all the pages.
+		allpages = Page.objects.order_by('order')
+
+		# Get default subpages.
+		defaultsubpages = Subpage.objects.filter(order=1)
+
+		# Get all the subpages.
+		allsubpages = Subpage.objects.filter(rootpage__path__exact=page).order_by('order')
+
+		# Finding the articles.
+		if subpage == 'onenew':
+			# Get the last new.
+			articles = [New.objects.order_by('-updated_date')[0]]
+		elif subpage == 'newslist':
+			# Get all news.
+			articles = New.objects.order_by('-updated_date')
+		else:
+			# Get all the news for a year.
+			articles = New.objects.filter(updated_date__year=subpage).order_by('-updated_date')
+
+		# Get the last 5 articles modified.
+		news = New.objects.order_by('-updated_date')[:5]  
+
+		# Last new
+		lastnew = news[0]
+
+	except (ValueError):
+		print(ValueError)
+
+	return HttpResponse(template.render(Context({'current_page_path' : page,
+												 'current_subpage_path' : subpage,
+												 'default_subpages' : defaultsubpages,
+												 'all_pages' : allpages,
+												 'all_subpages' : allsubpages,
+												 'articles' : articles,
+		                                         'news' : news,
+		                                         'lastnew' : lastnew})))  
+
 # ----------------------------------------------------------------------
 #                             PAGE HANDLER
 # ----------------------------------------------------------------------
@@ -146,18 +199,10 @@ def pageHandler(request,page,subpage):
 		# Get all the subpages.
 		allsubpages = Subpage.objects.filter(rootpage__path__exact=page).order_by('order')
 
-		# Finding the articles.
-		if page == 'news':
-			if subpage == 'onenew':
-				# Get the last new.
-				articles = [New.objects.order_by('-updated_date')[0]]
-			elif subpage == 'newslist':
-				# Get all news.
-				articles = New.objects.order_by('-updated_date')
-			else:
-				# Get all the news for a year.
-				articles = New.objects.filter(updated_date__year=subpage).order_by('-updated_date')
-		else:
+		if subpage=="downloads":
+			# Get all the releases.
+			articles = New.objects.order_by('-sg_ver')
+		else :
 			# Get the articles that are in page/subpage.
 			articles = Article.objects.filter(rootsubpage__rootpage__path__exact=page, rootsubpage__path__exact=subpage)
 

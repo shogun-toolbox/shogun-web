@@ -16,6 +16,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # Other urls:
+
+    # News
+    url(r'^page/news/(?P<subpage>[\w|\d]+)', 'pages.views.news'),
+
     # Subpages.
     url(r'^page/(?P<page>[\w|\d]+)/(?P<subpage>[\w|\d]+)', 'pages.views.pageHandler'),
 
