@@ -2,10 +2,40 @@
 
     {% block content %}
 
-            <!-- Write the list of articles -->
-            {% for article in articles %}
-                <dt><h3>{{ article.title }}</h3></dt>
-                <p align="justify">{{ article.content|safe }}</p><hr>
-            {% endfor %}
+    		{% ifequal current_subpage_path "downloads" %}
+    		<center>
+    			<!-- Write the list of releases -->
+    			<table>
+    				<tr>
+    					<th>Shogun version</th>
+    					<th colspan="3">FTP</th>
+    					<th colspan="3">HTTP</th>
+    				</tr>
+    				
+    				{% for new in articles %}
+                        {% ifnotequal new.sg_ver '0.0.0' %}
+        					<tr>
+        						<td align="center">{{ new.sg_ver }}</td>
+        						<td><a href="{{ new.ftp_source_code }}">Source Code</a></td>
+        						<td><a href="{{ new.ftp_md5sum }}">MD5</a></td>
+        						<td><a href="{{ new.ftp_PGP_signature }}">GPG</a></td>
+        						<td><a href="{{ new.http_source_code }}">Source Code</a></td>
+        						<td><a href="{{ new.http_md5sum }}">MD5</a></td>
+        						<td><a href="{{ new.http_PGP_signature }}">GPG</a></td>
+        					</tr>
+                        {% endifnotequal %}
+    				{% endfor %}
+    			</table>
+    		</center>
+
+    		{% else %} 
+            
+	            <!-- Write the list of articles -->
+	            {% for article in articles %}
+	                <dt><h3>{{ article.title }}</h3></dt>
+	                <p align="justify">{{ article.content|safe }}</p><hr>
+	            {% endfor %}
+
+	        {% endifequal %}
 
     {% endblock %}

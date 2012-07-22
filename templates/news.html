@@ -30,6 +30,23 @@
                         {{ article.updated_date }} -
                         {{ article.author }} - 
                         {{ article.mail }}</h4></dt>
+
+                    {% ifnotequal article.sg_ver '0.0.0' %}
+                        <center>
+                            <table>
+                                <tr><th>FTP</th>
+                                    <td><a href="{{ article.ftp_source_code }}">Source Code</a></td>
+                                    <td><a href="{{ article.ftp_md5sum }}">MD5</a></td>
+                                    <td><a href="{{ article.ftp_PGP_signature }}">PGP</a></td>
+                                    <th>HTTP</th>
+                                    <td><a href="{{ article.http_source_code }}">Source Code</a></td>
+                                    <td><a href="{{ article.http_md5sum }}">MD5</a></td>
+                                    <td><a href="{{ article.http_PGP_signature }}">PGP</a></td>
+                                </tr>
+                            </table>
+                        </center>
+                    {% endifnotequal %}
+                        
                     <p align="justify">
                         SHOGUN Release version {{ article.sg_ver }} ( libshogun {{ article.libshogun_ver }},
                             data {{ article.data_ver }}, parameter {{ article.param_ver }})
