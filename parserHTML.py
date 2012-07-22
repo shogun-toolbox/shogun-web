@@ -12,6 +12,10 @@ import time
 #Import elements needed for the database.
 from pages.models import New
 
+# Global variables.
+releasePathFTP = "ftp://shogun-toolbox.org/shogun/releases/"
+releasePathHTTP = "http://shogun-toolbox.org/archives/shogun/releases/"
+
 class myContentHandler(ContentHandler):
 
     ## 
@@ -33,7 +37,7 @@ class myContentHandler(ContentHandler):
         try:
             lastStoredDate = New.objects.order_by('-stored_date')[0].stored_date
         except:
-            lastStoredDate = datetime.date(2000,3,11)
+            lastStoredDate = datetime(2000, 1, 1, 10, 10, 10)
 
         self.lastStoredDate = lastStoredDate.timetuple()
 
@@ -153,44 +157,8 @@ class myContentHandler(ContentHandler):
             if self.libshogunui == '':
                 self.libshogunui = '0.0'
       
-            #Save in DB.
-            updated_date = datetime.strptime(self.updated_date, "%Y-%m-%d")
-
-            try:
-                record = New.objects.get(updated_date=updated_date)
-                record.stored_date = datetime.now()
-                record.sg_ver = self.sg_ver
-                record.sg_bver = self.sg_bver
-                record.libshogun_ver = self.libshogun_ver
-                record.data_ver = self.data_ver
-                record.param_ver = self.param_ver
-                record.libshogunui = self.libshogunui
-                record.author = self.author
-                record.mail = self.mail
-                record.content = str(self.content)
-                record.save()
-
-                if self.DEBUG:
-                    print ("New modified!")
-
-
-            except New.DoesNotExist:
-                record = New(stored_date=datetime.now(), \
-                            sg_ver=self.sg_ver, \
-                            sg_bver=self.sg_bver, \
-                            libshogun_ver=self.libshogun_ver, \
-                            data_ver=self.data_ver, \
-                            param_ver=self.param_ver, \
-                            libshogunui=self.libshogunui,
-                            updated_date=updated_date, \
-                            author=self.author, \
-                            mail=self.mail, \
-                            content=self.content)
-                record.save()
-
-
-                if self.DEBUG:
-                    print ("New added!")
+            # Add the new to the database.
+            self.addNew()
 
             #Reset the values.
             self.sg_ver = ""                # Shogun version.
@@ -351,3 +319,101 @@ class myContentHandler(ContentHandler):
                 self.content+=' ' +s.lstrip()
 
         self.content+=stop_tag_li + stop_tag_ul + '</ul>\n' + '\n'
+
+
+    ##
+    # Add new
+    ##
+    def addNew(self):
+
+        # Updated date in same format that database updated_date.
+        updated_date = datetime.strptime(self.updated_date, "%Y-%m-%d")
+
+        # The root version (0.5.1 -> 0.5)
+        version = ".".join(self.sg_ver.split(".")[0:-1])
+
+        # Create the path.
+        ftpPath = releasePathFTP + version + "/sources/shogun-" + self.sg_ver
+        httpPath = releasePathHTTP + version + "/sources/shogun-" + self.sg_ver
+
+        try:
+            record = New.objects.get(updated_date=updated_date)
+            record.stored_date = datetime.now()
+            record.sg_ver = self.sg_ver
+            record.sg_bver = self.sg_bver
+            record.libshogun_ver = self.libshogun_ver
+            record.data_ver = self.data_ver
+            record.param_ver = self.param_ver
+            record.libshogunui = self.libshogunui
+            record.author = self.author
+            record.mail = self.mail
+            record.content = str(self.content)
+            record.ftp_source_code=ftpPath + ".tar.bz2"
+            record.http_source_code=httpPath + ".tar.bz2"
+            record.ftp_md5sum=ftpPath + ".md5sum"
+            record.http_md5sum=httpPath + ".md5sum"
+            record.ftp_PGP_signature=ftpPath + ".tar.bz2.gpg"
+            record.http_PGP_signature=httpPath + ".tar.bz2.gpg"
+
+            # Add release download links.
+            record.save()
+
+            if self.DEBUG:
+                print ("New modified!")
+
+
+        except New.DoesNotExist:
+            record = New(stored_date=datetime.now(), \
+                         sg_ver=self.sg_ver, \
+                         sg_bver=self.sg_bver, \
+                         libshogun_ver=self.libshogun_ver, \
+                         data_ver=self.data_ver, \
+                         param_ver=self.param_ver, \
+                         libshogunui=self.libshogunui,
+                         updated_date=updated_date, \
+                         author=self.author, \
+                         mail=self.mail, \
+                         content=self.content, \
+                         ftp_source_code=ftpPath + ".tar.bz2", \
+                         http_source_code=httpPath + ".tar.bz2", \
+                         ftp_md5sum=ftpPath + ".md5sum", \
+                         http_md5sum=httpPath + ".md5sum", \
+                         ftp_PGP_signature=ftpPath + ".tar.bz2.gpg", \
+                         http_PGP_signature=httpPath + ".tar.bz2.gpg")
+            record.save()
+
+
+            if self.DEBUG:
+                print ("New added!")
+
+    ##
+    # Add related release
+    ##
+    def addRelatedRelease(self):
+
+        try:
+            record = Release.objects.get(sg_ver = self.sg_ver)
+
+            if self.DEBUG:
+                print ("Release " + self.sg_ver + " already exists.")
+            
+        except Release.DoesNotExist:
+
+            # The root version (0.5.1 -> 0.5)
+            version = ".".join(self.sg_ver.split(".")[0:-1])
+
+            # Create the path.
+            ftpPath = releasePathFTP + version + "/sources/shogun-" + self.sg_ver
+            httpPath = releasePathHTTP + version + "/sources/shogun-" + self.sg_ver
+
+            record = Release(sg_ver=self.sg_ver, \
+                             ftp_source_code=ftpPath + ".tar.bz2", \
+                             http_source_code=httpPath + ".tar.bz2", \
+                             ftp_md5sum=ftpPath + ".md5sum", \
+                             http_md5sum=httpPath + ".md5sum", \
+                             ftp_PGP_signature=ftpPath + ".tar.bz2.gpg", \
+                             http_PGP_signature=httpPath + ".tar.bz2.gpg")
+            record.save()
+
+            if self.DEBUG:
+                print ("Release " + self.sg_ver + " added.")
