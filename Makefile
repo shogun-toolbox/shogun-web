@@ -21,7 +21,7 @@ release: clean
 		$(RELEASEMEDIADIR) shogun@shogun-toolbox.org:$(WEBSITEMEDIADIR)
 	ssh shogun@shogun-toolbox.org \
 		\( sed -i -e '"s/^PRODUCTION = False/PRODUCTION = True/g"' \
-		-e '"s/trunk/shogun/g"' $(WEBSITERELEASEDIR)/settings.py \; \
+		$(WEBSITERELEASEDIR)/settings.py \; \
 		cat django/settings_override.py '>>' $(WEBSITERELEASEDIR)/settings.py \; \
 		python -mcompileall $(WEBSITERELEASEDIR)/ \; \
 		find $(WEBSITERELEASEDIR) -type d -exec chmod 755 {} '\;' \; \
@@ -31,7 +31,6 @@ release: clean
 		ln -sf $(RELEASENAME) $(WEBSITENAME) \; \
 		find $(WEBSITEMEDIADIR) -type d -exec chmod 755 {} '\;' \; \
 		find $(WEBSITEMEDIADIR) -type f -exec chmod 644 {} '\;' \; \
-		sudo /etc/apache2/apache_restart \
 		\)
 	rm -rf $(RELEASEDIR)
 

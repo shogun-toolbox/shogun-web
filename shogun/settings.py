@@ -7,11 +7,10 @@ import os
 templates_dir = "templates"
 static_dir = "static"
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+PRODUCTION = False # set to True when project goes live
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Soeren Sonnenburg', 'sonne@debian.org'),
 )
 
 CURRENT_PATH = os.path.dirname(__file__)
@@ -22,16 +21,29 @@ DATABASE_PATH = ROOT_PATH + '/shogun.sqlite'
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': DATABASE_PATH,           # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
+if PRODUCTION:
+    DEBUG = False
+    DATABASE_USER = 'shogun'             # Not used with sqlite3.
+    DATABASE_PASSWORD = 'XXXXXXXXXXXXXX'     # Not used with sqlite3.
+    DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
+    DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+    DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
+    DATABASE_NAME = 'shogun'             # Or path to database file if using sqlite3.
+    EMAIL_HOST='shogun-toolbox.org'
+else:
+    DEBUG = True
+    DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+                'NAME': DATABASE_PATH,           # Or path to database file if using sqlite3.
+                'USER': '',                      # Not used with sqlite3.
+                'PASSWORD': '',                  # Not used with sqlite3.
+                'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+                'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+                }
+            }
+
+TEMPLATE_DEBUG = DEBUG
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -40,7 +52,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = None
+TIME_ZONE = 'Europe/Berlin'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
