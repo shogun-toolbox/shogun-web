@@ -20,28 +20,25 @@ ROOT_PATH = "/".join(CURRENT_PATH.split("/")[0:-1])
 DATABASE_PATH = ROOT_PATH + '/shogun.sqlite'
 
 MANAGERS = ADMINS
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': DATABASE_PATH,           # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
 
 if PRODUCTION:
     DEBUG = False
-    DATABASE_USER = 'shogun'             # Not used with sqlite3.
-    DATABASE_PASSWORD = 'XXXXXXXXXXXXXX'     # Not used with sqlite3.
-    DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-    DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
-    DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
-    DATABASE_NAME = 'shogun'             # Or path to database file if using sqlite3.
+    DATABASES['default']['USER'] = 'shogun'
+    DATABASES['default']['NAME'] = 'shogun'
+    DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
     EMAIL_HOST='shogun-toolbox.org'
 else:
     DEBUG = True
-    DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-                'NAME': DATABASE_PATH,           # Or path to database file if using sqlite3.
-                'USER': '',                      # Not used with sqlite3.
-                'PASSWORD': '',                  # Not used with sqlite3.
-                'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-                'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-                }
-            }
 
 TEMPLATE_DEBUG = DEBUG
 

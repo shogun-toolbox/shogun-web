@@ -31,7 +31,7 @@ def home(request):
 
 	try:
 		# Get all the pages.
-		allpages = Page.objects.order_by('order')
+		allpages = Page.objects.order_by('sort_order')
 
 		# Parse the news.
 		newsParser.parseNews()
@@ -66,13 +66,13 @@ def showNew(request,newID):
 	# Find the pages.
 	try:
 		# Get all the pages.
-		allpages = Page.objects.order_by('order')
+		allpages = Page.objects.order_by('sort_order')
 
 		# Get default subpages.
-		defaultsubpages = Subpage.objects.filter(order=1)
+		defaultsubpages = Subpage.objects.filter(sort_order=1)
 
 		# Get all the subpages.
-		allsubpages = Subpage.objects.filter(rootpage__path__exact="news").order_by('order')
+		allsubpages = Subpage.objects.filter(rootpage__path__exact="news").order_by('sort_order')
 
 		# The new selected.
 		articles = New.objects.get(pk=newID)
@@ -106,7 +106,7 @@ def showPicture(request,pictureName):
 	# Find the pages.
 	try:
 		# Get all the pages.
-		allpages = Page.objects.order_by('order')
+		allpages = Page.objects.order_by('sort_order')
 
 		# Get picture url.
 		picture_url = "/static/figures/" + pictureName
@@ -139,13 +139,13 @@ def news(request, subpage):
 
 	try:
 		# Get all the pages.
-		allpages = Page.objects.order_by('order')
+		allpages = Page.objects.order_by('sort_order')
 
 		# Get default subpages.
-		defaultsubpages = Subpage.objects.filter(order=1)
+		defaultsubpages = Subpage.objects.filter(sort_order=1)
 
 		# Get all the subpages.
-		allsubpages = Subpage.objects.filter(rootpage__path__exact=page).order_by('order')
+		allsubpages = Subpage.objects.filter(rootpage__path__exact=page).order_by('sort_order')
 
 		# Finding the articles.
 		if subpage == 'onenew':
@@ -191,13 +191,13 @@ def pageHandler(request,page,subpage):
 	# Find the pages.
 	try:
 		# Get all the pages.
-		allpages = Page.objects.order_by('order')
+		allpages = Page.objects.order_by('sort_order')
 
 		# Get default subpages.
-		defaultsubpages = Subpage.objects.filter(order=1)
+		defaultsubpages = Subpage.objects.filter(sort_order=1)
 
 		# Get all the subpages.
-		allsubpages = Subpage.objects.filter(rootpage__path__exact=page).order_by('order')
+		allsubpages = Subpage.objects.filter(rootpage__path__exact=page).order_by('sort_order')
 
 		if subpage=="downloads":
 			# Get all the releases.

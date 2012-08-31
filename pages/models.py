@@ -4,7 +4,7 @@ from django.db import models
 class Page (models.Model):
 	path = models.CharField(max_length=20);
 	title = models.CharField(max_length=20);
-	order = models.IntegerField();
+	sort_order = models.IntegerField();
 	defaultSubpagePath = models.CharField(max_length=20)
 
 	def __unicode__(self):
@@ -15,7 +15,7 @@ class Subpage(models.Model):
 	rootpage = models.ForeignKey(Page);
 	path = models.CharField(max_length=20);
 	title = models.CharField(max_length=20);
-	order = models.IntegerField();
+	sort_order = models.IntegerField();
 	description = models.TextField(max_length=200);
 
 	def __unicode__(self):
@@ -24,7 +24,7 @@ class Subpage(models.Model):
 # Articles class.
 class Article (models.Model):
 	rootsubpage = models.ForeignKey(Subpage, blank=True, null=True);
-	order = models.IntegerField();
+	sort_order = models.IntegerField();
 	date = models.DateField();
 	time = models.TimeField();
 	title = models.CharField(max_length=100);
