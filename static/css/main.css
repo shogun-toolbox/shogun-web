@@ -30,7 +30,7 @@ Page: Homepage
 
 .box-01 {position:relative; width:955px; height:347px; margin-bottom:18px; background:url("../design/box-01.png") 0 0 no-repeat; overflow:hidden;}
     .box-01 #button {position:absolute; top:221px; left:143px; margin:0;}
-    .box-01 #ribbon {position:absolute; top:0; right:0; width:96px; height:96px; background:url("../design/box-01-ribbon.png") 0 0 no-repeat; font-size:0; overflow:hidden;}
+    .box-01 #ribbon {position:absolute; top:0; right:0; width:96px; height:96px; font-size:0; overflow:hidden;}
     .box-01 #twitter {position:absolute; top:272px; left:750px; height:30px; padding-top:33px; padding-left:65px; background:url("../design/box-01-twitter.gif") 0 0 no-repeat;}
     .box-01 #news {position:absolute; top:305px; right:255px;}
     .box-01 #news strong {margin-right:5px;}
