@@ -7,6 +7,9 @@ class Page (models.Model):
 	sort_order = models.IntegerField();
 	defaultSubpagePath = models.CharField(max_length=20)
 
+	class Meta:
+		ordering = ['sort_order']
+
 	def __unicode__(self):
 		return str(self.title) + " (" + str(self.path) + ")"
 
@@ -17,6 +20,9 @@ class Subpage(models.Model):
 	title = models.CharField(max_length=20);
 	sort_order = models.IntegerField();
 	description = models.TextField(max_length=200);
+
+	class Meta:
+		ordering = ['rootpage__sort_order','sort_order']
 
 	def __unicode__(self):
 		return "(" + str(self.rootpage.path) + "/" + str(self.path) + ") - " + str(self.title)
@@ -31,6 +37,9 @@ class Article (models.Model):
 	author = models.CharField(max_length=20);
 	content = models.TextField();
 	
+	class Meta:
+		ordering = ['rootsubpage__rootpage__sort_order','rootsubpage__sort_order','sort_order']
+
 	def __unicode__(self):
 		return str(self.rootsubpage.rootpage.path) + "/" + str(self.rootsubpage.path) + " - " + str(self.title)
 
@@ -55,6 +64,9 @@ class New (models.Model):
 	http_PGP_signature = models.CharField(max_length=500); 
 
 	content = models.TextField();                      # Content
+
+	class Meta:
+		ordering = ['-updated_date']
 
 	def __unicode__(self):
 		return str(self.updated_date) + ' - shogun ' + str(self.sg_ver)
