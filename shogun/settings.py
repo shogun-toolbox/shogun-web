@@ -36,7 +36,8 @@ if PRODUCTION:
     DATABASES['default']['USER'] = 'shogun'
     DATABASES['default']['NAME'] = 'shogun'
     DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
-    EMAIL_HOST='shogun-toolbox.org'
+    EMAIL_HOST='mail.nn7.de'
+    SERVER_EMAIL='shogun@shogun-toolbox.org'
 else:
     DEBUG = True
 
