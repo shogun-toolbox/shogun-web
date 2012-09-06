@@ -137,6 +137,13 @@ def news(request, subpage):
 	# choose the template.
 	template = get_template(page + ".html")
 
+	defaultsubpages=[]
+	all_pages=[]
+	all_subpages=[]
+	articles=[]
+	news=[]
+	lastnew=[]
+
 	try:
 		# Get all the pages.
 		allpages = Page.objects.order_by('sort_order')

@@ -10,7 +10,8 @@ static_dir = "static"
 PRODUCTION = False # set to True when project goes live
 
 ADMINS = (
-    ('Soeren Sonnenburg', 'sonne@debian.org'),
+    ('Soeren Sonnenburg', 'sonne@shogun-toolbox.org'),
+    ('Bernard Hernandez Perez', 'bernard.hernandez.perez@gmail.com'),
 )
 
 CURRENT_PATH = os.path.dirname(__file__)
