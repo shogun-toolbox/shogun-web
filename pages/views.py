@@ -42,8 +42,8 @@ def home(request):
 		# Last new.
 		lastnew = news[0]
 
-	except (ValueError):
-		print(ValueError)
+	except ValueError, err:
+		print(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : "home",
 												 'all_pages' : allpages,
@@ -60,8 +60,8 @@ def showNew(request,newID):
 	# Choose the template.
 	try:
 		template = get_template("news.html")
-	except (ValueError):
-		print(ValueError)
+	except ValueError, err:
+		print(err)
 
 	# Find the pages.
 	try:
@@ -80,8 +80,8 @@ def showNew(request,newID):
 		# Get the last 5 articles modified.
 		news = New.objects.order_by('-updated_date')[:5]  
 
-	except (ValueError):
-		print(ValueError)
+	except ValueError, err:
+		print(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'news',
 												 'current_subpage_path' : 'onenew',
@@ -100,8 +100,8 @@ def showPicture(request,pictureName):
 	# Choose the template.
 	try:
 		template = get_template("bigpicture.html")
-	except (ValueError):
-		print(ValueError)
+	except ValueError, err:
+		print(err)
 
 	# Find the pages.
 	try:
@@ -111,10 +111,8 @@ def showPicture(request,pictureName):
 		# Get picture url.
 		picture_url = "/static/figures/" + pictureName
 
-		print pictureName
-
-	except (ValueError):
-		print(ValueError)
+	except ValueError, err:
+		print(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'bigpicture',
 												 'current_subpage_path' : 'bigpicture',
@@ -171,8 +169,8 @@ def news(request, subpage):
 		# Last new
 		lastnew = news[0]
 
-	except (ValueError):
-		print(ValueError)
+	except ValueError, err:
+		print(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 												 'current_subpage_path' : subpage,
@@ -192,8 +190,8 @@ def pageHandler(request,page,subpage):
 	# Choose the template.
 	try:
 		template = get_template(page + ".html")
-	except (ValueError):
-		print(ValueError)
+	except ValueError, err:
+		print(err)
 
 	# Find the pages.
 	try:
@@ -219,8 +217,8 @@ def pageHandler(request,page,subpage):
 		# Last new
 		lastnew = news[0]
 
-	except (ValueError):
-		print(ValueError)
+	except ValueError, err:
+		print(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 												 'current_subpage_path' : subpage,
@@ -230,5 +228,3 @@ def pageHandler(request,page,subpage):
 												 'articles' : articles,
 		                                         'news' : news,
 		                                         'lastnew' : lastnew})))  
-
-
