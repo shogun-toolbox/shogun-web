@@ -1,11 +1,12 @@
 # Create your views here.
 
-from django.http import HttpResponse,HttpResponseNotFound
-from django.http import HttpResponseRedirect,HttpResponseNotAllowed
+import shogun.settings as settings
+
+from django.http import HttpResponse,Http404
 
 # HTML rendering libraries.
 from django.template.loader import get_template
-from django.template import Context
+from django.template import Context,TemplateDoesNotExist
 
 # Data Base libraries.
 from pages.models import Page
@@ -16,9 +17,28 @@ from pages.models import New
 # Import the parser.
 import parserHTML
 import datetime
+from BeautifulSoup import BeautifulSoup
 
 # Parse news object.
 newsParser = parserHTML.myContentHandler();
+
+
+def error(err):
+	if  settings.DEBUG:
+		print(err)
+	raise Http404
+
+
+def get_news():
+	# Get the last 5 articles modified.
+	news = New.objects.order_by('-updated_date')[:7]  
+
+	# Latest news
+	latest=None
+	if len(news)>0:
+		latest= news[0]
+
+	return news,latest
 
 # ----------------------------------------------------------------------
 #                                HOME
@@ -35,15 +55,9 @@ def home(request):
 
 		# Parse the news.
 		newsParser.parseNews()
-
-		# Get the last five news (articles).
-		news = New.objects.order_by('-updated_date')[:7]  
-
-		# Last new.
-		lastnew = news[0]
-
+		news,lastnew=get_news()
 	except ValueError, err:
-		print(err)
+		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : "home",
 												 'all_pages' : allpages,
@@ -58,10 +72,7 @@ def home(request):
 def showNew(request,newID):
 	
 	# Choose the template.
-	try:
-		template = get_template("news.html")
-	except ValueError, err:
-		print(err)
+	template = get_template("news.html")
 
 	# Find the pages.
 	try:
@@ -76,12 +87,10 @@ def showNew(request,newID):
 
 		# The new selected.
 		articles = New.objects.get(pk=newID)
-
-		# Get the last 5 articles modified.
-		news = New.objects.order_by('-updated_date')[:5]  
+		news = get_news()[0]
 
 	except ValueError, err:
-		print(err)
+		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'news',
 												 'current_subpage_path' : 'onenew',
@@ -98,10 +107,7 @@ def showNew(request,newID):
 def showPicture(request,pictureName):
 
 	# Choose the template.
-	try:
-		template = get_template("bigpicture.html")
-	except ValueError, err:
-		print(err)
+	template = get_template("bigpicture.html")
 
 	# Find the pages.
 	try:
@@ -112,13 +118,46 @@ def showPicture(request,pictureName):
 		picture_url = "/static/figures/" + pictureName
 
 	except ValueError, err:
-		print(err)
+		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'bigpicture',
 												 'current_subpage_path' : 'bigpicture',
 												 'all_pages' : allpages,
 												 'picture_name' : pictureName,
 												 'picture_url' : picture_url}))) 
+
+
+
+def weblog(request):
+
+
+	# Find the pages.
+	try:
+		template = get_template("weblog.html")
+
+		# Get all the pages.
+		allpages = Page.objects.order_by('sort_order')
+
+		news = get_news()[0]
+
+		html=file(settings.SHOGUN_PLANET).read()
+		soup = BeautifulSoup(html)
+		items=soup.body.findAll("div", { "class" : "daygroup" })
+		articles=[]
+		for article in soup.body.findAll("div", { "class" : "daygroup" }):
+			polished='<dt><h1>' + article.h2.string + '</h1></dt>'
+			articles.append(polished + unicode(article.div.div).replace('class="content"',""))
+
+
+	except Exception, err:
+		error(err)
+
+	return HttpResponse(template.render(Context({'current_page_path' : 'weblog',
+												 'current_subpage_path' : 'planet',
+												 'all_pages' : allpages,
+												 'all_subpages' : ['planet'],
+												 'articles' : articles,
+		                                         'news' : news})))  
 
 # ----------------------------------------------------------------------------------------------------
 #                                           NEWS
@@ -132,7 +171,7 @@ def news(request, subpage):
 	# Set the page we are.
 	page = "news"
 
-	# choose the template.
+	# choose the news template.
 	template = get_template(page + ".html")
 
 	defaultsubpages=[]
@@ -163,14 +202,10 @@ def news(request, subpage):
 			# Get all the news for a year.
 			articles = New.objects.filter(updated_date__year=subpage).order_by('-updated_date')
 
-		# Get the last 5 articles modified.
-		news = New.objects.order_by('-updated_date')[:5]  
-
-		# Last new
-		lastnew = news[0]
+		news,lastnew=get_news()
 
 	except ValueError, err:
-		print(err)
+		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 												 'current_subpage_path' : subpage,
@@ -190,8 +225,8 @@ def pageHandler(request,page,subpage):
 	# Choose the template.
 	try:
 		template = get_template(page + ".html")
-	except ValueError, err:
-		print(err)
+	except (TemplateDoesNotExist,ValueError), err:
+		error(err)
 
 	# Find the pages.
 	try:
@@ -211,14 +246,9 @@ def pageHandler(request,page,subpage):
 			# Get the articles that are in page/subpage.
 			articles = Article.objects.filter(rootsubpage__rootpage__path__exact=page, rootsubpage__path__exact=subpage)
 
-		# Get the last 5 articles modified.
-		news = New.objects.order_by('-updated_date')[:5]  
-
-		# Last new
-		lastnew = news[0]
-
+		news, lastnew=get_news()
 	except ValueError, err:
-		print(err)
+		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 												 'current_subpage_path' : subpage,

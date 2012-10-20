@@ -52,12 +52,14 @@
 
             <h2>What´s New</h2>
 
-            <ul class="ul-news">
+            <div class="ul-news">
                 <!-- Write the list of news (last articles) -->
+				<table>
                 {% for new in news %}
-                    <li><strong>{{ new.updated_date }}</strong><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN release version {{ new.sg_ver }}</font></a></li>
+				<tr><td><strong>{{ new.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"\></td><td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td></tr>
                 {% endfor %}
-            </ul>
+			</table>
+            </div>
             
             <p class="t-right"><a href="/page/news/newslist/"><img src="/static/design/btn-more.gif" alt="" /></a></p>
 

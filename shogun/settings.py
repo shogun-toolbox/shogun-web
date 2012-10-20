@@ -39,7 +39,9 @@ if PRODUCTION:
     DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
     EMAIL_HOST='mail.nn7.de'
     SERVER_EMAIL='shogun@shogun-toolbox.org'
+    SHOGUN_PLANET='/var/www/shogun-toolbox.org/planet/index.html'
 else:
+    SHOGUN_PLANET='/home/sonne/shogun/planet-index.html'
     DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
@@ -182,7 +184,7 @@ LOGGING = {
 }
 
 # Printed information.
-if not DEBUG:
+if DEBUG:
     print('\nSettings.py path is ' + CURRENT_PATH)
     print('Root path is '+ ROOT_PATH)
     print('Static files path is ' + STATIC_ROOT)

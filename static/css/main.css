@@ -123,6 +123,9 @@ Porlet: News
 ul.ul-news {list-style:none;}
 ul.ul-news li {padding:2px 0;}
 ul.ul-news li strong {margin-right:3px; padding-right:17px; background:url("../design/ico-arrow.gif") 100% 50% no-repeat;}
+.ul-news th, .ul-news td {padding-left:7px; padding-right:7px;}
+.content .ul-news table {padding: 10px; border:0;}
+.content .ul-news table td {padding: 0 0 0 7px; border:0;}
 
 /* ----------------------------------------------------------------------------------------------------------
 Others

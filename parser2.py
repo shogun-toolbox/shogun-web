@@ -265,7 +265,8 @@ class myContentHandler(ContentHandler):
     ##
     def parseFile(self, path):
 
-        print(path)
+        if self.DEBUG:
+            print(path)
 
         #Tuples of date.
         timestamp = os.path.getmtime(path)

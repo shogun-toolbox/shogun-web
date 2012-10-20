@@ -28,6 +28,6 @@ CREATE TABLE IF NOT EXISTS %(name)s%(sub)s
     line = re.sub(r"([^'])'f'(.)", r"\1THIS_IS_FALSE\2", line)
     line = line.replace('THIS_IS_FALSE', '0')
     line = line.replace('AUTOINCREMENT', 'AUTO_INCREMENT')
-    print line,
+    print(line,)
     
 main()

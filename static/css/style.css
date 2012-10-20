@@ -50,6 +50,31 @@ Page: Subpage
 /* ----------------------------------------------------------------------------------------------------------
 Others
 ---------------------------------------------------------------------------------------------------------- */
+.entrygroup { margin-right: -10px;}
+.entrygroup h4 {
+	font-family: "Bitstream Vera Sans", sans-serif;
+	font-size:200%;
+	font-weight: bold;
+}
 
-.input {border:1px solid #afafaf; background-color:#fff;}
-.border {border:1px solid #ccc;}
+.entrygroup h4 a {
+	text-decoration: underline;
+	color: inherit;
+}
+
+.entrygroup img.face {
+	float: right;
+	margin-top: -3em;
+}
+
+.entrygroup .entry {
+	margin-bottom: 0;
+}
+
+.entrygroup .entry .date {
+	color: grey;
+}
+
+.entrygroup .entry .date a {
+	color: inherit;
+}
