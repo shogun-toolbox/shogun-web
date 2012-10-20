@@ -1,0 +1,15 @@
+﻿{% extends "subpage.html" %}
+
+    {% block content %}
+
+	{% if irclogfiles %}
+	<ul>
+	{% for irclogfile in irclogfiles %}
+	<li><a href="/page/contact/irclog/{{irclogfile}}/">{{irclogfile}}</a></li>
+	{% endfor %}
+	</ul>
+	{% endif %}
+
+	{{logfile|safe}}
+
+    {% endblock %}

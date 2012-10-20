@@ -23,6 +23,12 @@ urlpatterns = patterns('',
     # Weblog
     url(r'^page/weblog/', 'pages.views.weblog'),
 
+    # irclogs
+    url(r'^page/contact/irclogs/', 'pages.views.irclogs'),
+
+    # irclog
+    url(r'^page/contact/irclog/(?P<year>[\d]+)-(?P<month>[\d]+)-(?P<day>[\d]+)/', 'pages.views.irclog'),
+
     # Subpages.
     url(r'^page/(?P<page>[\w|\d]+)/(?P<subpage>[\w|\d]+)', 'pages.views.pageHandler'),
 

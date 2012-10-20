@@ -15,6 +15,7 @@ from pages.models import Article
 from pages.models import New
 
 # Import the parser.
+import os
 import parserHTML
 import datetime
 from BeautifulSoup import BeautifulSoup
@@ -127,11 +128,57 @@ def showPicture(request,pictureName):
 												 'picture_url' : picture_url}))) 
 
 
+def irclog(request, year, month, day):
+	fname = '%s/#shogun.%s-%s-%s.log.html'  % (settings.SHOGUN_IRCLOGS, year, month, day)
+	try:
+		template = get_template("irclogs.html")
+
+		# Get all the pages.
+		allpages = Page.objects.order_by('sort_order')
+
+		news = get_news()[0]
+		html=file(fname).read()
+		soup = BeautifulSoup(html)
+		logfile=str(soup.body.table)
+	except Exception, err:
+		error(err)
+
+	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
+												 'current_subpage_path' : 'irc / irclogs',
+												 'all_pages' : allpages,
+												 'all_subpages' : ['irclogs'],
+												 'logfile' : logfile,
+		                                         'news' : news})))  
+
+
+
+
+def irclogs(request):
+	logfiles = [ f for f in os.listdir(settings.SHOGUN_IRCLOGS) if f.startswith('#shogun') ]
+	try:
+		template = get_template("irclogs.html")
+
+		# Get all the pages.
+		allpages = Page.objects.order_by('sort_order')
+
+		news = get_news()[0]
+
+
+		irclogfiles=[]
+		for log in logfiles:
+			irclogfiles.append(log.replace('#shogun.','').replace('.log.html',''))
+	except Exception, err:
+		error(err)
+
+	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
+												 'current_subpage_path' : 'irc / irclogs',
+												 'all_pages' : allpages,
+												 'all_subpages' : ['irclogs'],
+												 'irclogfiles' : irclogfiles,
+		                                         'news' : news})))  
+
 
 def weblog(request):
-
-
-	# Find the pages.
 	try:
 		template = get_template("weblog.html")
 
