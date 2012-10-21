@@ -155,6 +155,14 @@ def irclog(request, year, month, day):
 
 def irclogs(request):
 	logfiles = [ f for f in os.listdir(settings.SHOGUN_IRCLOGS) if f.startswith('#shogun') ]
+	logfiles.sort()
+	years={}
+
+	for fname in logfiles:
+		key=fname[:4]
+		if not years.has_key(key):
+			years[key]=list()
+		years[key].append(fname)
 	try:
 		template = get_template("irclogs.html")
 
@@ -163,9 +171,11 @@ def irclogs(request):
 
 		news = get_news()[0]
 
+		allsubpages=[]
+		for subpages
 
 		irclogfiles=[]
-		for log in logfiles:
+		for log in logfiles[::-1]:
 			irclogfiles.append(log.replace('#shogun.','').replace('.log.html',''))
 	except Exception, err:
 		error(err)
@@ -173,14 +183,14 @@ def irclogs(request):
 	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
 												 'current_subpage_path' : 'irc / irclogs',
 												 'all_pages' : allpages,
-												 'all_subpages' : ['irclogs'],
+												 'all_subpages' : allsubpages,
 												 'irclogfiles' : irclogfiles,
 		                                         'news' : news})))  
 
 
-def weblog(request):
+def planet(request):
 	try:
-		template = get_template("weblog.html")
+		template = get_template("planet.html")
 
 		# Get all the pages.
 		allpages = Page.objects.order_by('sort_order')
@@ -199,7 +209,7 @@ def weblog(request):
 	except Exception, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'weblog',
+	return HttpResponse(template.render(Context({'current_page_path' : 'planet',
 												 'current_subpage_path' : 'planet',
 												 'all_pages' : allpages,
 												 'all_subpages' : ['planet'],

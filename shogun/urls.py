@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^page/news/(?P<subpage>[\w|\d]+)', 'pages.views.news'),
 
     # Weblog
-    url(r'^page/weblog/', 'pages.views.weblog'),
+    url(r'^page/planet/', 'pages.views.planet'),
 
     # irclogs
     url(r'^page/contact/irclogs/', 'pages.views.irclogs'),

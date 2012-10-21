@@ -43,7 +43,7 @@ if PRODUCTION:
     SHOGUN_IRCLOGS='/var/www/shogun-toolbox.org/irclogs/'
 else:
     SHOGUN_PLANET='/home/sonne/shogun/planet-index.html'
-    SHOGUN_IRCLOGS='/home/sonne/shogun'
+    SHOGUN_IRCLOGS='/home/sonne/shogun/'
     DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
