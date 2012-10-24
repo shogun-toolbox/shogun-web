@@ -16,8 +16,10 @@ from pages.models import New
 
 # Import the parser.
 import os
+import os.path
 import parserHTML
 import datetime
+import calendar
 from BeautifulSoup import BeautifulSoup
 
 # Parse news object.
@@ -151,40 +153,78 @@ def irclog(request, year, month, day):
 		                                         'news' : news})))  
 
 
+def get_calendar_logs(logfiles):
+	logfiles_set=set(logfiles)
+	cal = calendar.Calendar()
+	start_entry=logfiles[0]
+	end_entry=logfiles[-1]
+	start_year=int(start_entry[:4])
+	start_month=int(start_entry[5:7])
+	end_year=int(end_entry[:4])
+	end_month=int(end_entry[5:7])
+
+	all_entries=[]
+	for year in xrange(start_year,end_year+1):
+		cur_start_month=1
+		cur_end_month=12
+
+		if year == start_year:
+			cur_start_month=start_month
+		if year == end_year:
+			cur_end_month=end_month
+
+		year_entries=[]
+		for month in xrange(cur_start_month, cur_end_month+1):
+			month_entries=[]
+
+			weeks_entries=[]
+			week_entries=[]
+			weekday=0
+			for day in cal.itermonthdays(year, month):
+				weekday+=1
+				entry=["","", ""]
+				if day>0:
+					key='%04d-%02d-%02d' % (year,month,day)
+					entry=[day, "", ""]
+					if key in logfiles_set:
+						entry[1:3]=key, os.path.getsize(settings.SHOGUN_IRCLOGS + '/' + '#shogun.%s.log.html' % key)/1024
+				week_entries.append(entry)
+				if (weekday>0) and (weekday % 7 == 0):
+					weeks_entries.append(week_entries)
+					week_entries=[]
+
+			if len(week_entries)>0:
+				weeks_entries.append(week_entries)
+			month_entries=[weeks_entries]
+			year_entries.append((calendar.month_name[month], month_entries))
+			print year,month
+		all_entries.append((year, year_entries))
+
+	return all_entries
 
 
 def irclogs(request):
-	logfiles = [ f for f in os.listdir(settings.SHOGUN_IRCLOGS) if f.startswith('#shogun') ]
+	logfiles = [ f.replace('#shogun.','').replace('.log.html','') for f in os.listdir(settings.SHOGUN_IRCLOGS) if f.startswith('#shogun') ]
 	logfiles.sort()
-	years={}
 
-	for fname in logfiles:
-		key=fname[:4]
-		if not years.has_key(key):
-			years[key]=list()
-		years[key].append(fname)
+
 	try:
 		template = get_template("irclogs.html")
 
 		# Get all the pages.
 		allpages = Page.objects.order_by('sort_order')
-
-		news = get_news()[0]
-
 		allsubpages=[]
-		for subpages
+		news = get_news()[0]
+		all_entries = get_calendar_logs(logfiles)
 
-		irclogfiles=[]
-		for log in logfiles[::-1]:
-			irclogfiles.append(log.replace('#shogun.','').replace('.log.html',''))
-	except Exception, err:
+	except IOError, err:
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
 												 'current_subpage_path' : 'irc / irclogs',
 												 'all_pages' : allpages,
 												 'all_subpages' : allsubpages,
-												 'irclogfiles' : irclogfiles,
+												 'irclogfiles' : all_entries,
 		                                         'news' : news})))  
 
 
@@ -210,7 +250,7 @@ def planet(request):
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'planet',
-												 'current_subpage_path' : 'planet',
+												 'current_subpage_path' : 'shogun',
 												 'all_pages' : allpages,
 												 'all_subpages' : ['planet'],
 												 'articles' : articles,
@@ -283,7 +323,10 @@ def pageHandler(request,page,subpage):
 	try:
 		template = get_template(page + ".html")
 	except (TemplateDoesNotExist,ValueError), err:
-		error(err)
+		try:
+			template = get_template("default.html")
+		except (TemplateDoesNotExist,ValueError), err:
+			error(err)
 
 	# Find the pages.
 	try:

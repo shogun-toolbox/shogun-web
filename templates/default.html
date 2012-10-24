@@ -1,9 +1,9 @@
 ﻿{% extends "subpage.html" %}
 
     {% block content %}
-                
-            <!-- Perex -->
-            <div class="perex"><p>Please create a template for {{ current_subpage_path }}.</p></div>
-            <!-- /perex -->
-
+            <!-- Write the list of articles -->
+            {% for article in articles %}
+                <dt><h3>{{ article.title }}</h3></dt>
+                <p align="justify">{{ article.content|safe }}</p><hr>
+            {% endfor %}
     {% endblock %}

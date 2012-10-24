@@ -1,15 +1,35 @@
 ﻿{% extends "subpage.html" %}
 
-    {% block content %}
+{% block content %}
 
-	{% if irclogfiles %}
-	<ul>
-	{% for irclogfile in irclogfiles %}
-	<li><a href="/page/contact/irclog/{{irclogfile}}/">{{irclogfile}}</a></li>
+{% if irclogfiles %}
+	{% for year_name, year in irclogfiles %}
+	<h3>{{year_name}}</h3>
+		{% for month_name, months in year %}
+		<h4>{{month_name}}</h4>
+			{% for weeks in months %}
+				<table>
+					{% for week in weeks %}
+					<tr>
+						{% for day,link,size in week %}
+						<td>
+							{% if day %}
+							{% if link %}
+							<a href="/page/contact/irclog/{{link}}/">{{day}}</a> ({{size}}kB)
+							{% else %}
+							{{day}}
+							{% endif %}
+							{% endif %}
+						</td>
+						{% endfor %}
+					</tr>
+					{% endfor %}
+				</table>
+			{% endfor %}
+		{% endfor %}
 	{% endfor %}
-	</ul>
-	{% endif %}
+{% endif %}
 
-	{{logfile|safe}}
+{{logfile|safe}}
 
-    {% endblock %}
+{% endblock %}
