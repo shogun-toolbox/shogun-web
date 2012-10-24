@@ -197,10 +197,9 @@ def get_calendar_logs(logfiles):
 				weeks_entries.append(week_entries)
 			month_entries=[weeks_entries]
 			year_entries.append((calendar.month_name[month], month_entries))
-			print year,month
-		all_entries.append((year, year_entries))
+		all_entries.append((year, year_entries[::-1]))
 
-	return all_entries
+	return all_entries[::-1]
 
 
 def irclogs(request):

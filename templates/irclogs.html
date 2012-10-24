@@ -4,11 +4,12 @@
 
 {% if irclogfiles %}
 	{% for year_name, year in irclogfiles %}
-	<h3>{{year_name}}</h3>
+	<h2>{{year_name}}</h2>
 		{% for month_name, months in year %}
-		<h4>{{month_name}}</h4>
+		<h3>{{month_name}}</h3>
 			{% for weeks in months %}
 				<table>
+					<tr><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td><td>Sun</td></tr>
 					{% for week in weeks %}
 					<tr>
 						{% for day,link,size in week %}
