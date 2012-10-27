@@ -242,7 +242,7 @@ def planet(request):
 		articles=[]
 		for article in soup.body.findAll("div", { "class" : "daygroup" }):
 			polished='<dt><h1>' + article.h2.string + '</h1></dt>'
-			articles.append(polished + unicode(article.div.div).replace('class="content"',""))
+			articles.append(polished + unicode(article.div.div).replace('class="content"',"").replace('{tex}','\[').replace('{/tex}','\]'))
 
 
 	except Exception, err:
