@@ -13,6 +13,8 @@ import time
 from pages.models import New
 
 # Global variables.
+releasePathDataFTP = "ftp://shogun-toolbox.org/shogun/data/"
+releasePathDataHTTP = "http://shogun-toolbox.org/archives/shogun/data/"
 releasePathFTP = "ftp://shogun-toolbox.org/shogun/releases/"
 releasePathHTTP = "http://shogun-toolbox.org/archives/shogun/releases/"
 
@@ -335,6 +337,8 @@ class myContentHandler(ContentHandler):
         # Create the path.
         ftpPath = releasePathFTP + version + "/sources/shogun-" + self.sg_ver
         httpPath = releasePathHTTP + version + "/sources/shogun-" + self.sg_ver
+        ftpDataPath = releasePathDataFTP + "shogun-data-" + self.sg_ver
+        httpDataPath = releasePathDataHTTP + "shogun-data-" + self.sg_ver
 
         try:
             record = New.objects.get(updated_date=updated_date)
@@ -348,6 +352,8 @@ class myContentHandler(ContentHandler):
             record.author = self.author
             record.mail = self.mail
             record.content = str(self.content)
+            record.ftp_data=ftpDataPath + ".tar.bz2"
+            record.http_data=httpDataPath + ".tar.bz2"
             record.ftp_source_code=ftpPath + ".tar.bz2"
             record.http_source_code=httpPath + ".tar.bz2"
             record.ftp_md5sum=ftpPath + ".md5sum"
@@ -374,6 +380,8 @@ class myContentHandler(ContentHandler):
                          author=self.author, \
                          mail=self.mail, \
                          content=self.content, \
+                         ftp_data=ftpDataPath + ".tar.bz2", \
+                         http_data=httpDataPath + ".tar.bz2", \
                          ftp_source_code=ftpPath + ".tar.bz2", \
                          http_source_code=httpPath + ".tar.bz2", \
                          ftp_md5sum=ftpPath + ".md5sum", \

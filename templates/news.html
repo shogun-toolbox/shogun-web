@@ -1,11 +1,6 @@
 ﻿{% extends "subpage.html" %}
 
     {% block content %}
-                
-            <!-- Perex -->
-            <!--<div class="perex"><p>Description of this section.</p></div>-->
-            <!-- /perex -->
-
             {% ifequal current_subpage_path "newslist" %}   
                     
                 <!-- write the list with the link for the news. -->
@@ -38,13 +33,15 @@
                         <center>
                             <table>
                                 <tr><th>FTP</th>
-                                    <td><a href="{{ article.ftp_source_code }}">Source Code</a></td>
+                                    <td><a href="{{ article.ftp_source_code }}">Source</a></td>
                                     <td><a href="{{ article.ftp_md5sum }}">MD5</a></td>
                                     <td><a href="{{ article.ftp_PGP_signature }}">PGP</a></td>
+									<td><a href="{{ article.ftp_data }}">Data</a></td>
                                     <th>HTTP</th>
-                                    <td><a href="{{ article.http_source_code }}">Source Code</a></td>
+                                    <td><a href="{{ article.http_source_code }}">Source</a></td>
                                     <td><a href="{{ article.http_md5sum }}">MD5</a></td>
                                     <td><a href="{{ article.http_PGP_signature }}">PGP</a></td>
+									<td><a href="{{ article.http_data }}">Data</a></td>
                                 </tr>
                             </table>
                         </center>

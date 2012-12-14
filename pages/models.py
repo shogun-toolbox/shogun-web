@@ -56,9 +56,11 @@ class New (models.Model):
 	author = models.CharField(max_length=20);          # Author
 	mail = models.CharField(max_length=50);            # Mail
 
+	ftp_data = models.CharField(max_length=500, null=True);     
 	ftp_source_code = models.CharField(max_length=500);     
 	ftp_md5sum = models.CharField(max_length=500); 
 	ftp_PGP_signature = models.CharField(max_length=500); 
+	http_data = models.CharField(max_length=500, null=True); 
 	http_source_code = models.CharField(max_length=500); 
 	http_md5sum = models.CharField(max_length=500); 
 	http_PGP_signature = models.CharField(max_length=500); 
