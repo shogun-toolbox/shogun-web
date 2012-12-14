@@ -337,8 +337,8 @@ class myContentHandler(ContentHandler):
         # Create the path.
         ftpPath = releasePathFTP + version + "/sources/shogun-" + self.sg_ver
         httpPath = releasePathHTTP + version + "/sources/shogun-" + self.sg_ver
-        ftpDataPath = releasePathDataFTP + "shogun-data-" + self.sg_ver
-        httpDataPath = releasePathDataHTTP + "shogun-data-" + self.sg_ver
+        ftpDataPath = releasePathDataFTP + "shogun-data-" + self.data_ver
+        httpDataPath = releasePathDataHTTP + "shogun-data-" + self.data_ver
 
         try:
             record = New.objects.get(updated_date=updated_date)
