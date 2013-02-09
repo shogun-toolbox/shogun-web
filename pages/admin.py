@@ -11,11 +11,13 @@ from django.contrib import admin
 class ArticleOptions(admin.ModelAdmin):
 	class Media:
 		js = ('../static/js/tiny_mce/tiny_mce.js',
+			  '../static/js/tiny_mce/tine_mce_config.js',
 			  '../static/js/editors/textfield.js')
 
 class NewOptions(admin.ModelAdmin):
 	class Media:
 		js = ('../static/js/tiny_mce/tiny_mce.js',
+			  '../static/js/tiny_mce/tine_mce_config.js',
 			  '../static/js/editors/textfield.js')
 		
 # Objects editable by admin.
