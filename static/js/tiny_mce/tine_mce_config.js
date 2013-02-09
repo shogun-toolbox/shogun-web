@@ -1,5 +1,3 @@
-
-<script language="javascript" type="text/javascript">
 tinyMCE.init({
 	theme : "advanced",
 	mode : "textareas",
@@ -7,4 +5,3 @@ tinyMCE.init({
 	extended_valid_elements : "iframe[src|width|height|name|align]",
 	verify_html : false
 });
-</script>
