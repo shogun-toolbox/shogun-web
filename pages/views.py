@@ -335,8 +335,19 @@ def pageHandler(request,page,subpage):
 		# Get default subpages.
 		defaultsubpages = Subpage.objects.filter(sort_order=1)
 
-		# Get all the subpages.
-		allsubpages = Subpage.objects.filter(rootpage__path__exact=page).order_by('sort_order')
+		# Get all the top subpages.
+		parent_subpages = Subpage.objects.filter(rootpage__path__exact=page, is_top=True).order_by('sort_order')
+
+		# Get the current parent subpage (which may or may not be the current subpage, i.e. if the current is a child)
+		# Assume that the path formed by page/subpage is unique for every subpage
+		current_subpage = Subpage.objects.filter(rootpage__path__exact=page, path__exact=subpage)[0]
+		if current_subpage.is_top == True:
+			current_parent = current_subpage
+		else:
+			for parent in parent_subpages:
+				# Assume every child subpage only has one parent
+				if current_subpage in parent.children.all():
+					current_parent = parent
 
 		if subpage=="downloads":
 			# Get all the releases.
@@ -353,7 +364,8 @@ def pageHandler(request,page,subpage):
 												 'current_subpage_path' : subpage,
 												 'default_subpages' : defaultsubpages,
 												 'all_pages' : allpages,
-												 'all_subpages' : allsubpages,
+												 'parent_subpages' : parent_subpages,
+												 'current_parent' : current_parent,
 												 'articles' : articles,
 		                                         'news' : news,
 		                                         'lastnew' : lastnew})))  

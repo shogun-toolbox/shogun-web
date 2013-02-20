@@ -32,10 +32,6 @@ Page: Subpage
 
 #title {background-color:#000;}
 #title h1 {color:#fff;}
-#title #subnav strong {color:#fd4;}
-#title #subnav a {color:#fff;}
-#title #subnav a:hover {color:#fd4;}
-#title #subnav span {color:#3f3f3f;}
 .cols, .cols-top, .cols-bottom {background-color:#fff;}
 .content .content-box {border-top:1px solid #d0d0d0; border-bottom:1px solid #d0d0d0; background:#f5f5f5;}
 .content .perex {border-bottom:1px solid #d0d0d0;}
@@ -46,6 +42,58 @@ Page: Subpage
 .content dt {color:#ccad00;}
 .aside h2 {color:#ccad00;}
 .aside .aside-box {border-top:1px solid #d0d0d0; border-bottom:1px solid #d0d0d0; background:#f5f5f5;}
+
+div#title ul#topnav {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 970px;
+	list-style: none;
+	font-size: 1.2em;
+	/* Set relative positioning on the unordered list itself - not on the list item */
+	position: relative;
+	bottom: -45px;
+}
+
+div#title ul#topnav li {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+div#title ul#topnav li a {
+	padding: 10px 15px;
+	display: block;
+	color: #f0f0f0;
+	text-decoration: none;
+}
+
+div#title ul#topnav li a:hover {
+	color: #ffd700;
+}
+
+div#title ul#topnav li span#subnav {
+	float: left;
+	padding: 15px 0;
+	position: absolute;
+	left: 0;
+	top:30px;
+	width: 970px;
+	color: #fff;
+}
+
+div#title ul#topnav li span#subnav a {
+	/**
+	 * Since we declared a link style on the parent list
+	 * link we will correct it back to its original state
+	 */
+	display: inline;
+	color: #f0f0f0;
+} 
+
+div#title ul#topnav li span#subnav a:hover {
+	color: #ffd700;
+}
 
 /* shogun planet */
 .entrygroup { margin-right: -10px;}
