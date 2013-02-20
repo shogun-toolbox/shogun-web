@@ -14,12 +14,21 @@ class Page (models.Model):
 		return str(self.title) + " (" + str(self.path) + ")"
 
 # Subpage class.
+# TODO raise an error if a child subpage is assigned to more than one parent
+# TODO raise an error if a subpage with at least one child is assigned as child of a subpage
 class Subpage(models.Model):
 	rootpage = models.ForeignKey(Page);
 	path = models.CharField(max_length=20);
 	title = models.CharField(max_length=20);
 	sort_order = models.IntegerField();
 	description = models.TextField(max_length=200);
+	# Children subpages - allows to nest a group of subpages in a parent subpage
+	# Non symmetrical because for the relationship parent -> child the direction matters
+	# null and blank because no subpage is compulsed to have children
+	# Although the model allows it, no subpage should have more than one parent
+	children = models.ManyToManyField('self', symmetrical=False, null=True, blank=True)
+	# Whether a subpage is to be shown in the top level
+	is_top = models.BooleanField('Is top subpage?', default=True)
 
 	class Meta:
 		ordering = ['rootpage__sort_order','sort_order']
