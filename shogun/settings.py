@@ -12,6 +12,7 @@ PRODUCTION = False # set to True when project goes live
 ADMINS = (
     ('Soeren Sonnenburg', 'sonne@shogun-toolbox.org'),
     ('Bernard Hernandez Perez', 'bernard.hernandez.perez@gmail.com'),
+    ('Fernando J. Iglesias Garcia', 'fernando.iglesias@shogun-toolbox.org')
 )
 
 CURRENT_PATH = os.path.dirname(__file__)
