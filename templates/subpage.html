@@ -6,16 +6,16 @@
 
     <!-- Title + Subcategories -->
     <div id="title" class="box">
-    	
+
         <h1>{{ current_subpage_page }}</h1>
-        
+
         <p id="subnav">
 
             {% for navsubpage in all_subpages %}
 
                 <a href="/page/{{ current_page_path }}/{{ navsubpage.path }}">
 
-                {% ifequal navsubpage.path current_subpage_path  %}   
+                {% ifequal navsubpage.path current_subpage_path  %}
                     <strong>{{ navsubpage.title }}</strong>
                 {% else %}
                     {{ navsubpage.title }}
@@ -29,7 +29,7 @@
     <!-- /title -->
 
     <!-- Breadcrumbs -->
-    <p id="breadcrumbs"><strong>Your are here:</strong> <a href="/page/{{ current_page_path }}/information/">
+    <p id="breadcrumbs"><strong>You are here:</strong> <a href="/page/{{ current_page_path }}/information/">
                                    {{ current_page_path }}</a> &nbsp;/&nbsp; <strong>{{ current_subpage_path }}</strong></p>
 
      <!-- Columns -->
