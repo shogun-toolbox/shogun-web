@@ -84,9 +84,6 @@ Page: Subpage
 
 #title {position:relative; width:955px; height:122px; background:url("../design/title.jpg") 0 0 no-repeat; overflow:hidden;}
 #title h1 {margin:0; padding:10px 25px 0 25px; font-size:340%; font-weight:bold; letter-spacing:-1px;}
-#title #subnav {position:absolute; left:25px; bottom:13px; margin:0;}
-#title #subnav a {font-weight:bold;}
-#title #subnav span {margin:0 7px;}
 
 #breadcrumbs {margin:0; padding:13px 25px;}
 

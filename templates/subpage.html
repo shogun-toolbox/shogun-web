@@ -6,31 +6,50 @@
 
     <!-- Title + Subcategories -->
     <div id="title" class="box">
-    	
-        <h1>{{ current_subpage_page }}</h1>
-        
-        <p id="subnav">
 
-            {% for navsubpage in all_subpages %}
+        <ul id="topnav">
+            {% for parent_subpage in parent_subpages %}
+                <li>
+                    <a href="/page/{{ current_page_path }}/{{ parent_subpage.path }}">
+                        {% ifequal parent_subpage.path current_parent.path  %}
+                            <strong>{{ parent_subpage.title }}</strong>
+                        {% else %}
+                            {{ parent_subpage.title }}
+                        {% endifequal %}
+					</a>
 
-                <a href="/page/{{ current_page_path }}/{{ navsubpage.path }}">
-
-                {% ifequal navsubpage.path current_subpage_path  %}   
-                    <strong>{{ navsubpage.title }}</strong>
-                {% else %}
-                    {{ navsubpage.title }}
-                {% endifequal %}
-
-                <a/><span>|</span>
-
+					<!-- If parent_subpage or any of its children is current_subpage -->
+					{% ifequal parent_subpage.path current_parent.path %}
+						<span id="subnav">
+							{% for children_subpage in parent_subpage.children.all %}
+								<a href="/page/{{ current_page_path }}/{{ children_subpage.path }}">
+									{% ifequal children_subpage.path current_subpage_path %}
+										<strong>{{ children_subpage.title }}</strong>
+									{% else %}
+										{{ children_subpage.title }}
+									{% endifequal %}
+								</a>
+							{% endfor %}
+						</span> <!-- /subnav -->
+					{% endifequal %}
+                </li>
             {% endfor %}
-        </p>
+        </ul> <!-- /topnav -->
+
     </div> 
     <!-- /title -->
 
     <!-- Breadcrumbs -->
-    <p id="breadcrumbs"><strong>Your are here:</strong> <a href="/page/{{ current_page_path }}/information/">
-                                   {{ current_page_path }}</a> &nbsp;/&nbsp; <strong>{{ current_subpage_path }}</strong></p>
+    <p id="breadcrumbs"><strong>You are here:</strong>
+		<a href="/page/{{ current_page_path }}">{{ current_page_path }}</a> &nbsp;/&nbsp;
+		{% ifequal current_subpage_path current_parent.path %}
+			<!-- We are in a parent page! -->
+			<strong>{{ current_subpage_path }}</strong>
+		{% else %}
+			<!-- We are in a child page! -->
+			<strong>{{ current_parent.path }}</strong> &nbsp;/&nbsp; <strong>{{ current_subpage_path }}</strong>
+		{% endifequal %}
+	</p>
 
      <!-- Columns -->
     <div class="cols-top"></div>
