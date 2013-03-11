@@ -357,7 +357,7 @@ def pageHandler(request,page,subpage):
 			articles = Article.objects.filter(rootsubpage__rootpage__path__exact=page, rootsubpage__path__exact=subpage)
 
 		news, lastnew=get_news()
-	except ValueError, err:
+	except (IndexError,ValueError) as err:
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
