@@ -1,7 +1,7 @@
 <new>
 	<updated_date>2013-03-17</updated_date>
 	<author>Soeren Sonnenburg</author>
-	<mail><sonne@debian.org></mail>
+	<mail>sonne@debian.org></mail>
 
 	<sg_ver>2.1.0</sg_ver>
 	<sg_bver>2.1.0</sg_bver>
