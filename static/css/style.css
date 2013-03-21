@@ -190,3 +190,13 @@ a.time:after { content: "]"; }
 .part, .join, .servermsg, .nickchange, .other { font-size: smaller; }
 td.part + td, td.join + td, td.servermsg + td, td.nickchange + td,
 td.other + td { font-size: smaller; text-align: right; }
+
+table.ideas { border-spacing: 15pt; }
+td.ideas1 { padding:10px 10px 10px 20px;background-color: #fcfcfc; border: 1px solid #8cacbb;}
+td.ideas2 { padding:10px 10px 10px 20px;background-color: #f2f2f2; border: 1px solid #8cacbb;}
+td.ideas3 { padding:10px 10px 10px 20px;background-color: #dee7ec; border: 1px solid #8cacbb;}
+td.ideas4 { padding:10px 10px 10px 20px;background-color: #ced7dc; border: 1px solid #8cacbb;}
+
+span.easy { color: green; font-weight: bold;}
+span.medium { color: blue; font-weight: bold;}
+span.difficult { color: red; font-weight: bold;}
