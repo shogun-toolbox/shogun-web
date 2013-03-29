@@ -101,10 +101,11 @@ Page: Subpage
 .content table th {text-align:center; background:url("../design/table-th.gif") 0 100% repeat-x;}
 .content dt {font-weight:bold;}
 .content dd {margin-left:25px; margin-bottom:15px;}
-.content h1, .content h2 {font-size:200%;}
-.content h3 {font-size:160%;}
-.content h4 {font-size:120%;}
-.content h5, h6 {font-size:100%;}
+.content h1 {font-size:200%;}
+.content h2 {font-size:150%; border-bottom: none; font-weight: bold; }
+.content h3 {font-size:125%; border-bottom: none; font-weight: bold; }
+.content h4 {font-size:110%; border-bottom: none; font-weight: bold; }
+.content h5, h6 {font-size:100%; border-bottom: none; font-weight: bold; }
 .content .content-box {margin:15px 0; margin-left:-25px; margin-right:-25px; padding:25px;}
 .content .perex {margin:0 -25px 25px -25px; padding:19px 25px 25px 25px; font-size:160%; font-weight:bold; letter-spacing:-1px;}
 .content .perex p {margin:0;}
@@ -130,5 +131,5 @@ Others
 
 img.f-right {margin-left:15px;}
 img.f-left {margin-right:15px;}
-.input {padding:7px; background:url("../design/input.gif") 0 0 no-repeat; font:100%/1 "arial",sans-serif;}
+.input {padding:7px; background:url("../design/input.gif") 0 0 no-repeat; font:100%/1 "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;}
 .smaller {font:90%/1.8 "tahoma",sans-serif;}
