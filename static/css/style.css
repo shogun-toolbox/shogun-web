@@ -196,6 +196,7 @@ td.other + td { font-size: smaller; text-align: right; }
 .ideas h4 { margin-bottom:2px; }
 .ideas ul { margin-top:-2px; line-height: 1.5em; }
 table.ideas { border-spacing: 15px; border: none; border-collapse:separate; }
+.ideas tr:not(:first-child) td {border:1px solid #8cacbb;}
 td.ideas1 { padding:10px 10px 10px 20px;background-color: #fcfcfc; border: 1px solid #8cacbb;}
 td.ideas2 { padding:10px 10px 10px 20px;background-color: #f2f2f2; border: 1px solid #8cacbb;}
 td.ideas3 { padding:10px 10px 10px 20px;background-color: #dee7ec; border: 1px solid #8cacbb;}
