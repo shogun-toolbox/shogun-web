@@ -44,7 +44,7 @@ Page: Homepage
 
     .box-02 .col {position:relative; float:left; width:300px; padding-bottom:17px; margin-bottom:-6px; z-index:100; background-position:100% 100%; background-repeat:no-repeat;}
     .box-02 .col.left {background-image:url("../design/image-01.jpg");}
-    .box-02 .col.center {background-image:url("../design/image-02.jpg");}
+    .box-02 .col.center {background-image:url("../design/soc-logo-190.png");}
     .box-02 .col .in {min-height:180px; height:auto;}
     .box-02 .col h2 {margin:0; font-size:100%; font-weight:bold; text-transform:uppercase;}
     .box-02 .col p {margin:15px 0;}
@@ -71,12 +71,13 @@ Page: Homepage
     .box-03 #loopedSlider .next {position:absolute; top:45px; right:0;}
     .box-03 #loopedSlider .pagination {position:absolute; bottom:0; left:425px;}
 
-.box-04 {position:relative; width:905px; height:38px; padding:22px 25px; background:url("../design/box-04.gif") 0 0 no-repeat; overflow:hidden;}
-    .box-04 .box-04-title {float:left; display:block;}
+.box-04 {position:relative; width:905px; height:82px; padding:0px 25px; margin-bottom:18px; background:url("../design/box-04.gif") 0 0 no-repeat; overflow:hidden;}
+    .box-04 .box-04-title {float:left; display:block;padding-top:22px;}
     .box-04 .box-04-title h3 {float:left; margin:0; padding-left:8px; height:36px; overflow:hidden; background:url("../design/box-04-title-l.gif") 0 0 no-repeat; font-weight:bold; text-transform:uppercase; font-size:100%;}
     .box-04 .box-04-title h3 span {float:left; display:block; padding:9px 15px 9px 7px; background:url("../design/box-04-title-r.gif") 100% 0 no-repeat;}
-    .box-04 .box-04-links {float:left; margin:0; padding:8px 0 0 20px;}
+    .box-04 .box-04-links {float:left; margin:0; padding:30px 0 0 22px;}
     .box-04 .box-04-links span {margin:0 10px;}
+	.box-04 .logo img {float:right; display:block;margin:0; padding:0;}
 
 /* ----------------------------------------------------------------------------------------------------------
 Page: Subpage
