@@ -21,6 +21,8 @@ import parserHTML
 import datetime
 import calendar
 from BeautifulSoup import BeautifulSoup
+import demos
+
 
 # Parse news object.
 newsParser = parserHTML.myContentHandler();
@@ -368,4 +370,12 @@ def pageHandler(request,page,subpage):
 												 'current_parent' : current_parent,
 												 'articles' : articles,
 		                                         'news' : news,
-		                                         'lastnew' : lastnew})))  
+		                                         'lastnew' : lastnew})))
+
+    
+    
+
+def demoHandler(request, demo_name, function):
+    demo = getattr(demos, demo_name)
+    fun = getattr(demo, function)
+    return fun(request)

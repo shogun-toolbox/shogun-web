@@ -38,6 +38,9 @@ urlpatterns = patterns('',
     # One new selected (ID):
     url(r'^new/(?P<newID>[\w|\d]+)', 'pages.views.showNew'),
 
+    # SVR Demo.
+    url(r'^demo/(?P<demo_name>[\w|\d]+)/(?P<function>[\w|\d]+)', 'pages.views.demoHandler'),
+    
     # Main page.
     (r'^', 'pages.views.home'),
 )
