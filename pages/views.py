@@ -312,7 +312,7 @@ def news(request, subpage):
 												 'all_subpages' : allsubpages,
 												 'articles' : articles,
 		                                         'news' : news,
-		                                         'lastnew' : lastnew})))  
+		                                         'lastnew' : lastnew})))   
 
 # ----------------------------------------------------------------------
 #                             PAGE HANDLER
