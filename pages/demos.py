@@ -55,7 +55,7 @@ class svr:
         svm.set_epsilon(1e-2)
                         
         x=numpy.linspace(0,8,800)
-        y=svm.apply(RealFeatures(numpy.array([x])));
+        y=svm.apply(RealFeatures(numpy.array([x]))).get_labels()
         y=numpy.array(y, dtype=numpy.float64)
         for i in xrange(len(x)):
             line_dot.append({'x_value' : x[i], 'y_value' : y[i]})
