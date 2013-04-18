@@ -2,7 +2,7 @@
 <html>
     <head>
       <title>
-        Support Vector Regression Demo
+        Clustering-Demo
       </title>
 
       <style>
@@ -41,35 +41,30 @@
       <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body id="main">
-      <div class="page-header"><h2>&nbsp;Support Vector Regression Demo <small>based on Shogun-Toolbox</small></h2></div>
+      <div class="page-header"><h2>&nbsp;Clustering Demo <small>based on Shogun-Toolbox</small></h2></div>
       <div class="row">
       <div class="span9" style="display:inline;"></div>
       <div class="span3" style="display:inline;">
       <form name="argument">
-          <label> Kernel Function </label>
-          <select name="kernel" class="btn">
-                <option value="gaus" selected>GaussianKernel</option>
-                <option value="poly">PolynomialKernel</option>
-                <option value="line">LinearKernel</option>
+          <label> Distance </label>
+          <select name="distance_name" class="btn">
+                <option value="eucl" selected>Euclidean Distance</option>
+                <option value="manh">Manhattan Metric</option>
+                <option value="jens">Jensen Metric</option>
              </select></br>
-          <label> C  </label>
-          <input style="width:800" type="text" value="1.2" name="C" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"></br>
-          <label> tube </label>
-          <input type="text" value="0.04" name="tube" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"></br>
-          <label>sigma</label>
-          <input type="text" value="0.3" name="sigma" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"></br>
-          <label> d </label>
-          <input type="text" value="5" name="d" onkeyup="value=value.replace(/[^\d]/g,'')">
+          <label> Number of Clusters ( <500 )</label>
+          <input type="text" value="2" name="number_of_clusters" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"></br>
         <div class="btn-group">
-        <button type="button" class="btn btn-small btn-primary"  onclick="regression();">Regression</button>
-        <button type="button" class="btn btn-small btn-primary" onclick="clear_map();">Clear</button>
+        <button type="button" class="btn btn-small btn-primary"  onclick="cluster();">Cluster</button>
+        <button type="button" class="btn btn-small btn-primary" onclick="clear_canvas();">Clear</button>
         </div>
       </form>
       </div>
       </div>
 
       <script>
-        var new_points = {"points" : []};
+        var positive_dots = {"points" : []};
+        var negative_dots = {"points" : []};
         var margin = {top: 20, right: 20, bottom: 30, left: 40},
             width = 660 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
@@ -94,11 +89,11 @@
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .on("mousemove", mousemove)
+            .on("contextmenu",rightmousedown)
             .on("mousedown", mousedown)
           .append("g")
             .attr("transform", "translate(" + margin.left + "," +
             margin.top + ")")
-
 
 
         var cursor = svg.append("circle")
@@ -117,6 +112,25 @@
         function mousedown() {
           if (d3.mouse(this)[0]-margin.left < 0 || d3.mouse(this)[1]-margin.top > height)
              return;
+          if (event.button==0){
+            var point = d3.mouse(this);
+            point[0]-=margin.left;
+            point[1]-=margin.top;
+            svg.append("circle")
+              .attr("class",  "dot")
+              .attr("r", 3.5)
+              .attr("cx", point[0])
+              .attr("cy", point[1])
+              .style("fill", "red");
+            positive_dots.points.push( {"x": x.invert(point[0]).toFixed(3),"y": y.invert(point[1]).toFixed(3)});
+          }
+        }
+
+        d3.select("svg").node().oncontextmenu = function(){return false;}; //disable right click menu
+        function rightmousedown()
+        {
+          if (d3.mouse(this)[0]-margin.left < 0 || d3.mouse(this)[1]-margin.top > height)
+             return;
           var point = d3.mouse(this);
           point[0]-=margin.left;
           point[1]-=margin.top;
@@ -124,17 +138,12 @@
             .attr("class",  "dot")
             .attr("r", 3.5)
             .attr("cx", point[0])
-            .attr("cy", point[1]);
-          new_points.points.push( {"x": x.invert(point[0]).toFixed(3),"y": y.invert(point[1]).toFixed(3)});
+            .attr("cy", point[1])
+            .style("fill", "blue");
+          negative_dots.points.push( {"x": x.invert(point[0]).toFixed(3),"y": y.invert(point[1]).toFixed(3)});
         }
-        
 
-          new_points.points.forEach(function(d) {
-            d.x = +d.x;
-            d.y = +d.y;
-          });
-
-          x.domain([0,1]).nice();
+          x.domain([0,1]);
           y.domain([0,0.75]);
                    
           svg.append("g")
@@ -159,64 +168,62 @@
               .style("text-anchor", "end")
               .text("Y-axis");
 
-          svg.selectAll(".dot")
-              .data(new_points.points)
-            .enter().append("circle")
-              .attr("class", "dot")
-              .attr("r", 3.5)
-              .attr("cx", function(d) { return x(d.x); })
-              .attr("cy", function(d) { return y(d.y); })
-              .style("fill", "black")
 
-
-        function clear_map()
+        function clear_canvas()
         {
-           $('.line').fadeOut(800, function() { $(this).remove(); });
-//           svg.selectAll(".line").remove();
+           svg.selectAll(".line").remove();
            svg.selectAll(".dot").remove();
-           new_points = {"points" : []};
+           positive_dots = {"points" : []};
+           negative_dots = {"points" : []};
         }
         
-        function regression()
+        function cluster()
         {
-            if (new_points.points.length !=0)
               $.ajax(
                     {
-                      url:"point",
+                      url:"cluster",
                       type: "POST",
                       dataType: 'text',
-                      data: {csrfmiddlewaretoken: '{{ csrf_token }}',
-                             data: JSON.stringify(new_points),
-                             C: document.argument.C.value,
-                             tube: document.argument.tube.value,
-                             kernel: document.argument.kernel.value,
-                             sigma: document.argument.sigma.value,
-                             d: document.argument.d.value},
+                      data: {positive: JSON.stringify(positive_dots),
+                             negative: JSON.stringify(negative_dots),
+                             number_of_clusters: document.argument.number_of_clusters.value,
+                             distance_name: document.argument.distance_name.value,
+                             csrfmiddlewaretoken: '{{ csrf_token }}'},
                       success: function(data){
+                                  svg.selectAll(".line").remove();
                                   var json = $.parseJSON(data);
                                   svg.selectAll(".line").remove();
-                                  json.forEach(function(d) {
-                                      d.x_value = +d.x_value;
-                                      d.y_value = +d.y_value;
-                                    });
-                                 svg.selectAll(".line")
-                                   .data(json)
-                                   .enter().append("circle")
+                                 var circle = svg.selectAll(".line")
+                                   .data(json['circle'])
+                                   .enter();
+                                 circle.append("circle")
                                    .attr("class", "line")
-                                   .attr("r", 1.5)
-                                   .attr("cx", function(d) { return x(d.x_value); })
-                                   .attr("cy", function(d) { return y(d.y_value); })
-                                   .style("fill", "blue");
+                                   .attr("r",  function(d) { return x(d.r); })
+                                   .attr("cx", function(d) { return x(d.x); })
+                                   .attr("cy", function(d) { return y(d.y); })
+                                   .style("fill", "none")
+                                   .style("stroke", "gray");
+                                 circle.append("line")
+                                   .attr("class","line")
+                                   .attr("x1", function(d) {return x(d.x+0.02);})
+                                   .attr("y1", function(d) {return y(d.y+0.02);})
+                                   .attr("x2", function(d) {return x(d.x-0.02);})
+                                   .attr("y2", function(d) {return y(d.y-0.02);})
+                                   .style("stroke", "gray");
+                                 circle.append("line")
+                                   .attr("class","line")
+                                   .attr("x1", function(d) {return x(d.x-0.02);})
+                                   .attr("y1", function(d) {return y(d.y+0.02);})
+                                   .attr("x2", function(d) {return x(d.x+0.02);})
+                                   .attr("y2", function(d) {return y(d.y-0.02);})
+                                   .style("stroke", "gray");
         
                                },
         
                       error: function(){
-                                   alert("Error Generated!");
+                                   alert("Sorry! Got something wrong here, Check your input");
                                }
                     });
-             else{
-                  alert("Sorry, there's no dot input, click some, pls");
-             }
         }
 
         
