@@ -105,7 +105,7 @@
             .attr("r", 5)
             .attr("transform", "translate(-100,-100)")
             .attr("class", "cursor");
-        
+
         function mousemove() {
           cursor.attr("transform", "translate(" +
           (d3.mouse(this)[0]-margin.left) +","+
@@ -123,7 +123,7 @@
             .attr("cy", point[1]);
           new_points.points.push( {"x": x.invert(point[0]).toFixed(3),"y": y.invert(point[1]).toFixed(3)});
         }
-        
+
 
           new_points.points.forEach(function(d) {
             d.x = +d.x;
@@ -132,7 +132,7 @@
 
           x.domain([0,8]).nice();
           y.domain([0,4]).nice();
-                   
+
           svg.append("g")
               .attr("class", "x axis")
               .attr("transform", "translate(0," + height + ")")
@@ -172,7 +172,7 @@
            svg.selectAll(".dot").remove();
            new_points = {"points" : []};
         }
-        
+
         function regression()
         {
             if (new_points.points.length !=0)
@@ -180,7 +180,7 @@
                     {
                       url:"point",
                       type: "GET",
-                      contentType: "application/json", 
+                      contentType: "application/json",
                       dataType: 'text',
                       data: {data: JSON.stringify(new_points),
                              csrfmiddlewaretoken: '3N1Zbm4Avp4kE5U0snM9B4cdzDKueXZO',
@@ -204,9 +204,9 @@
                                    .attr("cx", function(d) { return x(d.x_value); })
                                    .attr("cy", function(d) { return y(d.y_value); })
                                    .style("fill", "blue");
-        
+
                                },
-        
+
                       error: function(){
                                    alert("Error Generated!");
                                }
@@ -216,7 +216,7 @@
              }
         }
 
-        
+
         </script>
     </body>
 </html>
