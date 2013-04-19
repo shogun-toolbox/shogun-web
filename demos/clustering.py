@@ -15,8 +15,8 @@ def entrance(request):
 
 def cluster(request):
     try:
-        arguments = read_data(request)
-        kmeans = train_clustering(*arguments)
+        arguments = _read_data(request)
+        kmeans = _train_clustering(*arguments)
         centers = kmeans.get_cluster_centers()
         radi = kmeans.get_radiuses()
         result = {'circle': []}
@@ -28,7 +28,7 @@ def cluster(request):
     except:
         return HttpResponseNotFound()
     
-def read_data(request):
+def _read_data(request):
     k = int(request.POST['number_of_clusters'])
     if k > 500:
         raise TypeError
@@ -40,7 +40,7 @@ def read_data(request):
         raise TypeError
     return (positive, negative, distance_name, k)
    
-def train_clustering(positive, negative, distance_name, k):
+def _train_clustering(positive, negative, distance_name, k):
     labels = numpy.array([1]*len(positive) + [-1]*len(negative), dtype=numpy.float64)
     num_pos = len(positive)
     num_neg = len(negative)
@@ -70,4 +70,3 @@ def train_clustering(positive, negative, distance_name, k):
     kmeans.train()
 
     return kmeans
-
