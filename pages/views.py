@@ -20,9 +20,8 @@ import os.path
 import parserHTML
 import datetime
 import calendar
+import importlib
 from BeautifulSoup import BeautifulSoup
-import demos
-
 
 # Parse news object.
 newsParser = parserHTML.myContentHandler();
@@ -372,10 +371,8 @@ def pageHandler(request,page,subpage):
 		                                         'news' : news,
 		                                         'lastnew' : lastnew})))
 
-    
-    
-
 def demoHandler(request, demo_name, function):
-    demo = getattr(demos, demo_name)
+    demo = importlib.import_module('demos.'+demo_name)
     fun = getattr(demo, function)
-    return fun(request)
+    return HttpResponse(fun(request))
+
