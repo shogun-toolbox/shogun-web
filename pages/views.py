@@ -10,8 +10,8 @@ from django.template import Context,TemplateDoesNotExist
 
 # Data Base libraries.
 from pages.models import Page
-from pages.models import Subpage 
-from pages.models import Article 
+from pages.models import Subpage
+from pages.models import Article
 from pages.models import New
 
 # Import the parser.
@@ -36,7 +36,7 @@ def error(err):
 
 def get_news():
 	# Get the last 5 articles modified.
-	news = New.objects.order_by('-updated_date')[:7]  
+	news = New.objects.order_by('-updated_date')[:7]
 
 	# Latest news
 	latest=None
@@ -67,7 +67,7 @@ def home(request):
 	return HttpResponse(template.render(Context({'current_page_path' : "home",
 												 'all_pages' : allpages,
 												 'news' : news,
-												 'lastnew' : lastnew})))  
+												 'lastnew' : lastnew})))
 
 
 # ----------------------------------------------------------------------
@@ -75,7 +75,7 @@ def home(request):
 # ----------------------------------------------------------------------
 # To render correctly the other views (about,documentation,contact,...)
 def showNew(request,newID):
-	
+
 	# Choose the template.
 	template = get_template("news.html")
 
@@ -103,7 +103,7 @@ def showNew(request,newID):
 												 'all_pages' : allpages,
 												 'all_subpages' : allsubpages,
 												 'articles' : [articles],
-		                                         'news' : news})))  
+		                                         'news' : news})))
 
 # ----------------------------------------------------------------------
 #                             SHOW BIG PICTURE
@@ -129,7 +129,7 @@ def showPicture(request,pictureName):
 												 'current_subpage_path' : 'bigpicture',
 												 'all_pages' : allpages,
 												 'picture_name' : pictureName,
-												 'picture_url' : picture_url}))) 
+												 'picture_url' : picture_url})))
 
 
 def irclog(request, year, month, day):
@@ -152,7 +152,7 @@ def irclog(request, year, month, day):
 												 'all_pages' : allpages,
 												 'all_subpages' : ['irclogs'],
 												 'logfile' : logfile,
-		                                         'news' : news})))  
+		                                         'news' : news})))
 
 
 def get_calendar_logs(logfiles):
@@ -226,7 +226,7 @@ def irclogs(request):
 												 'all_pages' : allpages,
 												 'all_subpages' : allsubpages,
 												 'irclogfiles' : all_entries,
-		                                         'news' : news})))  
+		                                         'news' : news})))
 
 
 def planet(request):
@@ -255,7 +255,7 @@ def planet(request):
 												 'all_pages' : allpages,
 												 'all_subpages' : ['planet'],
 												 'articles' : articles,
-		                                         'news' : news})))  
+		                                         'news' : news})))
 
 # ----------------------------------------------------------------------------------------------------
 #                                           NEWS
@@ -312,14 +312,14 @@ def news(request, subpage):
 												 'all_subpages' : allsubpages,
 												 'articles' : articles,
 		                                         'news' : news,
-		                                         'lastnew' : lastnew})))   
+		                                         'lastnew' : lastnew})))
 
 # ----------------------------------------------------------------------
 #                             PAGE HANDLER
 # ----------------------------------------------------------------------
 # To render correctly the other views (about,documentation,contact,...)
 def pageHandler(request,page,subpage):
-	
+
 	# Choose the template.
 	try:
 		template = get_template(page + ".html")
@@ -372,10 +372,13 @@ def pageHandler(request,page,subpage):
 		                                         'news' : news,
 		                                         'lastnew' : lastnew})))
 
-    
-    
 
+# ----------------------------------------------------------------------
+#                             DEMO HANDLER
+# ----------------------------------------------------------------------
+# Method to render demos
 def demoHandler(request, demo_name, function):
-    demo = getattr(demos, demo_name)
-    fun = getattr(demo, function)
-    return fun(request)
+	demo = getattr(demos, demo_name)
+	fun = getattr(demo, function)
+	return fun(request)
+
