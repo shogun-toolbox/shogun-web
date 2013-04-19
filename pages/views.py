@@ -372,7 +372,27 @@ def pageHandler(request,page,subpage):
 		                                         'lastnew' : lastnew})))
 
 def demoHandler(request, demo_name, function):
-    demo = importlib.import_module('demos.'+demo_name)
-    fun = getattr(demo, function)
-    return HttpResponse(fun(request))
+    try:
+        if demo_name == 'clustering':
+            import demos.clustering
+            if function == 'entrance':
+                response = demos.clustering.entrance(request)
+            elif function == 'cluster':
+                response = demos.clustering.cluster(request)
+            else:
+                raise Http404
+        elif demo_name == 'svr':
+            import demos.svr
+            if function == 'entrance':
+                response = demos.svr.entrance(request)
+            elif function == 'point':
+                response = demos.svr.point(request)
+            else:
+                raise Http404
+        else:
+            raise Http404
+    except:
+        raise Http404
+
+    return HttpResponse(response)
 

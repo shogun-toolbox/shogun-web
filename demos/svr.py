@@ -15,8 +15,8 @@ def entrance(request):
     
 def point(request):
     try:
-        arguments = read_data(request)
-        svm=train_svr(*arguments)
+        arguments=_read_data(request)
+        svm=_train_svr(*arguments)
         x=numpy.linspace(0, 1, 800)
         y=numpy.array(svm.apply(RealFeatures(numpy.array([x]))).get_labels(), dtype=numpy.float64)
         line_dot = []
@@ -26,7 +26,7 @@ def point(request):
     except:
         return HttpResponseNotFound()
             
-def read_data(request):
+def _read_data(request):
     labels = []
     features = []
     data = json.loads(request.POST['data'])
@@ -40,7 +40,7 @@ def read_data(request):
         features.append(float(pt["x"]))
     return (cost, tubeeps, degree, width, kernel_name, labels, features)
                 
-def train_svr(cost, tubeeps, degree, width, kernel_name, labels, features):
+def _train_svr(cost, tubeeps, degree, width, kernel_name, labels, features):
     labels = numpy.array(labels, dtype=numpy.float64)
     num = len(features)
     if num == 0:
