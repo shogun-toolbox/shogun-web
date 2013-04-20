@@ -17,7 +17,7 @@ def point(request):
     try:
         arguments=_read_data(request)
         svm=_train_svr(*arguments)
-        x=numpy.linspace(0, 1, 800)
+        x=numpy.linspace(0, 1, 100)
         y=numpy.array(svm.apply(RealFeatures(numpy.array([x]))).get_labels(), dtype=numpy.float64)
         line_dot = []
         for i in xrange(len(x)):
