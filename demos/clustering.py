@@ -1,13 +1,9 @@
-from django.core.context_processors import csrf
-from django.contrib.auth import login as auth_login
-from django.contrib.auth import *
-from django.template import Context, loader
 from django.http import HttpResponse, HttpResponseNotFound
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from modshogun import *
 
-import numpy
+import modshogun as sg
+import numpy as np
 import json
 
 def entrance(request):
@@ -41,10 +37,10 @@ def _read_data(request):
     return (positive, negative, distance_name, k)
    
 def _train_clustering(positive, negative, distance_name, k):
-    labels = numpy.array([1]*len(positive) + [-1]*len(negative), dtype=numpy.float64)
+    labels = np.array([1]*len(positive) + [-1]*len(negative), dtype=np.float64)
     num_pos = len(positive)
     num_neg = len(negative)
-    features = numpy.zeros((2, num_pos+num_neg))
+    features = np.zeros((2, num_pos+num_neg))
     
     for i in xrange(num_pos):
         features[0, i] = positive[i]['x']
@@ -54,19 +50,19 @@ def _train_clustering(positive, negative, distance_name, k):
         features[0, i+num_pos] = negative[i]['x']
         features[1, i+num_pos] = negative[i]['y']
                  
-    lab = BinaryLabels(labels)
-    train = RealFeatures(features)
+    lab = sg.BinaryLabels(labels)
+    train = sg.RealFeatures(features)
              
     if distance_name == "eucl":
-        distance = EuclideanDistance(train, train)
+        distance = sg.EuclideanDistance(train, train)
     elif distance_name == "manh":
-        distance = ManhattanMetric(train, train)
+        distance = sg.ManhattanMetric(train, train)
     elif distance_name == "jens":
-        distance = JensenMetric(train, train)
+        distance = sg.JensenMetric(train, train)
     else:
        raise TypeError
                   
-    kmeans = KMeans(k, distance)
+    kmeans = sg.KMeans(k, distance)
     kmeans.train()
 
     return kmeans

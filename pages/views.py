@@ -20,7 +20,6 @@ import os.path
 import parserHTML
 import datetime
 import calendar
-import importlib
 from BeautifulSoup import BeautifulSoup
 
 # Parse news object.
@@ -370,42 +369,3 @@ def pageHandler(request,page,subpage):
 												 'articles' : articles,
 		                                         'news' : news,
 		                                         'lastnew' : lastnew})))
-
-def demoHandler(request, demo_name, function):
-    try:
-        if demo_name == 'clustering':
-            import demos.clustering
-            if function == 'entrance':
-                response = demos.clustering.entrance(request)
-            elif function == 'cluster':
-                response = demos.clustering.cluster(request)
-            else:
-                raise Http404
-        elif demo_name == 'svr':
-            import demos.svr
-            if function == 'entrance':
-                response = demos.svr.entrance(request)
-            elif function == 'point':
-                response = demos.svr.point(request)
-            else:
-                raise Http404
-        elif demo_name == 'classification':
-        	import demos.classification
-        	actions = {
-        		'index': demos.classification.index,
-        		'binary': demos.classification.binary,
-        		'multiclass': demos.classification.multiclass,
-        		'run_binary': demos.classification.run_binary,
-        		'run_multiclass': demos.classification.run_multiclass
-        	}
-        	if function in actions:
-        		response = actions[function](request)
-        	else:
-        		raise Http404
-        else:
-            raise Http404
-    except:
-        raise Http404
-
-    return HttpResponse(response)
-

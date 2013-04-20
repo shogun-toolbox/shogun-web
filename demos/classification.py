@@ -1,10 +1,8 @@
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from modshogun import RealFeatures, BinaryLabels, MulticlassLabels
-from modshogun import GaussianKernel
-from modshogun import LibSVM, GMNPSVM
 
+import modshogun as sg
 import numpy as np
 import json
 import re
@@ -32,7 +30,7 @@ def run_binary(request):
         return HttpResponse(json.dumps({"status": repr(e)}))
 
     try:
-        x, y, z = classify(LibSVM, features, labels, C)
+        x, y, z = classify(sg.LibSVM, features, labels, C)
     except Exception as e:
         return HttpResponse(json.dumps({"status": repr(e)}))
 
@@ -50,7 +48,7 @@ def run_multiclass(request):
     except ValueError as e:
         return HttpResponse(json.dumps({"status": e.message}))
 
-    x, y, z = classify(GMNPSVM, features, labels, C)
+    x, y, z = classify(sg.GMNPSVM, features, labels, C)
 
     # Conrec hack: add tiny noise
     z = z + np.random.rand(*z.shape) * 0.01
@@ -62,7 +60,7 @@ def run_multiclass(request):
 
 def classify(classifier, features, labels, C=5, kernel_name=None, kernel_args=None):
     sigma = 10000
-    kernel = GaussianKernel(features, features, sigma)
+    kernel = sg.GaussianKernel(features, features, sigma)
 
     svm = classifier(C, kernel, labels)
     svm.train(features)
@@ -73,7 +71,7 @@ def classify(classifier, features, labels, C=5, kernel_name=None, kernel_args=No
     y1 = np.linspace(0, y_size, size)
     x, y = np.meshgrid(x1, y1)
 
-    test = RealFeatures(np.array((np.ravel(x), np.ravel(y))))
+    test = sg.RealFeatures(np.array((np.ravel(x), np.ravel(y))))
     kernel.init(features, test)
 
     out = svm.apply(test).get_values()
@@ -110,8 +108,8 @@ def _get_binary_features(data):
             features = np.concatenate((A, B), axis=1)
             labels = np.concatenate((np.ones(A.shape[1]), -np.ones(B.shape[1])), axis=1)
 
-    features = RealFeatures(features)
-    labels = BinaryLabels(labels)
+    features = sg.RealFeatures(features)
+    labels = sg.BinaryLabels(labels)
 
     return features, labels
 
@@ -135,7 +133,7 @@ def _get_multi_features(data):
         features = np.concatenate(tuple(v.values()), axis=1)
         labels = np.concatenate((np.zeros(v["a"].shape[1]), np.ones(v["b"].shape[1]), 2 * np.ones(v["c"].shape[1]), 3 * np.ones(v["d"].shape[1])), axis=1)
 
-    features = RealFeatures(features)
-    labels = MulticlassLabels(labels)
+    features = sg.RealFeatures(features)
+    labels = sg.MulticlassLabels(labels)
 
     return features, labels
