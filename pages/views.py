@@ -20,9 +20,8 @@ import os.path
 import parserHTML
 import datetime
 import calendar
+import importlib
 from BeautifulSoup import BeautifulSoup
-import demos
-
 
 # Parse news object.
 newsParser = parserHTML.myContentHandler();
@@ -372,13 +371,41 @@ def pageHandler(request,page,subpage):
 		                                         'news' : news,
 		                                         'lastnew' : lastnew})))
 
-
-# ----------------------------------------------------------------------
-#                             DEMO HANDLER
-# ----------------------------------------------------------------------
-# Method to render demos
 def demoHandler(request, demo_name, function):
-	demo = getattr(demos, demo_name)
-	fun = getattr(demo, function)
-	return fun(request)
+    try:
+        if demo_name == 'clustering':
+            import demos.clustering
+            if function == 'entrance':
+                response = demos.clustering.entrance(request)
+            elif function == 'cluster':
+                response = demos.clustering.cluster(request)
+            else:
+                raise Http404
+        elif demo_name == 'svr':
+            import demos.svr
+            if function == 'entrance':
+                response = demos.svr.entrance(request)
+            elif function == 'point':
+                response = demos.svr.point(request)
+            else:
+                raise Http404
+        elif demo_name == 'classification':
+        	import demos.classification
+        	actions = {
+        		'index': demos.classification.index,
+        		'binary': demos.classification.binary,
+        		'multiclass': demos.classification.multiclass,
+        		'run_binary': demos.classification.run_binary,
+        		'run_multiclass': demos.classification.run_multiclass
+        	}
+        	if function in actions:
+        		response = actions[function](request)
+        	else:
+        		raise Http404
+        else:
+            raise Http404
+    except:
+        raise Http404
+
+    return HttpResponse(response)
 
