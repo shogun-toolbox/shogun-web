@@ -51,10 +51,10 @@ def _train_svr(cost, tubeeps, degree, width, kernel_name, labels, features):
                 
     if kernel_name == "line":
         gk = sg.LinearKernel(train, train)
-        gk.set_normalizer(IdentityKernelNormalizer())
+        gk.set_normalizer(sg.IdentityKernelNormalizer())
     elif kernel_name == "poly":
         gk = sg.PolyKernel(train, train, degree, True)
-        gk.set_normalizer(IdentityKernelNormalizer())
+        gk.set_normalizer(sg.IdentityKernelNormalizer())
     elif kernel_name == "gaus":
         gk = sg.GaussianKernel(train, train, width)
     else:
