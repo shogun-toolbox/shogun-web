@@ -22,8 +22,6 @@ def index(request):
 def run_binary(request):
     points = json.loads(request.GET["points"])
     C = json.loads(request.GET["C"])
-    width = json.loads(request.GET["width"])
-    height = json.loads(request.GET["height"])
 
     try:
         features, labels = _get_binary_features(points)
@@ -36,7 +34,7 @@ def run_binary(request):
         return HttpResponse(json.dumps({"status": e.message}))
 
     try:
-        x, y, z = classify(sg.LibSVM, features, labels, kernel, x_size=width, y_size=height, C=C)
+        x, y, z = classify(sg.LibSVM, features, labels, kernel, C=C)
     except Exception as e:
         return HttpResponse(json.dumps({"status": repr(e)}))
 
@@ -48,8 +46,6 @@ def run_binary(request):
 def run_multiclass(request):
     points = json.loads(request.GET["points"])
     C = json.loads(request.GET["C"])
-    width = json.loads(request.GET["width"])
-    height = json.loads(request.GET["height"])
 
     try:
         features, labels = _get_multi_features(points)
@@ -61,7 +57,7 @@ def run_multiclass(request):
         return HttpResponse(json.dumps({"status": e.message}))
 
     try:
-        x, y, z = classify(sg.GMNPSVM, features, labels, kernel, x_size=width, y_size=height, C=C)
+        x, y, z = classify(sg.GMNPSVM, features, labels, kernel, C=C)
     except Exception as e:
         return HttpResponse(json.dumps({"status": repr(e)}))
 
@@ -91,13 +87,13 @@ def _get_kernel(request, features):
 
     return kernel
 
-def classify(classifier, features, labels, kernel, x_size = 640, y_size = 400, C=1):
+def classify(classifier, features, labels, kernel, C=1):
     svm = classifier(C, kernel, labels)
     svm.train(features)
 
     size = 100
-    x1 = np.linspace(0, x_size, size)
-    y1 = np.linspace(0, y_size, size)
+    x1 = np.linspace(0, 1, size)
+    y1 = np.linspace(0, 1, size)
     x, y = np.meshgrid(x1, y1)
 
     test = sg.RealFeatures(np.array((np.ravel(x), np.ravel(y))))
