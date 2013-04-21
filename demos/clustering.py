@@ -1,7 +1,6 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-
 import modshogun as sg
 import numpy as np
 import json
