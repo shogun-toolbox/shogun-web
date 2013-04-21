@@ -32,6 +32,13 @@
         .dot {
           stroke: #000;
         }
+        .grid .tick {
+            stroke: lightgrey;
+            opacity: 0.7;
+        }
+        .grid path{
+              stroke-width: 0;
+        }
       </style>
       <script src="/static/js/d3.min.js"></script>
       <script src="/static/js/jquery-1.9.1.min.js"></script>
@@ -72,7 +79,7 @@
         var new_points = {"points" : []};
         var margin = {top: 20, right: 20, bottom: 30, left: 40},
             width = 660 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+            height = 530 - margin.top - margin.bottom;
 
         var x = d3.scale.linear()
             .range([0, width]);
@@ -89,7 +96,23 @@
         var yAxis = d3.svg.axis()
             .scale(y)
             .orient("left");
+        
+        x.domain([0,1]).nice();
+        y.domain([0,0.8]).nice();
 
+        function make_x_axis() {
+            return d3.svg.axis()
+                .scale(x)
+                 .orient("bottom")
+                 .ticks(10)
+        }
+        function make_y_axis() {
+            return d3.svg.axis()
+                .scale(y)
+                .orient("left")
+                .ticks(8)
+        }
+        
         var svg = d3.select(".span9").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -99,19 +122,31 @@
             .attr("transform", "translate(" + margin.left + "," +
             margin.top + ")")
 
-
+        svg.append("g")
+            .attr("class", "grid")
+            .attr("transform", "translate(0," + height + ")")
+            .call(make_x_axis()
+                .tickSize(-height, 0, 0)
+                .tickFormat("")
+            )
+        svg.append("g")
+            .attr("class", "grid")
+            .call(make_y_axis()
+                .tickSize(-width, 0, 0)
+                .tickFormat("")
+            )
 
         var cursor = svg.append("circle")
             .attr("r", 5)
             .attr("transform", "translate(-100,-100)")
             .attr("class", "cursor");
-        
+
         function mousemove() {
           if (d3.mouse(this)[0]-margin.left < 0 || d3.mouse(this)[1]-margin.top > height)
              return;
           cursor.attr("transform", "translate(" +
-          (d3.mouse(this)[0]-margin.left) +","+
-          (d3.mouse(this)[1]-margin.top) +
+            (d3.mouse(this)[0]-margin.left) +","+
+            (d3.mouse(this)[1]-margin.top) +
           ")");
         }
         function mousedown() {
@@ -134,8 +169,6 @@
             d.y = +d.y;
           });
 
-          x.domain([0,1]).nice();
-          y.domain([0,0.75]);
                    
           svg.append("g")
               .attr("class", "x axis")
@@ -169,13 +202,26 @@
               .style("fill", "black")
 
 
+        json = {}
         function clear_map()
         {
-           $('.line').fadeOut(800, function() { $(this).remove(); });
-//           svg.selectAll(".line").remove();
+           svg.selectAll(".line")
+            .transition()
+            .duration(1000)
+            .attr("d", start(json))
+            .remove();
            svg.selectAll(".dot").remove();
            new_points = {"points" : []};
         }
+       var line = d3.svg.line()
+           .x(function (d) { return x(d.x_value); })
+           .y(function (d) { return y(d.y_value); })
+           .interpolate('basis')
+      var start = d3.svg.line()
+           .x(function (d) {return x(d.x_value); })
+           .y(function (d) {return y(0); })
+           .interpolate('basis')
+   
         
         function regression()
         {
@@ -193,21 +239,22 @@
                              sigma: document.argument.sigma.value,
                              d: document.argument.d.value},
                       success: function(data){
-                                  var json = $.parseJSON(data);
-                                  svg.selectAll(".line").remove();
+                                  json = $.parseJSON(data);
+//                                  svg.selectAll(".line").remove();
                                   json.forEach(function(d) {
-                                      d.x_value = +d.x_value;
-                                      d.y_value = +d.y_value;
-                                    });
+                                    d.x_value = +d.x_value;
+                                    d.y_value = +d.y_value;
+                                  });
+                                 if (svg.selectAll(".line")[0].length == 0)
+                                 svg.append("path")
+                                    .attr("class", "line")
+                                    .attr("d", start(json))
+                                    .style("stroke-width", "2")
+                                    .style("stroke", "green")
+                                    .style("fill", "none");
                                  svg.selectAll(".line")
-                                   .data(json)
-                                   .enter().append("circle")
-                                   .attr("class", "line")
-                                   .attr("r", 1.5)
-                                   .attr("cx", function(d) { return x(d.x_value); })
-                                   .attr("cy", function(d) { return y(d.y_value); })
-                                   .style("fill", "blue");
-        
+                                    .transition().duration(1000)
+                                    .attr("d", line(json));
                                },
         
                       error: function(){
