@@ -43,7 +43,7 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3">
+        <div class="span2">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Methods</li>
@@ -53,28 +53,39 @@
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-        <div class="span9">
-
+        <div class="span6">
         <h1>Multiclass classification</h1>
-
         <div class="svg-container"></div>
-          <p>
-            <div class="btn-group">
-              <button id="a_button" class="btn btn-primary" type="button" onclick="change_features('a')">A features</button>
-              <button id="b_button" class="btn" type="button" onclick="change_features('b')">B features</button>
-              <button id="c_button" class="btn" type="button" onclick="change_features('c')">C features</button>
-              <button id="d_button" class="btn" type="button" onclick="change_features('d')">D features</button>
-            </div>
-          </p>
-          <p>
-            <div class="btn-group">
-              <div class="input-append">
-                <input id="c-param" class="span5" type="text" placeholder="C parameter">
-                <button class="btn btn-success" type="button" onclick="classify('run_multiclass')">Classify</button>
-              </div>
-            </div>
-          </p>
+        <div class="btn-group">
+          <button id="a_button" class="btn btn-primary" type="button" onclick="change_features('a')">A features</button>
+          <button id="b_button" class="btn" type="button" onclick="change_features('b')">B features</button>
+          <button id="c_button" class="btn" type="button" onclick="change_features('c')">C features</button>
+          <button id="d_button" class="btn" type="button" onclick="change_features('d')">D features</button>
+        </div>
         </div><!--/span-->
+
+        <div class="span3">
+          <h3>Parameters</h3>
+          <form name="">
+            <label>Kernel</label>
+            <select id="kernel-param" class="span8">
+              <option value="gaussian" selected>GaussianKernel</option>
+              <option value="linear">LinearKernel</option>
+              <option value="poly">PolynomialKernel</option>
+            </select>
+            <label>C</label>
+            <input id="c-param" class="span8" type="text" value="1">
+            <label>Sigma</label>
+            <input id="sigma-param" class="span8" type="text" value="10000">
+            <label>Degree</label>
+            <input id="degree-param" class="span8" type="text" value="2">
+          </form>
+          <div class="btn-group">
+            <button type="button" class="btn btn-success" onclick="classify('run_multiclass')">Classify</button>
+            <button type="button" class="btn btn" onclick="clear_demo()">Clear</button>
+          </div><!--/btn-group-->
+        </div><!--/span-->
+
       </div><!--/row-->
     <hr>
       <footer>
