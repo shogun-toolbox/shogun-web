@@ -2,7 +2,7 @@
 <html>
     <head>
       <title>
-        Support Vector Regression Demo
+        Gaussian Process Regression Demo
       </title>
 
       <style>
@@ -48,35 +48,30 @@
       <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body id="main">
-      <div class="page-header"><h2>&nbsp;Support Vector Regression Demo <small>based on Shogun-Toolbox</small></h2></div>
+      <div class="page-header"><h2>&nbsp;Gaussian Process Regression Demo <small>based on Shogun-Toolbox</small></h2></div>
       <div class="row">
       <div class="span9" style="display:inline;"></div>
       <div class="span3" style="display:inline;">
       <form name="argument">
-          <label> Kernel Function </label>
-          <select name="kernel" class="btn">
-                <option value="gaus" selected>GaussianKernel</option>
-                <option value="poly">PolynomialKernel</option>
-                <option value="line">LinearKernel</option>
-             </select></br>
-          <label> C  </label>
-          <input style="width:800" type="text" value="1.2" name="C" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"></br>
-          <label> tube </label>
-          <input type="text" value="0.04" name="tube" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"></br>
-          <label>sigma</label>
-          <input type="text" value="0.3" name="sigma" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"></br>
-          <label> d </label>
-          <input type="text" value="5" name="d" onkeyup="value=value.replace(/[^\d]/g,'')">
+          <label> Sine Freq.  </label>
+          <input style="width:800" type="text" value="1.0" name="frequency" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"></br>
+          <label> Amplitude </label>
+          <input type="text" value="1.0" name="amplitude" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"></br>
+          <label> Noise Level </label>
+          <input type="text" value="0.3" name="noise_level" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"></br>
+          <label> Kernel Width </label>
+          <input type="text" value="5" name="kernel_width" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')">
         <div class="btn-group">
-        <button type="button" class="btn btn-small btn-primary"  onclick="regression();">Regression</button>
-        <button type="button" class="btn btn-small btn-primary" onclick="clear_map();">Clear</button>
+        <button type="button" class="btn btn-small btn-primary"  onclick="create_toy_data();">Generate Sine Data</button>
+        <button type="button" class="btn btn-small btn-primary"  onclick="train();">Train GP</button>
+        <button type="button" class="btn btn-small btn-primary"  onclick="clear_map();">Clear</button>
         </div>
       </form>
       </div>
       </div>
 
       <script>
-        var new_points = {"points" : []};
+        create_toy_data();
         var margin = {top: 20, right: 20, bottom: 30, left: 40},
             width = 660 - margin.left - margin.right,
             height = 530 - margin.top - margin.bottom;
@@ -97,8 +92,8 @@
             .scale(y)
             .orient("left");
         
-        x.domain([0,1]).nice();
-        y.domain([0,0.8]).nice();
+        x.domain([-5,5]).nice();
+        y.domain([-4,4]).nice();
 
         function make_x_axis() {
             return d3.svg.axis()
@@ -116,8 +111,6 @@
         var svg = d3.select(".span9").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
-            .on("mousemove", mousemove)
-            .on("mousedown", mousedown)
           .append("g")
             .attr("transform", "translate(" + margin.left + "," +
             margin.top + ")")
@@ -136,43 +129,9 @@
                 .tickFormat("")
             )
 
-        var cursor = svg.append("circle")
-            .attr("r", 5)
-            .attr("transform", "translate(-100,-100)")
-            .attr("class", "cursor");
-
-        function mousemove() {
-          if (d3.mouse(this)[0]-margin.left < 0 || d3.mouse(this)[1]-margin.top > height)
-             return;
-          cursor.attr("transform", "translate(" +
-            (d3.mouse(this)[0]-margin.left) +","+
-            (d3.mouse(this)[1]-margin.top) +
-          ")");
-        }
-        function mousedown() {
-          if (d3.mouse(this)[0]-margin.left < 0 || d3.mouse(this)[1]-margin.top > height)
-             return;
-          var point = d3.mouse(this);
-          point[0]-=margin.left;
-          point[1]-=margin.top;
-          svg.append("circle")
-            .attr("class",  "dot")
-            .attr("r", 3.5)
-            .attr("cx", point[0])
-            .attr("cy", point[1]);
-          new_points.points.push( {"x": x.invert(point[0]).toFixed(3),"y": y.invert(point[1]).toFixed(3)});
-        }
-        
-
-          new_points.points.forEach(function(d) {
-            d.x = +d.x;
-            d.y = +d.y;
-          });
-
-                   
           svg.append("g")
               .attr("class", "x axis")
-              .attr("transform", "translate(0," + height + ")")
+              .attr("transform", "translate(0," + height/2 + ")")
               .call(xAxis)
              .append("text")
               .attr("class", "label")
@@ -183,6 +142,7 @@
 
           svg.append("g")
               .attr("class", "y axis")
+              .attr("transform", "translate(" +width/2 + ", 0)")
               .call(yAxis)
              .append("text")
               .attr("class", "label")
@@ -192,17 +152,6 @@
               .style("text-anchor", "end")
               .text("Y-axis");
 
-          svg.selectAll(".dot")
-              .data(new_points.points)
-            .enter().append("circle")
-              .attr("class", "dot")
-              .attr("r", 3.5)
-              .attr("cx", function(d) { return x(d.x); })
-              .attr("cy", function(d) { return y(d.y); })
-              .style("fill", "black")
-
-
-        json = {}
         function clear_map()
         {
            svg.selectAll(".line")
@@ -213,38 +162,57 @@
            svg.selectAll(".dot").remove();
            new_points = {"points" : []};
         }
-       var line = d3.svg.line()
-           .x(function (d) { return x(d.x_value); })
-           .y(function (d) { return y(d.y_value); })
+        var end = d3.svg.line()
+           .x(function (d) { return x(d.x); })
+           .y(function (d) { return y(d.y); })
            .interpolate('basis')
-      var start = d3.svg.line()
-           .x(function (d) {return x(d.x_value); })
+        var start = d3.svg.line()
+           .x(function (d) {return x(d.x); })
            .y(function (d) {return y(0); })
            .interpolate('basis')
-   
-        
-        function regression()
+
+        toy_data = [];
+        function create_toy_data()
         {
-            if (new_points.points.length !=0)
               $.ajax(
                     {
-                      url:"point",
+                       url:"create_toy_data",
+                       type: "POST",
+                       dataType: 'text',
+                       data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+                              amplitude: document.argument.amplitude.value ,
+                              frequency: document.argument.frequency.value,
+                              noise_level: document.argument.noise_level.value},
+                       success: function(data){
+                                   json = $.parseJSON(data)['data'];
+                                   svg.selectAll(".dot").remove();
+                                   toy_data = json;
+                                   svg.selectAll(".dot")
+                                      .data(json)
+                                      .enter().append("circle")
+                                       .attr("class", "dot")
+                                       .attr("r", 1.5)
+                                       .attr("cx", function(d) { return x(d.x); })
+                                       .attr("cy", function(d) { return y(d.y); })
+                                       .style("fill", "red")
+                                       .style("stroke", "none");
+                                },
+                        error: function(){alert("Cannot connect to server");}
+                     });
+        }
+        function train()
+        {
+            if (toy_data.length !=0)
+              $.ajax(
+                    {
+                      url:"train",
                       type: "POST",
                       dataType: 'text',
                       data: {csrfmiddlewaretoken: '{{ csrf_token }}',
-                             data: JSON.stringify(new_points),
-                             C: document.argument.C.value,
-                             tube: document.argument.tube.value,
-                             kernel: document.argument.kernel.value,
-                             sigma: document.argument.sigma.value,
-                             d: document.argument.d.value},
+                             toy_data: JSON.stringify(toy_data),
+                             kernel_width: document.argument.kernel_width.value},
                       success: function(data){
-                                  json = $.parseJSON(data);
-//                                  svg.selectAll(".line").remove();
-                                  json.forEach(function(d) {
-                                    d.x_value = +d.x_value;
-                                    d.y_value = +d.y_value;
-                                  });
+                                 json = $.parseJSON(data);
                                  if (svg.selectAll(".line")[0].length == 0)
                                  svg.append("path")
                                     .attr("class", "line")
@@ -254,15 +222,14 @@
                                     .style("fill", "none");
                                  svg.selectAll(".line")
                                     .transition().duration(1000)
-                                    .attr("d", line(json));
+                                    .attr("d", end(json));
                                },
-        
                       error: function(){
                                    alert("Error Generated!");
                                }
                     });
              else{
-                  alert("Sorry, there's no dot input, click some, pls");
+                  alert("Sorry, there's no dots to train, generate some, pls");
              }
         }
 
