@@ -20,6 +20,7 @@ import os.path
 import parserHTML
 import datetime
 import calendar
+import importlib
 from BeautifulSoup import BeautifulSoup
 
 # Parse news object.
