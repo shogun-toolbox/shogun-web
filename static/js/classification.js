@@ -70,6 +70,9 @@ function mousedown() {
         .ease("linear")
         .attr("opacity", 1);
 
+    point[0] /= width;
+    point[1] /= height;
+
     if (feature_type in points) {
         points[feature_type].push(point);
     } else {
@@ -94,7 +97,7 @@ function classify(url) {
     if (!kernel) {
         kernel = "gaussian";
     }
-    sigma = parseInt(d3.select("input#sigma-param").property("value"));
+    sigma = parseFloat(d3.select("input#sigma-param").property("value"));
     if (!sigma) {
         sigma = 10000;
     }
@@ -188,7 +191,6 @@ function recv(data) {
     svg.selectAll("text")
         .each(function(d, i) {
             this.parentNode.appendChild(this);
-            console.log(this);
         });
 
 }
