@@ -5,7 +5,6 @@ from django.shortcuts import render_to_response
 import modshogun as sg
 import numpy as np
 import json
-import re
 
 
 def binary(request):
@@ -23,14 +22,21 @@ def index(request):
 def run_binary(request):
     points = json.loads(request.GET["points"])
     C = json.loads(request.GET["C"])
+    width = json.loads(request.GET["width"])
+    height = json.loads(request.GET["height"])
 
     try:
         features, labels = _get_binary_features(points)
     except ValueError as e:
-        return HttpResponse(json.dumps({"status": repr(e)}))
+        return HttpResponse(json.dumps({"status": e.message}))
 
     try:
-        x, y, z = classify(sg.LibSVM, features, labels, C)
+        kernel = _get_kernel(request, features)
+    except ValueError as e:
+        return HttpResponse(json.dumps({"status": e.message}))
+
+    try:
+        x, y, z = classify(sg.LibSVM, features, labels, kernel, x_size=width, y_size=height, C=C)
     except Exception as e:
         return HttpResponse(json.dumps({"status": repr(e)}))
 
@@ -42,13 +48,22 @@ def run_binary(request):
 def run_multiclass(request):
     points = json.loads(request.GET["points"])
     C = json.loads(request.GET["C"])
+    width = json.loads(request.GET["width"])
+    height = json.loads(request.GET["height"])
 
     try:
         features, labels = _get_multi_features(points)
     except ValueError as e:
         return HttpResponse(json.dumps({"status": e.message}))
+    try:
+        kernel = _get_kernel(request, features)
+    except ValueError as e:
+        return HttpResponse(json.dumps({"status": e.message}))
 
-    x, y, z = classify(sg.GMNPSVM, features, labels, C)
+    try:
+        x, y, z = classify(sg.GMNPSVM, features, labels, kernel, x_size=width, y_size=height, C=C)
+    except Exception as e:
+        return HttpResponse(json.dumps({"status": repr(e)}))
 
     # Conrec hack: add tiny noise
     z = z + np.random.rand(*z.shape) * 0.01
@@ -58,14 +73,28 @@ def run_multiclass(request):
     return HttpResponse(json.dumps(data))
 
 
-def classify(classifier, features, labels, C=5, kernel_name=None, kernel_args=None):
-    sigma = 10000
-    kernel = sg.GaussianKernel(features, features, sigma)
+def _get_kernel(request, features):
+    name = json.loads(request.GET["kernel"])
 
+    if name == "gaussian":
+        sigma = json.loads(request.GET["sigma"])
+        kernel = sg.GaussianKernel(features, features, sigma)
+    elif name == "linear":
+        kernel = sg.LinearKernel(features, features)
+        kernel.set_normalizer(sg.IdentityKernelNormalizer())
+    elif name == "poly":
+        degree = json.loads(request.GET["degree"])
+        kernel = sg.PolyKernel(features, features, degree, True)
+        kernel.set_normalizer(sg.VarianceKernelNormalizer())
+    else:
+        raise ValueError("Unknown kernel")
+
+    return kernel
+
+def classify(classifier, features, labels, kernel, x_size = 640, y_size = 400, C=1):
     svm = classifier(C, kernel, labels)
     svm.train(features)
-    x_size = 640
-    y_size = 400
+
     size = 100
     x1 = np.linspace(0, x_size, size)
     y1 = np.linspace(0, y_size, size)
@@ -83,18 +112,9 @@ def classify(classifier, features, labels, C=5, kernel_name=None, kernel_args=No
     return x, y, z
 
 
-def _get_coordinates(data):
-    regex = re.match(r"translate\((?P<x>.*),(?P<y>.*)\)", data)
-
-    x = float(regex.group("x"))
-    y = float(regex.group("y"))
-
-    return (x, y)
-
-
 def _get_binary_features(data):
-    A = np.transpose(np.array(map(_get_coordinates, data.get("a", []))))
-    B = np.transpose(np.array(map(_get_coordinates, data.get("b", []))))
+    A = np.transpose(np.array(data.get("a", []), dtype=float))
+    B = np.transpose(np.array(data.get("b", []), dtype=float))
 
     if not len(A):
         if not len(B):
@@ -119,7 +139,7 @@ def _get_multi_features(data):
     empty = np.zeros((2, 0))
     for key in v:
         if key in data:
-            v[key] = np.transpose(np.array(map(_get_coordinates, data[key])))
+            v[key] = np.transpose(np.array(data[key], dtype=float))
         else:
             v[key] = empty
 

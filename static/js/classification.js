@@ -1,30 +1,80 @@
-
+var points = {};
 var feature_type = "a";
-var width = 640,
-    height = 400;
 var fill = d3.scale.category10();
 
-var svg = d3.select("div.svg-container").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .on("mousedown", mousedown);
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 640 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-svg.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("class", "box");
+var x = d3.scale.linear()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var color = d3.scale.category10();
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var svg = d3.select("div.svg-container").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .on("mousedown", mousedown)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+  .append("text")
+    .attr("class", "label")
+    .attr("x", width)
+    .attr("y", -6)
+    .style("text-anchor", "end")
+
+svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis)
+  .append("text")
+    .attr("class", "label")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end")
 
 function mousedown() {
     var point = d3.mouse(this);
+
+    point[0] -= margin.left;
+    point[1] -= margin.top;
+
+    if (point[0] < 0 || point[1] < 0 || point[0] > width || point[1] > height) {
+        return;
+    }
+
     svg.append("circle")
         .attr("r", 5)
-        .attr("transform", "translate(" + d3.mouse(this) + ")")
+        .attr("cx", point[0])
+        .attr("cy", point[1])
         .attr("class", feature_type)
         .attr("opacity", 0)
-        .transition()
+      .transition()
         .duration(200)
         .ease("linear")
         .attr("opacity", 1);
+
+    if (feature_type in points) {
+        points[feature_type].push(point);
+    } else {
+        points[feature_type] = [point];
+    }
 }
 
 function change_features(feature) {
@@ -36,30 +86,36 @@ function change_features(feature) {
 }
 
 function classify(url) {
-    points = {};
-
-    svg.selectAll("circle")
-        .each(function(d, i) {
-            c = this.attributes[2]["value"];
-            coordinates = this.attributes[1]["value"];
-            if (c in points) {
-                points[c].push(coordinates);
-            } else {
-                points[c] = [coordinates];
-            }
-        });
-
     c = parseInt(d3.select("input#c-param").property("value"));
     if (!c) {
         c = 1;
     }
-    data = {"points": JSON.stringify(points), "C": JSON.stringify(c)};
+    kernel = d3.select("select#kernel-param").property("value");
+    if (!kernel) {
+        kernel = "gaussian";
+    }
+    sigma = parseInt(d3.select("input#sigma-param").property("value"));
+    if (!sigma) {
+        sigma = 10000;
+    }
+    degree = parseInt(d3.select("input#degree-param").property("value"));
+    if (!degree) {
+        degree = 2;
+    }
 
+    data = {
+        "points": JSON.stringify(points),
+        "C": JSON.stringify(c),
+        "width": JSON.stringify(width),
+        "height": JSON.stringify(height),
+        "kernel": JSON.stringify(kernel),
+        "sigma": JSON.stringify(sigma),
+        "degree": JSON.stringify(degree),
+    };
     request_clasify(data, url);
 }
 
 function request_clasify(message, url) {
-
     $.ajax({
         url:url,
         type: "GET",
@@ -68,18 +124,17 @@ function request_clasify(message, url) {
         data: message,
         success: recv,
     });
+}
 
+function clear_demo() {
+    //Remove points
+    svg.selectAll("circle")
+        .remove();
+    points = {};
 
-    // xhr = new XMLHttpRequest();
-    // xhr.aborted = false;
-    // xhr.open("POST", URL, true);
-    // xhr.setRequestHeader("X-Ajax-Request", "true");
-    // xhr.onreadystatechange = function() {
-    //     if (xhr.readyState === 4 && xhr.status === 200) {
-    //         recv(xhr.responseText);
-    //     }
-    // };
-    // xhr.send(JSON.stringify(data));
+    // Remove paths
+    svg.selectAll("path")
+        .remove();
 }
 
 function recv(data) {
@@ -113,12 +168,10 @@ function recv(data) {
     c.contour(z, 0, xs.length-1, 0, ys.length-1, xs, ys, zs.length, zs);
 
     // Remove old paths
-    d3.select("svg")
-        .selectAll("path")
+    svg.selectAll("path")
         .remove();
     // Create new paths
-    d3.select("svg")
-        .selectAll("path").data(c.contourList())
+    svg.selectAll("path").data(c.contourList())
         .enter().append("svg:path")
         .style("fill", function(d) { return colours(d.level);})
         .attr("class", "path")
@@ -127,10 +180,15 @@ function recv(data) {
             .y(function(d) { return y(d.y); })
         );
     // Sort points
-    d3.select("svg")
-        .selectAll("circle")
-        .each(function() {
+    svg.selectAll("circle")
+        .each(function(d, i) {
             this.parentNode.appendChild(this);
+        });
+
+    svg.selectAll("text")
+        .each(function(d, i) {
+            this.parentNode.appendChild(this);
+            console.log(this);
         });
 
 }
