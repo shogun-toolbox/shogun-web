@@ -48,6 +48,9 @@ urlpatterns = patterns('',
     url(r'^demos/classification/run_binary', 'demos.classification.run_binary'),
     url(r'^demos/classification/multiclass', 'demos.classification.multiclass'),
     url(r'^demos/classification/run_multiclass', 'demos.classification.run_multiclass'),
+    url(r'^demos/gp/entrance', 'demos.gp.entrance'),
+    url(r'^demos/gp/create_toy_data', 'demos.gp.create_toy_data'),
+    url(r'^demos/gp/train', 'demos.gp.train'),
 
     # Main page.
     (r'^', 'pages.views.home'),
