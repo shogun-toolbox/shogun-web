@@ -29,6 +29,9 @@ var svg = d3.select("div.svg-container").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+var svg1 = svg.append("g");
+var svg2 = svg.append("g");
+
 svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
@@ -140,9 +143,31 @@ function clear_demo() {
         .remove();
 }
 
+function getCountour(z, minimum, maximum, dom) {
+    // Generate contour
+    cliff = -100;
+    z.push(d3.range(z[0].length).map(function() { return cliff; }));
+    z.unshift(d3.range(z[0].length).map(function() { return cliff; }));
+    z.forEach(function(d) {
+        d.push(cliff);
+        d.unshift(cliff);
+    });
+
+    c = new Conrec();
+    xs = d3.range(0, z.length);
+    ys = d3.range(0, z[0].length);
+    zs = d3.range(minimum, maximum, 0.1);
+    x = d3.scale.linear().range([0, width]).domain([0, z.length]);
+    y = d3.scale.linear().range([0, height]).domain([0, z[0].length]);
+    colours = d3.scale.linear().domain(dom).range(["blue", "red"]);
+
+    c.contour(z, 0, xs.length-1, 0, ys.length-1, xs, ys, zs.length, zs);
+
+    return {"c": c, "x": x, "y": y, "colours": colours};
+}
+
 function recv(data) {
     data = JSON.parse(data);
-
     if (data["status"] != "ok") {
         alert(data["status"]);
         return;
@@ -151,37 +176,49 @@ function recv(data) {
     // Grid data
     z = data["z"];
 
-    // Generate contour
-    var cliff = -100;
-    z.push(d3.range(z[0].length).map(function() { return cliff; }));
-    z.unshift(d3.range(z[0].length).map(function() { return cliff; }));
-    z.forEach(function(d) {
-        d.push(cliff);
-        d.unshift(cliff);
-    });
+    minimum = data["min"];
+    maximum = data["max"];
+    dom = data["domain"];
 
-    var c = new Conrec(),
-        xs = d3.range(0, z.length),
-        ys = d3.range(0, z[0].length),
-        zs = d3.range(data["min"], data["max"], 0.1),
-        x = d3.scale.linear().range([0, width]).domain([0, z.length]),
-        y = d3.scale.linear().range([0, height]).domain([0, z[0].length]),
-        colours = d3.scale.linear().domain(data["domain"]).range(["blue", "red"]);
-
-    c.contour(z, 0, xs.length-1, 0, ys.length-1, xs, ys, zs.length, zs);
+    result = getCountour(z, minimum, maximum, dom);
+    c = result["c"];
+    x = result["x"];
+    y = result["y"];
+    colours = result["colours"];
 
     // Remove old paths
-    svg.selectAll("path")
+    svg1.selectAll("path")
+        .remove();
+    svg2.selectAll("path")
         .remove();
     // Create new paths
-    svg.selectAll("path").data(c.contourList())
+    svg1.selectAll("path").data(c.contourList())
         .enter().append("svg:path")
-        .style("fill", function(d) { return colours(d.level);})
+        .style("fill", function(d) { return colours(d.level); })
         .attr("class", "path")
-        .attr("d",d3.svg.line()
+        .attr("d", d3.svg.line()
             .x(function(d) { return x(d.x); })
             .y(function(d) { return y(d.y); })
         );
+
+    if ("z2" in data) {
+        z2 = data["z2"];
+        result = getCountour(z2, minimum, maximum, dom);
+        c2 = result["c"];
+
+        // Create new paths
+        svg2.selectAll("path").data(c2.contourList())
+            .enter().append("svg:path")
+            .style("fill", function(d) { return colours(d.level); })
+            .attr("class", "path")
+            .style("opacity", "0.03")
+            .attr("d", d3.svg.line()
+                .x(function(d) { return x(d.x); })
+                .y(function(d) { return y(d.y); })
+            );
+        svg.append(svg1.selectAll("path"));
+    }
+
     // Sort points
     svg.selectAll("circle")
         .each(function(d, i) {

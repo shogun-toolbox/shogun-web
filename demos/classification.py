@@ -42,7 +42,7 @@ def run_binary(request):
     except Exception as e:
         return HttpResponse(json.dumps({"status": repr(e)}))
 
-    data = {"status": "ok", "domain": [-1, 1], "max": np.max(z), "min": np.min(z), "z": z.tolist()}
+    data = {"status": "ok", "domain": [np.min(z), np.max(z)], "max": np.max(z), "min": np.min(z), "z": z.tolist()}
 
     return HttpResponse(json.dumps(data))
 
@@ -86,11 +86,14 @@ def run_perceptron(request):
         return HttpResponse(json.dumps({"status": e.message}))
 
     try:
-        x, y, z = classify_perceptron(sg.AveragedPerceptron, features, labels, learn, bias)
+        z_value, z_label = classify_perceptron(sg.Perceptron, features, labels, learn, bias)
     except Exception as e:
         return HttpResponse(json.dumps({"status": repr(e)}))
 
-    data = {"status": "ok", "domain": [-1, 1], "max": np.max(z), "min": np.min(z), "z": z.tolist()}
+    mininum = np.min(z_value)
+    maximum = np.max(z_value)
+
+    data = {"status": "ok", "domain": [mininum, maximum], "max": maximum, "min": mininum, "z": z_value.tolist(), "z2": z_label.tolist()}
 
     return HttpResponse(json.dumps(data))
 
@@ -138,7 +141,7 @@ def classify_svm(classifier, features, labels, kernel, C=1):
 def classify_perceptron(classifier, features, labels, learn=1, bias=0):
     perceptron = classifier(features, labels)
     perceptron.set_learn_rate(learn)
-    perceptron.set_max_iter(10000)
+    perceptron.set_max_iter(1000)
     perceptron.set_bias(bias)
     perceptron.train()
 
@@ -149,14 +152,20 @@ def classify_perceptron(classifier, features, labels, learn=1, bias=0):
 
     test = sg.RealFeatures(np.array((np.ravel(x), np.ravel(y))))
 
-    out = perceptron.apply(test).get_values()
+    outl = perceptron.apply(test).get_labels()
+    outv = perceptron.apply(test).get_values()
+
     # Normalize output
-    out /= np.max(out)
+    outv /= np.max(outv)
 
-    z = out.reshape((size, size))
-    z = np.transpose(z)
+    z_value = outv.reshape((size, size))
+    z_value = np.transpose(z_value)
 
-    return x, y, z
+    z_label = outl.reshape((size, size))
+    z_label = np.transpose(z_label)
+    z_label = z_label + np.random.rand(*z_label.shape) * 0.01
+
+    return z_value, z_label
 
 
 def _get_binary_features(data):
