@@ -100,8 +100,7 @@
             .on("contextmenu",rightmousedown)
             .on("mousedown", mousedown)
           .append("g")
-            .attr("transform", "translate(" + margin.left + "," +
-            margin.top + ")")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
         x.domain([0,1]).nice();
         y.domain([0,0.8]).nice();
@@ -149,18 +148,16 @@
         function mousedown() {
           if (d3.mouse(this)[0]-margin.left < 0 || d3.mouse(this)[1]-margin.top > height)
              return;
-          if (event.button==0){
-            var point = d3.mouse(this);
-            point[0]-=margin.left;
-            point[1]-=margin.top;
-            svg.append("circle")
-              .attr("class",  "dot")
-              .attr("r", 3.5)
-              .attr("cx", point[0])
-              .attr("cy", point[1])
-              .style("fill", "red");
-            positive_dots.points.push( {"x": x.invert(point[0]).toFixed(3),"y": y.invert(point[1]).toFixed(3)});
-          }
+          var point = d3.mouse(this);
+          point[0]-=margin.left;
+          point[1]-=margin.top;
+          svg.append("circle")
+            .attr("class",  "dot")
+            .attr("r", 3.5)
+            .attr("cx", point[0])
+            .attr("cy", point[1])
+            .style("fill", "red");
+          positive_dots.points.push( {"x": x.invert(point[0]).toFixed(3),"y": y.invert(point[1]).toFixed(3)});
         }
 
         d3.select("svg").node().oncontextmenu = function(){return false;}; //disable right click menu
