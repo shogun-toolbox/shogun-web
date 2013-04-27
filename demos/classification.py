@@ -90,9 +90,6 @@ def run_perceptron(request):
     except Exception as e:
         return HttpResponse(json.dumps({"status": repr(e)}))
 
-    # Conrec hack: add tiny noise
-    z = z + np.random.rand(*z.shape) * 0.01
-
     data = {"status": "ok", "domain": [-1, 1], "max": np.max(z), "min": np.min(z), "z": z.tolist()}
 
     return HttpResponse(json.dumps(data))
@@ -152,7 +149,9 @@ def classify_perceptron(classifier, features, labels, learn=1, bias=0):
 
     test = sg.RealFeatures(np.array((np.ravel(x), np.ravel(y))))
 
-    out = perceptron.apply(test).get_labels()
+    out = perceptron.apply(test).get_values()
+    # Normalize output
+    out /= np.max(out)
 
     z = out.reshape((size, size))
     z = np.transpose(z)
