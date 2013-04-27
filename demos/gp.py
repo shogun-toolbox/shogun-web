@@ -41,7 +41,7 @@ def train(request):
         arguments = _read_toy_data(request)
         result = _process(*arguments)
     except:
-	return HttpResponseNotFound()
+        return HttpResponseNotFound()
 
     return HttpResponse(json.dumps(result))
 
@@ -78,17 +78,19 @@ def _process(x_set, y_set, kernel_width):
     inf = sg.ExactInferenceMethod(SECF, feat_train, zmean, labels, likelihood)
 
     # location of unispaced predictions
-    x_test = np.array([np.linspace(min(x_set), max(x_set), feat_train.get_num_vectors())])
+    x_test = np.array([np.linspace(-5, 5, feat_train.get_num_vectors())])
     feat_test = sg.RealFeatures(x_test)
 
     gp = sg.GaussianProcessRegression(inf, feat_train, labels)
     gp.set_return_type(sg.GaussianProcessRegression.GP_RETURN_COV)
     covariance = gp.apply_regression(feat_test)
     gp.set_return_type(sg.GaussianProcessRegression.GP_RETURN_MEANS)
-    predictions = gp.apply_regression()
+    predictions = gp.apply_regression(feat_test)
 
     result = []
     for i in xrange(len(feat_test.get_feature_matrix()[0])):
         result.append({'x': feat_test.get_feature_matrix()[0][i],
-                       'y': predictions.get_labels()[i]})
+                       'y': predictions.get_labels()[i],
+                       'range_upper': predictions.get_labels()[i]+3*np.sqrt(covariance.get_labels()[i]),
+                       'range_lower': predictions.get_labels()[i]-3*np.sqrt(covariance.get_labels()[i])})
     return result
