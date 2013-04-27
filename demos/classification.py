@@ -62,6 +62,7 @@ def run_multiclass(request):
 
     try:
         x, y, z = classify_svm(sg.GMNPSVM, features, labels, kernel, C=C)
+
     except Exception as e:
         return HttpResponse(json.dumps({"status": repr(e)}))
 
@@ -75,7 +76,9 @@ def run_multiclass(request):
 
 def run_perceptron(request):
     points = json.loads(request.GET["points"])
-    C = json.loads(request.GET["C"])
+    learn = json.loads(request.GET["C"])
+    bias = json.loads(request.GET["sigma"])
+
 
     try:
         features, labels = _get_binary_features(points)
@@ -83,7 +86,7 @@ def run_perceptron(request):
         return HttpResponse(json.dumps({"status": e.message}))
 
     try:
-        x, y, z = classify_perceptron(sg.AveragedPerceptron, features, labels, C=C)
+        x, y, z = classify_perceptron(sg.AveragedPerceptron, features, labels, learn, bias)
     except Exception as e:
         return HttpResponse(json.dumps({"status": repr(e)}))
 
@@ -114,7 +117,7 @@ def _get_kernel(request, features):
     return kernel
 
 
-def classify_svm(classifier, features, labels, kernel, x_size = 640, y_size = 400, C=1):
+def classify_svm(classifier, features, labels, kernel, C=1):
     svm = classifier(C, kernel, labels)
     svm.train(features)
 
@@ -135,15 +138,16 @@ def classify_svm(classifier, features, labels, kernel, x_size = 640, y_size = 40
     return x, y, z
 
 
-def classify_perceptron(classifier, features, labels, x_size = 640, y_size = 400, C=1):
+def classify_perceptron(classifier, features, labels, learn=1, bias=0):
     perceptron = classifier(features, labels)
-    perceptron.set_learn_rate(C)
+    perceptron.set_learn_rate(learn)
     perceptron.set_max_iter(10000)
+    perceptron.set_bias(bias)
     perceptron.train()
 
     size = 100
-    x1 = np.linspace(0, x_size, size)
-    y1 = np.linspace(0, y_size, size)
+    x1 = np.linspace(0, 1, size)
+    y1 = np.linspace(0, 1, size)
     x, y = np.meshgrid(x1, y1)
 
     test = sg.RealFeatures(np.array((np.ravel(x), np.ravel(y))))
