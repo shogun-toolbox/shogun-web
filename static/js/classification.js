@@ -37,7 +37,7 @@ var colorbar_title = d3.select("h3.hide");
 var colorbar = d3.select("div.colorbar-container")
   .append("svg")
     .attr("width", 250)
-    .attr("height", 50);
+    .attr("height", 100);
 
 svg.append("g")
     .attr("class", "x axis")
@@ -177,10 +177,15 @@ function setColorBar(minimum, maximum) {
     if (colorbar_title) {
         colorbar_title.attr("class", "");
 
+        // Clean old state
+        colorbar.selectAll("rect")
+            .remove();
+        colorbar.selectAll("text")
+            .remove();
+
         data1 = d3.range(40);
         rects = colorbar.selectAll("rect")
             .data(data1);
-
         colorScale = d3.scale.linear()
             .domain([d3.min(data1), d3.max(data1)])
             .range(["#0000ff", "#ff0000"]);
@@ -198,6 +203,20 @@ function setColorBar(minimum, maximum) {
                 }
             })
             .style("opacity", "0.85");
+
+        colorbar
+            .append("text")
+            .attr('x',0)
+            .attr('y',70)
+            .attr('fill', 'black')
+            .text(minimum.toFixed(2));
+
+        colorbar
+            .append("text")
+            .attr('x',170)
+            .attr('y',70)
+            .attr('fill', 'black')
+            .text(maximum.toFixed(2));
     }
 }
 
