@@ -22,7 +22,8 @@ var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
 
-var svg = d3.select("div.svg-container").append("svg")
+var svg = d3.select("div.svg-container")
+  .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .on("mousedown", mousedown)
@@ -32,6 +33,12 @@ var svg = d3.select("div.svg-container").append("svg")
 var svg1 = svg.append("g");
 var svg2 = svg.append("g");
 
+var colorbar_title = d3.select("h3.hide");
+var colorbar = d3.select("div.colorbar-container")
+  .append("svg")
+    .attr("width", 250)
+    .attr("height", 50);
+
 svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
@@ -40,7 +47,7 @@ svg.append("g")
     .attr("class", "label")
     .attr("x", width)
     .attr("y", -6)
-    .style("text-anchor", "end")
+    .style("text-anchor", "end");
 
 svg.append("g")
     .attr("class", "y axis")
@@ -50,7 +57,7 @@ svg.append("g")
     .attr("transform", "rotate(-90)")
     .attr("y", 6)
     .attr("dy", ".71em")
-    .style("text-anchor", "end")
+    .style("text-anchor", "end");
 
 function mousedown() {
     var point = d3.mouse(this);
@@ -116,7 +123,7 @@ function classify(url) {
         "height": JSON.stringify(height),
         "kernel": JSON.stringify(kernel),
         "sigma": JSON.stringify(sigma),
-        "degree": JSON.stringify(degree),
+        "degree": JSON.stringify(degree)
     };
     request_clasify(data, url);
 }
@@ -128,7 +135,7 @@ function request_clasify(message, url) {
         contentType: "application/json",
         dataType: 'text',
         data: message,
-        success: recv,
+        success: recv
     });
 }
 
@@ -166,6 +173,35 @@ function getCountour(z, minimum, maximum, dom) {
     return {"c": c, "x": x, "y": y, "colours": colours};
 }
 
+function setColorBar(minimum, maximum) {
+    if (colorbar_title) {
+        colorbar_title.attr("class", "");
+
+        data1 = d3.range(40);
+        rects = colorbar.selectAll("rect")
+            .data(data1);
+
+        colorScale = d3.scale.linear()
+            .domain([d3.min(data1), d3.max(data1)])
+            .range(["#0000ff", "#ff0000"]);
+
+        rects.enter()
+            .append("rect")
+            .attr({
+                height: 50,
+                width: 5,
+                x: function(d,i) {
+                    return i * 5;
+                },
+                fill: function(d,i) {
+                    return colorScale(d);
+                }
+            })
+            .style("opacity", "0.85");
+    }
+}
+
+
 function recv(data) {
     data = JSON.parse(data);
     if (data["status"] != "ok") {
@@ -201,22 +237,22 @@ function recv(data) {
             .y(function(d) { return y(d.y); })
         );
 
+    setColorBar(minimum, maximum);
+
     if ("z2" in data) {
         z2 = data["z2"];
         result = getCountour(z2, minimum, maximum, dom);
         c2 = result["c"];
-
         // Create new paths
         svg2.selectAll("path").data(c2.contourList())
             .enter().append("svg:path")
             .style("fill", function(d) { return colours(d.level); })
             .attr("class", "path")
-            .style("opacity", "0.03")
+            .style("opacity", "0.02")
             .attr("d", d3.svg.line()
                 .x(function(d) { return x(d.x); })
                 .y(function(d) { return y(d.y); })
             );
-        svg.append(svg1.selectAll("path"));
     }
 
     // Sort points

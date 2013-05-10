@@ -71,13 +71,15 @@
             <label>Learn rate</label>
             <input id="c-param" class="span8" type="text" value="1">
             <label>Bias</label>
-            <input id="sigma-param" class="hide"class="span8" type="text" value="0">
-            <input id="degree-param" class="hide">
+            <input id="sigma-param" class="span8" type="text" value="0">
+            <input id="degree-param" class="span8 hide">
           </form>
           <div class="btn-group">
             <button type="button" class="btn btn-success" onclick="classify('run_perceptron')">Classify</button>
             <button type="button" class="btn btn" onclick="clear_demo()">Clear</button>
           </div><!--/btn-group-->
+          <h3 class="hide">Colorbar</h3>
+          <div class="colorbar-container"></div>
         </div><!--/span-->
 
       </div><!--/row-->
@@ -92,6 +94,7 @@
   <script type="text/javascript" src="/static/js/d3.min.js"></script>
   <script type="text/javascript" src="/static/js/conrec.js"></script>
   <script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="/static/js/colorbar.js"></script>
   <script type="text/javascript" src="/static/js/classification.js"></script>
 
 </html>
