@@ -201,8 +201,7 @@ function setColorBar(minimum, maximum) {
                 fill: function(d,i) {
                     return colorScale(d);
                 }
-            })
-            .style("opacity", "0.85");
+            });
 
         colorbar
             .append("text")
@@ -251,7 +250,7 @@ function recv(data) {
         .enter().append("svg:path")
         .style("fill", function(d) { return colours(d.level); })
         .style("stroke", "black")
-        .style("stroke-width", "3")
+        .style("stroke-width", "1")
         .style("stroke-linecap", "round")
         .style("stroke-linejoin", "round")
         .attr("class", "path")
@@ -271,11 +270,11 @@ function recv(data) {
             .enter().append("svg:path")
             .style("fill", function(d) { return colours(d.level); })
             .style("stroke", "black")
-            .style("stroke-width", "3")
+            .style("stroke-width", "1")
             .style("stroke-linecap", "round")
             .style("stroke-linejoin", "round")
             .attr("class", "path")
-            .style("opacity", "0.03")
+            .style("opacity", "0.04")
             .attr("d", d3.svg.line()
                 .x(function(d) { return x(d.x); })
                 .y(function(d) { return y(d.y); })
