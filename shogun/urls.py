@@ -51,6 +51,9 @@ urlpatterns = patterns('',
     url(r'^demos/gp/entrance', 'demos.gp.entrance'),
     url(r'^demos/gp/create_toy_data', 'demos.gp.create_toy_data'),
     url(r'^demos/gp/train', 'demos.gp.train'),
+    url(r'^demos/kernel_matrix/entrance', 'demos.kernel_matrix.entrance'),
+    url(r'^demos/kernel_matrix/create_toy_data', 'demos.kernel_matrix.create_toy_data'),
+    url(r'^demos/kernel_matrix/generate_matrix', 'demos.kernel_matrix.generate_matrix'),
 
     # Main page.
     (r'^', 'pages.views.home'),
