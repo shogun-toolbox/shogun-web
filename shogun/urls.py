@@ -38,23 +38,6 @@ urlpatterns = patterns('',
     # One new selected (ID):
     url(r'^new/(?P<newID>[\w|\d]+)', 'pages.views.showNew'),
 
-    # Demos
-    url(r'^demos/clustering/entrance', 'demos.clustering.entrance'),
-    url(r'^demos/clustering/cluster', 'demos.clustering.cluster'),
-    url(r'^demos/svr/entrance', 'demos.svr.entrance'),
-    url(r'^demos/svr/point', 'demos.svr.point'),
-    url(r'^demos/classification/index', 'demos.classification.index'),
-    url(r'^demos/classification/binary', 'demos.classification.binary'),
-    url(r'^demos/classification/run_binary', 'demos.classification.run_binary'),
-    url(r'^demos/classification/multiclass', 'demos.classification.multiclass'),
-    url(r'^demos/classification/run_multiclass', 'demos.classification.run_multiclass'),
-    url(r'^demos/gp/entrance', 'demos.gp.entrance'),
-    url(r'^demos/gp/create_toy_data', 'demos.gp.create_toy_data'),
-    url(r'^demos/gp/train', 'demos.gp.train'),
-    url(r'^demos/kernel_matrix/entrance', 'demos.kernel_matrix.entrance'),
-    url(r'^demos/kernel_matrix/create_toy_data', 'demos.kernel_matrix.create_toy_data'),
-    url(r'^demos/kernel_matrix/generate_matrix', 'demos.kernel_matrix.generate_matrix'),
-
     # Main page.
     (r'^', 'pages.views.home'),
 )
