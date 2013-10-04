@@ -225,9 +225,11 @@ def irclogs(request):
 												 'all_subpages' : allsubpages,
 												 'irclogfiles' : all_entries,
 		                                         'news' : news})))
-def notebooks(request):
+def notebook(request):
 	from util import notebook
 	import os
+	nburl=settings.NOTEBOOK_URL
+	nbdir=settings.NOTEBOOK_DIR
 
 	try:
 		template = get_template("notebooks.html")
@@ -236,10 +238,11 @@ def notebooks(request):
 		allpages = Page.objects.order_by('sort_order')
 		allsubpages=[]
 		news = get_news()[0]
-		listing=[ '%s/%s' % ('static/notebooks', f) for f in os.listdir('static/notebooks') if f.endswith('.html') ]
+		listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith('.html') ]
 		all_entries=[]
 		for nb in listing:
-			all_entries.append([notebook.get_first_image_raw(nb),'/' + nb])
+			all_entries.append([notebook.get_first_image_raw(nb, nburl + '/' + os.path.basename(nb)),\
+					notebook.get_abstract(nb.replace('.html','.ipynb'))])
 
 	except IOError, err:
 		error(err)

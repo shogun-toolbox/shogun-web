@@ -231,7 +231,7 @@ body {
 	position: relative;
 	top: 35px;
 	left: 5%;
-	height: 90%;
+	height: 80%;
 	/*margin: 0 0 0 -15%;  add negative left margin for half the width to center the div */
 	border-radius: 4px;
 	box-shadow: 0 0 5px rgba(0,0,0,0.9);
@@ -248,4 +248,17 @@ body {
     cursor:pointer;
     height:35px;
     width:35px;
+}
+
+.overlay {
+	float:left;
+	margin:0 15px 0 0;
+}
+
+.notebook {
+	padding: 10px 15px;
+	display: block;
+	text-decoration: none;
+	list-style-type: none;
+	background-color:#FFF;
 }

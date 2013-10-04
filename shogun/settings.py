@@ -33,6 +33,8 @@ DATABASES = {
         }
     }
 
+NOTEBOOK_URL =  "/static/notebook/current"
+
 if PRODUCTION:
     DEBUG = False
     DATABASES['default']['USER'] = 'shogun'
@@ -42,9 +44,11 @@ if PRODUCTION:
     SERVER_EMAIL='shogun@shogun-toolbox.org'
     SHOGUN_PLANET='/var/www/shogun-toolbox.org/planet/index.html'
     SHOGUN_IRCLOGS='/var/www/shogun-toolbox.org/irclogs/'
+    NOTEBOOK_DIR =  "/home/shogun/static/notebook/current"
 else:
     SHOGUN_PLANET='/home/sonne/shogun/planet-index.html'
     SHOGUN_IRCLOGS='/home/sonne/shogun/'
+    NOTEBOOK_DIR =  os.path.join(ROOT_PATH, "static/notebook/current")
     DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
@@ -101,6 +105,7 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(ROOT_PATH, static_dir),
 )
+
 
 # List of finder classes that know how to find static files in
 # various locations.

@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^page/planet/', 'pages.views.planet'),
 
     # Notebooks
-    url(r'^page/notebooks/', 'pages.views.notebooks'),
+    url(r'^page/notebook/', 'pages.views.notebook'),
 
     # irclogs
     url(r'^page/contact/irclogs/', 'pages.views.irclogs'),

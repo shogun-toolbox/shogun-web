@@ -1,6 +1,6 @@
 $(document).on("click", ".overlay", function(){
-	event.preventDefault();
-    $(".overlay-content").load("/static/notebooks/bss_audio.html",
+        event.preventDefault();
+    $(".overlay-content").load($(this).attr("href"),
       function(){$(".overlay-bg").fadeIn(500); })
 });
 
