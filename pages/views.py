@@ -225,6 +225,31 @@ def irclogs(request):
 												 'all_subpages' : allsubpages,
 												 'irclogfiles' : all_entries,
 		                                         'news' : news})))
+def notebooks(request):
+	from util import notebook
+	import os
+
+	try:
+		template = get_template("notebooks.html")
+
+		# Get all the pages.
+		allpages = Page.objects.order_by('sort_order')
+		allsubpages=[]
+		news = get_news()[0]
+		listing=[ '%s/%s' % ('static/notebooks', f) for f in os.listdir('static/notebooks') if f.endswith('.html') ]
+		all_entries=[]
+		for nb in listing:
+			all_entries.append([notebook.get_first_image_raw(nb),'/' + nb])
+
+	except IOError, err:
+		error(err)
+
+	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
+												 'current_subpage_path' : 'notebooks',
+												 'all_pages' : allpages,
+												 'all_subpages' : allsubpages,
+												 'notebooks' : all_entries,
+		                                         'news' : news})))
 
 
 def planet(request):

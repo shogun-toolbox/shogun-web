@@ -206,3 +206,46 @@ span.easy { color: green; font-weight: bold;}
 span.medium { color: blue; font-weight: bold;}
 span.difficult { color: red; font-weight: bold;}
 .ideas h1 {font-size:150%; border-bottom: none; font-weight: bold; }
+
+body {
+	font-family: 'Helvetica Neue','Helvetica', Arial, sans-serif;
+}
+
+.overlay-bg {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height:100%;
+	width: 100%;
+	background: #000; /* fallback */
+	background: rgba(0,0,0,0.75);
+	z-index: 3;
+}
+
+.overlay-content {
+	z-index: 4;
+	background: #fff;
+	padding: 1%;
+	width: 90%;
+	position: relative;
+	top: 35px;
+	left: 5%;
+	height: 90%;
+	/*margin: 0 0 0 -15%;  add negative left margin for half the width to center the div */
+	border-radius: 4px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.9);
+	overflow: auto;
+}
+
+/* close button positioned on upper right corner */
+.overlay-close {
+	z-index: 5;
+    background-image:url(/static/design/close.png);
+    position:relative;
+    left:5%;
+    top:70px;
+    cursor:pointer;
+    height:35px;
+    width:35px;
+}

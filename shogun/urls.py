@@ -23,6 +23,9 @@ urlpatterns = patterns('',
     # Weblog
     url(r'^page/planet/', 'pages.views.planet'),
 
+    # Notebooks
+    url(r'^page/notebooks/', 'pages.views.notebooks'),
+
     # irclogs
     url(r'^page/contact/irclogs/', 'pages.views.irclogs'),
 

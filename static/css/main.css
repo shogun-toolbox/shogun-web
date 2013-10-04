@@ -42,7 +42,7 @@ Page: Homepage
     .box-02-top {width:955px; height:6px; background:url("../design/box-02-top.gif") 0 0 no-repeat; font-size:0; line-height:0;}
     .box-02-bottom {width:955px; height:8px; margin-bottom:18px; background:url("../design/box-02-bottom.gif") 0 0 no-repeat; font-size:0; line-height:0;}
 
-    .box-02 .col {position:relative; float:left; width:300px; padding-bottom:17px; margin-bottom:-6px; z-index:100; background-position:100% 100%; background-repeat:no-repeat;}
+    .box-02 .col {position:relative; float:left; width:300px; padding-bottom:17px; margin-bottom:-6px; z-index:2; background-position:100% 100%; background-repeat:no-repeat;}
     .box-02 .col.left {background-image:url("../design/image-01.jpg");}
     .box-02 .col.center {background-image:url("../design/soc-logo-190.png");}
     .box-02 .col .in {min-height:180px; height:auto;}
