@@ -251,8 +251,10 @@ body {
 }
 
 .overlay {
+	inline-block;
 	float:left;
 	margin:0 15px 0 0;
+	padding: 10px 15px;*/
 }
 
 .notebook {
@@ -261,4 +263,5 @@ body {
 	text-decoration: none;
 	list-style-type: none;
 	background-color:#FFF;
+	clear: left;
 }
