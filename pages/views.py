@@ -241,7 +241,10 @@ def notebook(request):
 		listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith('.html') ]
 		all_entries=[]
 		for nb in listing:
-			all_entries.append([notebook.get_first_image_raw(nb, nburl + '/' + os.path.basename(nb)),\
+			image=notebook.get_first_image_raw(nb, nburl + '/' + os.path.basename(nb))
+			if image is None:
+				continue
+			all_entries.append([image,\
 					notebook.get_abstract(nb.replace('.html','.ipynb'))])
 
 	except IOError, err:
