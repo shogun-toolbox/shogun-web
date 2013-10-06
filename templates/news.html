@@ -8,11 +8,11 @@
                 <ul class="ul-news">
 				<table>
                     {% for article in articles %}
-					<tr><td><strong>{{ article.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"\></td><td>
+					<tr><td><strong>{{ article.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td>
 							<a href="/new/{{ article.pk }}/">
 								<font size=1>SHOGUN {{ article.sg_ver }}
                                 </font>
-							</a></td><td><img src="/static/design/ico-arrow.gif" alt="->"\></td><td>
+							</a></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td>
 								<font size=1>{{ article.author }} - 
                                              {{ article.mail }}
                                 </font>

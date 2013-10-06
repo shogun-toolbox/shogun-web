@@ -239,6 +239,7 @@ def notebook(request):
 		allsubpages=[]
 		news = get_news()[0]
 		listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith('.html') ]
+		listing.sort()
 		all_entries=[]
 		for nb in listing:
 			image=notebook.get_first_image_raw(nb, nburl + '/' + os.path.basename(nb))

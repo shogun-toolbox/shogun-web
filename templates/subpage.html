@@ -7,6 +7,7 @@
     <!-- Title + Subcategories -->
     <div id="title" class="box">
 
+		{% if parent_subpages %}
         <ul id="topnav">
             {% for parent_subpage in parent_subpages %}
                 <li>
@@ -35,6 +36,7 @@
                 </li>
             {% endfor %}
         </ul> <!-- /topnav -->
+		{% endif %}
 
     </div> 
     <!-- /title -->
@@ -77,7 +79,7 @@
                 <!-- Write the list of news (last articles) -->
 				<table>
                 {% for new in news %}
-				<tr><td><strong>{{ new.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"\></td><td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td></tr>
+				<tr><td><strong>{{ new.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td></tr>
                 {% endfor %}
 			</table>
             </div>
