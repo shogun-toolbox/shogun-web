@@ -16,7 +16,7 @@
 	<script src="/static/js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/static/js/loopedslider.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/static/js/overlay.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.1-latest/MathJax.js?config=TeX-AMS_HTML"></script>
 	<script type="text/javascript">
 	init_mathjax = function() {
 		if (window.MathJax) {
@@ -27,6 +27,9 @@
 					displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
 				},
 				displayAlign: 'left', // Change this to 'center' to center equations.
+				"HTML-CSS": {
+					styles: {'.MathJax_Display': {"margin": 0}}
+				}
 				});
 			MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 		}
