@@ -2,10 +2,8 @@ $(document).ready(function() {
 	$(".overlay").click(function(event) {
 		event.preventDefault();
 		$('body').css('overflow', 'hidden');
-		$(".overlay-content").load($(this).attr("href"),
-			function() {
-				$(".overlay-bg").fadeIn(500); 
-			});
+		$(".overlay-iframe").attr('src', $(this).attr("href"));
+		$(".overlay-bg").fadeIn(500);
 	});
 
 	$(document).keyup(function(event) {
@@ -22,7 +20,7 @@ $(document).ready(function() {
 
 function closeOverlay(event) {
 	event.preventDefault();
-	$(".overlay-bg").fadeOut(500, function() { $(".overlay-content").empty();});
+	$(".overlay-bg").fadeOut(500);
 	$('body').css('overflow', 'visible');
 }
 
