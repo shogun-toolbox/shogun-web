@@ -1,0 +1,17 @@
+﻿{% extends "subpage.html" %}
+
+{% block content %}
+<div class="overlay-bg">
+		<div class="overlay-content">
+        <div class="overlay-close"><a href="#"></a> </div>
+			<iframe class="overlay-iframe"></iframe>
+		</div>
+</div>
+
+{% for notebook in notebooks %}
+<div class="notebook">
+{{notebook.0|safe}} {{notebook.1|safe}}
+</div>
+{% endfor %}
+
+{% endblock %}
