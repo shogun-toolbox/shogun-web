@@ -15,7 +15,7 @@ def get_first_image_raw(fname, url):
 		else:
 			if line.startswith('<img'):
 				image=[]
-				image.append(line.replace('<img','<a class="overlay" href="%s" ><img alt="%s" width="100" height="100"' % (url, os.path.basename(fname))))
+				image.append(line.replace('<img','<a class="overlay" href="%s" ><img alt="%s" width="140" height="105"' % (url, os.path.basename(fname))))
 
 def get_abstract(fname):
 	import json
