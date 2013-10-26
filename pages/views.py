@@ -48,6 +48,23 @@ def get_news():
 # ----------------------------------------------------------------------
 # To render correctly the main view (home).
 def home(request):
+	from util import notebook
+	import os
+	nburl=settings.NOTEBOOK_URL
+	nbdir=settings.NOTEBOOK_DIR
+
+	listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith('.html') ]
+	listing.sort()
+	all_entries=[]
+	for nb in listing:
+		image=notebook.get_first_image_raw(nb, nburl + '/' + os.path.basename(nb))
+		if image is None:
+			continue
+		all_entries.append(image)
+
+	notebooks=[]
+	for i in xrange(0,len(all_entries),5):
+		notebooks.append(all_entries[i:(i+5)])
 
 	# choose the template.
 	template = get_template("home.html")
@@ -65,6 +82,7 @@ def home(request):
 	return HttpResponse(template.render(Context({'current_page_path' : "home",
 												 'all_pages' : allpages,
 												 'news' : news,
+												 'notebooks' : notebooks,
 												 'lastnew' : lastnew})))
 
 

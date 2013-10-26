@@ -256,6 +256,14 @@ body {
 	padding: 10px 15px;
 }
 
+.overlay-new {
+	z-index: 4;
+	padding: 5px 10px;
+	display: block;
+    color: #000;
+	clear: left;
+}
+
 .notebook {
 	padding: 10px 15px;
 	display: block;

@@ -3,6 +3,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		$('body').css('overflow', 'hidden');
 		$(".overlay-iframe").attr('src', $(this).attr("href"));
+		$(".overlay-new").attr('href', $(this).attr("href"));
 		$(".overlay-bg").fadeIn(500);
 	});
 
