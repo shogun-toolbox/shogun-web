@@ -1,0 +1,75 @@
+<new>
+	<updated_date>2013-10-28</updated_date>
+	<author>Soeren Sonnenburg</author>
+	<mail>sonne@debian.org></mail>
+
+	<sg_ver>3.0.0</sg_ver>
+	<sg_bver>3.0.0</sg_bver>
+	<libshogun_ver>14.0</libshogun_ver>
+	<data_ver>0.6</data_ver>
+
+	<content>
+    * This release features 8 successful Google Summer of Code projects and
+      it is the result of an incredible effort by our students. All projects come with
+      very cool ipython-notebooks that contain background, code examples and
+      visualizations. These can be found on our webpage!
+        
+      The projects are:
+      - Gaussian Processes for binary classification [Roman Votjakov]
+      - Sampling log-determinants for large sparse matrices [Soumyajit De]
+      - Metric Learning via LMNN [Fernando Iglesias]
+      - Independent Component Analysis (ICA) [Kevin Hughes] 
+      - Hashing Feature Framework [Evangelos Anagnostopoulos]
+      - Structured Output Learning [Hu Shell]
+      - A web-demo framework [Liu Zhengyang]
+        
+      Other important changes are the change of our build-system to cmake and
+      the addition of clone/equals methods to our base-class. In addition, you
+      get the usual ton of bugfixes, new unit-tests, and new mini-features.
+    * Features:
+        - In addition, the following features have been added:
+        - Added method to importance sample the (true) marginal likelihood of a
+          Gaussian Process using a posterior approximation.
+        - Added a new class for classical probability distribution that can be
+          sampled and whose log-pdf can be evaluated. Added the multivariate
+          Gaussian with various numerical flavours. 
+        - Cross-validation framework works now with Gaussian Processes
+        - Added nu-SVR for LibSVR class
+        - Modelselection is now supported for parameters of sub-kernels of
+          combined kernels in the MKL context. Thanks to Evangelos Anagnostopoulos
+        - Probability output for multi-class SVMs is now supported using various
+          heuristics. Thanks to Shell Xu Hu.
+        - Added an "equals" method to all Shogun objects that recursively
+          compares all registered parameters with those of another instance --
+          up to a specified accuracy.
+        - Added a "clone" method to all Shogun objects that creates a deep copy
+        - Multiclass LDA. Thanks to Kevin Hughes. 
+        - Added a new datatype, complex128_t, for complex numbers. Math functions,
+          support for SGVector/Matrix, SGSparseVector/Matrix, and serialization
+          with Ascii and Xml files added. [Soumyajit De].
+        - Added mini-framework for numerical integration in one variable. Implemented
+          Gauss-Kronrod and Gauss-Hermite quadrature formulas.
+        - Changed from configure script to CMake by Viktor Gal.
+        - Add C++0x and C++11 cmake detection scripts
+        - ND-Array typmap support for python and octave modular.
+    * Bugfixes:
+        - Fix json serialization.
+        - Fixed bugs in FITC inference method that caused wrong posterior results.
+        - Fixed bugs in GP Regression that caused negative values for the variances.
+        - Fixed two memory errors in the streaming-features framework.
+        - Fixed bug in the Kernel Mean Matching implementation (thanks to Meghana Kshirsagar).
+    * Cleanup and API Changes:
+        - Switch compile system to cmake
+        - SGSparseVector/Matrix are now derived from SGReferenceData and thus refcounted.
+        - Move README and INSTALL files to top level directory.
+        - Use common RefCount class for ReferencedData and CSGObjects.
+        - Rename HMSVMLabels to SequenceLabels
+        - Refactored method to fit a sigmoid to SVM scores, now in CStatistics,
+          still called from CBinaryLabels.
+        - Use Dynamic arrays to hold preprocessors in features instead of raw pointers.
+        - Use Dynamic arrays to hold Features in CombinedFeatures.
+        - Use Dynamic arrays to hold Kernels in CombinedKernels/ProductKernels.
+        - Use Eigen3 for GPs, LDA
+	</content>
+</new>
+
