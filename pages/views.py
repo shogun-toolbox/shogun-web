@@ -1,6 +1,8 @@
 # Create your views here.
 
 import shogun.settings as settings
+import util.notebook
+import util.demo
 
 from django.http import HttpResponse,Http404
 
@@ -48,19 +50,8 @@ def get_news():
 # ----------------------------------------------------------------------
 # To render correctly the main view (home).
 def home(request):
-	from util import notebook
-	import os
-	nburl=settings.NOTEBOOK_URL
-	nbdir=settings.NOTEBOOK_DIR
-
-	listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith('.html') ]
-	listing.sort()
-	all_entries=[]
-	for nb in listing:
-		image=notebook.get_first_image_raw(nb, nburl + '/' + os.path.basename(nb))
-		if image is None:
-			continue
-		all_entries.append(image)
+	all_entries=util.demo.get_demos(False)
+	all_entries.extend(util.notebook.get_notebooks(False))
 
 	notebooks=[]
 	for i in xrange(0,len(all_entries),5):
@@ -243,29 +234,14 @@ def irclogs(request):
 												 'all_subpages' : allsubpages,
 												 'irclogfiles' : all_entries,
 		                                         'news' : news})))
-def notebook(request):
-	from util import notebook
-	import os
-	nburl=settings.NOTEBOOK_URL
-	nbdir=settings.NOTEBOOK_DIR
 
+def demo(request):
 	try:
 		template = get_template("notebooks.html")
-
-		# Get all the pages.
 		allpages = Page.objects.order_by('sort_order')
 		allsubpages=[]
 		news = get_news()[0]
-		listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith('.html') ]
-		listing.sort()
-		all_entries=[]
-		for nb in listing:
-			image=notebook.get_first_image_raw(nb, nburl + '/' + os.path.basename(nb))
-			if image is None:
-				continue
-			all_entries.append([image,\
-					notebook.get_abstract(nb.replace('.html','.ipynb'))])
-
+		all_entries = util.demo.get_demos()
 	except IOError, err:
 		error(err)
 
@@ -276,6 +252,22 @@ def notebook(request):
 												 'notebooks' : all_entries,
 		                                         'news' : news})))
 
+def notebook(request):
+	try:
+		template = get_template("notebooks.html")
+		allpages = Page.objects.order_by('sort_order')
+		allsubpages=[]
+		news = get_news()[0]
+		all_entries = util.notebook.get_notebooks()
+	except IOError, err:
+		error(err)
+
+	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
+												 'current_subpage_path' : 'notebooks',
+												 'all_pages' : allpages,
+												 'all_subpages' : allsubpages,
+												 'notebooks' : all_entries,
+		                                         'news' : news})))
 
 def planet(request):
 	try:

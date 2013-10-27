@@ -1,3 +1,5 @@
+import shogun.settings as settings
+
 def decode_image(image):
 	import base64
 	return base64.b64decode(''.join(image))
@@ -69,3 +71,21 @@ def get_last_image(fname):
 ##img=get_last_image(fname)
 #file(dst,'w').write(img)
 
+def get_notebooks(with_abstract=True):
+	import os
+	nburl=settings.NOTEBOOK_URL
+	nbdir=settings.NOTEBOOK_DIR
+	listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith('.html') ]
+	listing.sort()
+	all_entries=[]
+	for nb in listing:
+		image=get_first_image_raw(nb, nburl + '/' + os.path.basename(nb))
+		if image is None:
+			continue
+		if with_abstract:
+			all_entries.append([image,\
+					get_abstract(nb.replace('.html','.ipynb'))])
+		else:
+			all_entries.append(image)
+
+	return all_entries
