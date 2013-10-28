@@ -24,10 +24,10 @@ urlpatterns = patterns('',
     url(r'^page/planet/', 'pages.views.planet'),
 
     # Notebooks
-    url(r'^page/documentation/notebook/', 'pages.views.notebook'),
+    url(r'^page/documentation/notebook', 'pages.views.notebook'),
 
     # Demos
-    url(r'^page/documentation/demo/', 'pages.views.demo'),
+    url(r'^page/documentation/demo', 'pages.views.demo'),
 
     # irclogs
     url(r'^page/contact/irclogs/', 'pages.views.irclogs'),

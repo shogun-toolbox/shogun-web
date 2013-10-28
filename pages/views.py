@@ -245,8 +245,8 @@ def demo(request):
 	except IOError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
-												 'current_subpage_path' : 'notebooks',
+	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
+												 'current_subpage_path' : 'demo',
 												 'all_pages' : allpages,
 												 'all_subpages' : allsubpages,
 												 'notebooks' : all_entries,
@@ -262,8 +262,8 @@ def notebook(request):
 	except IOError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
-												 'current_subpage_path' : 'notebooks',
+	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
+												 'current_subpage_path' : 'notebook',
 												 'all_pages' : allpages,
 												 'all_subpages' : allsubpages,
 												 'notebooks' : all_entries,
