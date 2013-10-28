@@ -44,11 +44,13 @@ if PRODUCTION:
     SERVER_EMAIL='shogun@shogun-toolbox.org'
     SHOGUN_PLANET='/var/www/shogun-toolbox.org/planet/index.html'
     SHOGUN_IRCLOGS='/var/www/shogun-toolbox.org/irclogs/'
-    NOTEBOOK_DIR =  "/home/shogun/static/notebook/current"
+    NOTEBOOK_DIR='/home/shogun/static/notebook/current'
+    DEMO_DIR='/home/shogun/shogun-demo'
 else:
     SHOGUN_PLANET='/home/sonne/shogun/planet-index.html'
     SHOGUN_IRCLOGS='/home/sonne/shogun/'
-    NOTEBOOK_DIR =  os.path.join(ROOT_PATH, "static/notebook/current")
+    NOTEBOOK_DIR = os.path.join(ROOT_PATH, "static/notebook/current")
+    DEMO_DIR=os.path.join(ROOT_PATH, "../shogun-demo")
     DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
@@ -159,7 +161,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'pages',
-	'django_evolution',
+    'django_evolution',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -190,6 +192,7 @@ LOGGING = {
         },
     }
 }
+
 
 # Printed information.
 if DEBUG:

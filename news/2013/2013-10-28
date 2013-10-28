@@ -7,6 +7,7 @@
 	<sg_bver>3.0.0</sg_bver>
 	<libshogun_ver>14.0</libshogun_ver>
 	<data_ver>0.6</data_ver>
+	<param_ver>1</param_ver>
 
 	<content>
     * This release features 8 successful Google Summer of Code projects and

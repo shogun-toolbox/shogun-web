@@ -1,19 +1,24 @@
 def get_demos(abstract=True):
-	links=[\
-'<a class="overlay" href="http://demos.shogun-toolbox.org/classifier/binary/"><img src="/static/thumbnails/binary_demo_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/dimred/tapkee/"><img src="/static/thumbnails/dimred_tapkee_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/regression/gp/"><img src="/static/thumbnails/gp_regress_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/misc/kernel_matrix/"><img src="/static/thumbnails/kernel_mat_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/clustering/kmeans/"><img src="/static/thumbnails/kmeans_demo_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/application/language_detect/"><img src="/static/thumbnails/lang_detect_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/application/ocr/"><img src="/static/thumbnails/ocr_demo_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/classifier/perceptron/"><img src="/static/thumbnails/perceptron_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/regression/svr/"><img src="/static/thumbnails/svr_demo_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/misc/tree/"><img src="/static/thumbnails/tree_demo_thumb.png" alt=""/></a>',
-'<a class="overlay" href="http://demos.shogun-toolbox.org/classifier/multiclass/"><img src="/static/thumbnails/multiclass_thumb.png" alt=""/></a>']
+	relpath,abstracts=get_abstract(abstract)
+	links=[]
+	for path in relpath:
+		links.append('<a class="overlay" href="http://demos.shogun-toolbox.org/%s"><img src="/static/thumbnails/%s" alt=""/></a>' % (path))
 
-	abstracts=["1","2","3","4","5","6","7","8","9","10"]
 	if abstract:
 		return zip(links,abstracts)
 	else:
 		return links
+
+
+def get_abstract(abstract):
+	import os
+	import shogun.settings as settings
+	dmodir=settings.DEMO_DIR
+	relpath=[]
+	abstracts=[]
+	for base, dirs, files in os.walk(dmodir, topdown=True):
+		for name in [ os.path.join(dmodir, base, f) for f in files if f.endswith(".desc") ]:
+			relpath.append(('/'.join(name.split('/')[-2:])[:-5]+'/', '_'.join(name.split('/')[-2:])[:-5] + '.png'))
+			if abstract:
+				abstracts.append(file(name).read())
+	return relpath,abstracts
