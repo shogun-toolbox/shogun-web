@@ -243,7 +243,7 @@ def demo(request):
 		news = get_news()[0]
 		all_entries = util.demo.get_demos()
 		parent_subpages = Subpage.objects.filter(rootpage__path__exact='documentation', is_top=True).order_by('sort_order')
-		current_parent = Subpage.objects.filter(rootpage__path__exact='documentation', path__exact=subpage)[0]
+		current_parent = Subpage.objects.filter(rootpage__path__exact='documentation', path__exact='demo')[0]
 	except IOError, err:
 		error(err)
 
@@ -264,7 +264,7 @@ def notebook(request):
 		news = get_news()[0]
 		all_entries = util.notebook.get_notebooks()
 		parent_subpages = Subpage.objects.filter(rootpage__path__exact='documentation', is_top=True).order_by('sort_order')
-		current_parent = Subpage.objects.filter(rootpage__path__exact='documentation', path__exact=subpage)[0]
+		current_parent = Subpage.objects.filter(rootpage__path__exact='documentation', path__exact='notebook')[0]
 	except IOError, err:
 		error(err)
 
