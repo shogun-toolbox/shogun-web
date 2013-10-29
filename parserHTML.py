@@ -358,8 +358,8 @@ class myContentHandler(ContentHandler):
             record.http_source_code=httpPath + ".tar.bz2"
             record.ftp_md5sum=ftpPath + ".md5sum"
             record.http_md5sum=httpPath + ".md5sum"
-            record.ftp_PGP_signature=ftpPath + ".tar.bz2.gpg"
-            record.http_PGP_signature=httpPath + ".tar.bz2.gpg"
+            record.ftp_PGP_signature=ftpPath + ".tar.bz2.asc"
+            record.http_PGP_signature=httpPath + ".tar.bz2.asc"
 
             # Add release download links.
             record.save()
@@ -386,8 +386,8 @@ class myContentHandler(ContentHandler):
                          http_source_code=httpPath + ".tar.bz2", \
                          ftp_md5sum=ftpPath + ".md5sum", \
                          http_md5sum=httpPath + ".md5sum", \
-                         ftp_PGP_signature=ftpPath + ".tar.bz2.gpg", \
-                         http_PGP_signature=httpPath + ".tar.bz2.gpg")
+                         ftp_PGP_signature=ftpPath + ".tar.bz2.asc", \
+                         http_PGP_signature=httpPath + ".tar.bz2.asc")
             record.save()
 
 
@@ -419,8 +419,8 @@ class myContentHandler(ContentHandler):
                              http_source_code=httpPath + ".tar.bz2", \
                              ftp_md5sum=ftpPath + ".md5sum", \
                              http_md5sum=httpPath + ".md5sum", \
-                             ftp_PGP_signature=ftpPath + ".tar.bz2.gpg", \
-                             http_PGP_signature=httpPath + ".tar.bz2.gpg")
+                             ftp_PGP_signature=ftpPath + ".tar.bz2.asc", \
+                             http_PGP_signature=httpPath + ".tar.bz2.asc")
             record.save()
 
             if self.DEBUG:
