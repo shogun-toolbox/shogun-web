@@ -350,6 +350,9 @@ def news(request, subpage):
 
 		news,lastnew=get_news()
 
+		parent_subpages = Subpage.objects.filter(rootpage__path__exact=page, is_top=True).order_by('sort_order')
+		current_parent = Subpage.objects.filter(rootpage__path__exact=page, path__exact=subpage)[0]
+
 	except ValueError, err:
 		error(err)
 
@@ -358,6 +361,8 @@ def news(request, subpage):
 												 'default_subpages' : defaultsubpages,
 												 'all_pages' : allpages,
 												 'all_subpages' : allsubpages,
+												 'parent_subpages' : parent_subpages,
+												 'current_parent' : current_parent,
 												 'articles' : articles,
 		                                         'news' : news,
 		                                         'lastnew' : lastnew})))
