@@ -10,10 +10,7 @@
 	<param_ver>1</param_ver>
 
 	<content>
-    * This release features 8 successful Google Summer of Code projects and
-      it is the result of an incredible effort by our students. All projects come with
-      very cool ipython-notebooks that contain background, code examples and
-      visualizations. These can be found on our webpage!
+    * This release features 8 successful Google Summer of Code projects and it is the result of an incredible effort by our students. All projects come with very cool ipython-notebooks that contain background, code examples and visualizations. These can be found on our webpage!
         
       The projects are:
       - Gaussian Processes for binary classification [Roman Votjakov]
