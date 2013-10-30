@@ -49,7 +49,10 @@
 			<strong>{{ current_subpage_path }}</strong>
 		{% else %}
 			<!-- We are in a child page! -->
-			<strong>{{ current_parent.path }}</strong> &nbsp;/&nbsp; <strong>{{ current_subpage_path }}</strong>
+			{% if current_parent.path %}
+			<strong>{{ current_parent.path }}</strong> &nbsp;/&nbsp;
+			{% endif %}
+			<strong>{{ current_subpage_path }}</strong>
 		{% endifequal %}
 	</p>
 
