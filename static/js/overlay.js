@@ -2,8 +2,13 @@ $(document).ready(function() {
 	$(".overlay").click(function(event) {
 		event.preventDefault();
 		$('body').css('overflow', 'hidden');
-		$(".overlay-iframe").attr('src', $(this).attr("href"));
-		$(".overlay-new").attr('href', $(this).attr("href"));
+		var url=$(this).attr("href");
+		$(".overlay-iframe").attr('src', url);
+		$(".overlay-new").attr('href', url);
+		if (url.indexOf("notebook") != -1) {
+			var nburl="http://cloud.shogun-toolbox.org/notebook" + url.substring(url.lastIndexOf("/"), url.lastIndexOf(".")) + ".ipynb"
+			$(".overlay-cloud").attr('href', nburl);
+		}
 		$(".overlay-bg").fadeIn(500);
 	});
 
