@@ -74,11 +74,8 @@ def get_last_image(fname):
 def get_notebooks(with_abstract=True):
 	import os
 	nburl=settings.NOTEBOOK_URL
-	nbdir=settings.NOTEBOOK_DIR
-	listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith('.html') ]
-	listing.sort()
 	all_entries=[]
-	for nb in listing:
+	for nb in get_notebook_list():
 		image=get_first_image_raw(nb, nburl + '/' + os.path.basename(nb))
 		if image is None:
 			continue
@@ -89,3 +86,14 @@ def get_notebooks(with_abstract=True):
 			all_entries.append(image)
 
 	return all_entries
+
+def get_notebook_list(suffix=".html"):
+	import os
+	nbdir=settings.NOTEBOOK_DIR
+	listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith(suffix) ]
+	listing.sort()
+	return listing
+
+def get_notebook_list_basename(suffix=".html"):
+	import os
+	return [os.path.basename(fname) for fname in get_notebook_list(suffix)]

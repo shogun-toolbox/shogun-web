@@ -17,6 +17,10 @@ urlpatterns = patterns('',
 
     # Other urls:
 
+    # Notebooks
+    url(r'^notebooks/list', 'util.export.list_notebooks'),
+    url(r'^notebooks/thumb/(?P<nbnum>[\d]+)/', 'util.export.get_notebook_thumb'),
+
     # News
     url(r'^page/news/(?P<subpage>[\w|\d]+)', 'pages.views.news'),
 
