@@ -2,7 +2,7 @@ def get_demos(abstract=True):
 	relpath,abstracts=get_abstract(abstract)
 	links=[]
 	for path in relpath:
-		links.append('<a class="overlay" href="http://demos.shogun-toolbox.org/%s"><img src="/static/thumbnails/%s" alt=""/></a>' % (path))
+		links.append(('http://demos.shogun-toolbox.org/%s' % path[0], '/static/thumbnails/%s' % path[1]))
 
 	if abstract:
 		return zip(links,abstracts)

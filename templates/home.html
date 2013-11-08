@@ -125,7 +125,7 @@
 					<div>
 						<ul class="list box">
 						{% for notebook in notebookset %}
-						<li>{{notebook|safe}}</li>
+						<li><a class="overlay" href="{{notebook.0|safe}}"><img width="140" height="105" src="{{notebook.1|safe}}" alt=""/></a></li>
 						{% endfor %}
 						</ul>
 					</div>

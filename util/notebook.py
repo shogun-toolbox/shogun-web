@@ -73,15 +73,14 @@ def get_last_image(fname):
 
 def get_notebooks(with_abstract=True):
 	import os
-	nburl=settings.NOTEBOOK_URL
 	all_entries=[]
 	for nb in get_notebook_list():
-		image=get_first_image_raw(nb, nburl + '/' + os.path.basename(nb))
+		image=(nb[2],nb[3])
 		if image is None:
 			continue
 		if with_abstract:
 			all_entries.append([image,\
-					get_abstract(nb.replace('.html','.ipynb'))])
+					get_abstract(nb[1].replace('.html','.ipynb'))])
 		else:
 			all_entries.append(image)
 
@@ -90,10 +89,12 @@ def get_notebooks(with_abstract=True):
 def get_notebook_list(suffix=".html"):
 	import os
 	nbdir=settings.NOTEBOOK_DIR
-	listing=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith(suffix) ]
-	listing.sort()
-	return listing
-
-def get_notebook_list_basename(suffix=".html"):
-	import os
-	return [os.path.basename(fname) for fname in get_notebook_list(suffix)]
+	nburl=settings.NOTEBOOK_URL
+	nbs=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith(suffix) ]
+	nbs=[ nb for nb in nbs if nb.find('template')==-1 ]
+	nbs.sort()
+	nbs=[(nbs[i][:-4]+'.ipynb', \
+		nbs[i], \
+		nburl + '/' + os.path.basename(nbs[i]), \
+		'/notebooks/thumb/%d/' % i) for i in xrange(len(nbs))]
+	return nbs
