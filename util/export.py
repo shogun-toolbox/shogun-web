@@ -6,7 +6,9 @@ from django.http import HttpResponse,Http404
 
 def list_notebooks(request):
 	response_data=notebook.get_notebook_dict()
-	return HttpResponse(json.dumps(response_data), content_type="application/json")
+	response=HttpResponse(json.dumps(response_data), content_type="application/json")
+	response['Access-Control-Allow-Origin']='*';
+	return response
 
 def get_notebook_thumb(request, nbnum):
 	try:
