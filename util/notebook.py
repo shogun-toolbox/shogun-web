@@ -93,7 +93,7 @@ def get_notebook_list(suffix=".html"):
 	nbs=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith(suffix) ]
 	nbs=[ nb for nb in nbs if nb.find('template')==-1 ]
 	nbs.sort()
-	nbs=[(nbs[i][:-4]+'.ipynb', \
+	nbs=[(nbs[i][:-5]+'.ipynb', \
 		nbs[i], \
 		nburl + '/' + os.path.basename(nbs[i]), \
 		'/notebooks/thumb/%d/' % i) for i in xrange(len(nbs))]
