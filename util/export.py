@@ -5,7 +5,7 @@ from util import notebook
 from django.http import HttpResponse,Http404
 
 def list_notebooks(request):
-	response_data=notebook.get_notebook_dict()
+	response_data=notebook.get_notebook_list()
 	response=HttpResponse(json.dumps(response_data), content_type="application/json")
 	response['Access-Control-Allow-Origin']='*';
 	return response
