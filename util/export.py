@@ -5,7 +5,8 @@ from util import notebook
 from django.http import HttpResponse,Http404
 
 def list_notebooks(request):
-	response_data=[(nb[3],nb[2]) for nb in notebook.get_notebook_list("*.ipynb")]
+	import os
+	response_data=[('http://shogun-toolbox.org' + nb[3],os.path.basename(nb[2])) for nb in notebook.get_notebook_list(".ipynb")]
 	response=HttpResponse(json.dumps(response_data), content_type="application/json")
 	response['Access-Control-Allow-Origin']='*';
 	return response
