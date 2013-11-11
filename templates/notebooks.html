@@ -4,7 +4,7 @@
 {% include "overlay.html" %}
 {% for notebook in notebooks %}
 <div class="notebook">
-	<a class="overlay" href="{{notebook.0.0|safe}}"><img alt="" width="140" height="105" src={{notebook.0.1|safe}}\></a> {{notebook.1|safe}}
+	<a class="overlay" href="{{notebook.0.0|safe}}"><img alt="" width="140" height="105" src="{{notebook.0.1|safe}}"\></a> {{notebook.1|safe}}
 </div>
 {% endfor %}
 
