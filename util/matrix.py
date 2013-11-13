@@ -24,8 +24,6 @@ def display_matrix(request):
 		if l.find('shogun')>=0:
 			continue
 		s=l.split(',')
-		if l.find('Bayes')>=0:
-			print s
 
 		k=0
 		s2=list()
@@ -50,7 +48,7 @@ def display_matrix(request):
 		for i in s2[:-1]:
 			c+=1
 			if c==1:
-				table.append('%s</td><td width="300">' % i)
+				table.append('<strong>%s</strong></td><td width="300">' % i)
 			else:
 				table.append("%s</td><td>" % i)
 		table.append("%s</td></tr><tr><td>" % s2[-1])
@@ -67,7 +65,6 @@ def get_related_projects():
 			break
 		if j<4:
 			continue
-		#l=l.replace('&', '</td><td>')
 		if len(l)==1:
 			tab.append("</td></tr><tr><td>\n")
 		if len(l)<=1:
@@ -83,7 +80,8 @@ def get_related_projects():
 				tab.append("%s</th><th>" % i)
 			tab.append("%s</th></tr></thead><tr><td>" % s2[-1])
 		else:
-			for i in s2[:-1]:
+			tab.append("<strong>%s</strong></td><td>" % s2[0])
+			for i in s2[1:-1]:
 				tab.append("%s</td><td>" % i)
 			if j==LASTLINE:
 				tab.append("%s</td></tr></table>" % s2[-1])
