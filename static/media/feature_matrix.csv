@@ -1,14 +1,23 @@
 ,,,,,,,,,,,,,
 ,shogun feature matrix,,,,,,,,,,,,
 ,,,,,,,,,,,,,
+,,created,last updated,main language,main focus,,,,,,,,
+,shogun,1999,10-2013,C++,General Purpose ML Package with particular focus on large scale learning; Kernel Methods; Interfaces to various languages,,,,,,,,
+,weka,1997,07-2013,java,General Purpose ML Package,,,,,,,,
+,kernlab,04-2004,11-2013,R,Kernel Based Classification/Dimensionality Reduction,,,,,,,,
+,dlib,2006,10-2013,C++,Portability; Correctness,,,,,,,,
+,nieme,09-2006,03-2009,C++,Linear Regression; Ranking; Classification,,,,,,,,
+,orange,06-2004,11-2013,python,Visual Data Analysis,,,,,,,,
+,java-ml,08-2008,07-2012,java,Feature Selection,,,,,,,,
+,pyML,08-2004,09-2013,C++; python,Kernel Methods,,,,,,,,
+,mlpy,02-2008,03-2012,python,Basic Algorithms,,,,,,,,
+,pybrain,10-2008,02-2013,python,Reinforcement Learning,,,,,,,,
+,torch7,01-2002,11-2013,C++;lua,Neural Networks,,,,,,,,
+,scikit-learn,2007,08-2013,python; cython,General Purpose with simple API and numpy / scipy idioms,,,,,,,,
 ,,,,,,,,,,,,,
-,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch7,scikit-learn
-,created,1999,1997,04-2004,2006,09-2006,06-2004,08-2008,08-2004,02-2008,10-2008,01-2002,2007
-,last updated,10-2013,07-2013,11-2013,10-2013,03-2009,11-2013,07-2012,09-2013,03-2012,02-2013,11-2013,08-2013
-,Main Language,C++,java,R,C++,C++,python,java,C++; python,python,python,C++,python; cython
-,Main Focus,General Purpose ML Package with particular focus on large scale learning; Kernel Methods; Interfaces to various languages,General Purpose ML Package,Kernel Based Classification/Dimensionality Reduction,Portability; Correctness,Linear Regression; Ranking; Classification,Visual Data Analysis,Feature Selection,Kernel Methods,Basic Algorithms,Reinforcement Learning,Neural Networks,General Purpose with simple API and numpy / scipy idioms
 ,,,,,,,,,,,,,
 ,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
 General Features,Graphical User Interface,0,1,0,1,1,1,0,0,0,1,1,0
 ,One Class Classification,1,1,1,1,0,0,0,1,0,0,0,1
 ,Classification,1,1,1,1,1,1,1,1,1,1,1,1

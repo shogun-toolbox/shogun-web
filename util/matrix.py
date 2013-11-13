@@ -11,14 +11,14 @@ def fetch_spreadsheet():
 
 def display_matrix(request):
 	j=0
-	data=[]
+	table=[]
 	for l in file(MATRIX_FILE).readlines():
 		j+=1
-		if j<12:
+		if j<19:
 			continue
 		#l=l.replace('&', '<td>')
 		if len(l)==1:
-			data.append("</td></tr></tbody><tbody><tr><td>\n")
+			table.append("</td></tr></tbody><tbody><tr><td>\n")
 		if len(l)<=1:
 			continue
 		if l.find('shogun')>=0:
@@ -50,54 +50,47 @@ def display_matrix(request):
 		for i in s2[:-1]:
 			c+=1
 			if c==1:
-				data.append('%s</td><td width="300">' % i)
+				table.append('%s</td><td width="300">' % i)
 			else:
-				data.append("%s</td><td>" % i)
-		data.append("%s</td></tr><tr><td>" % s2[-1])
-	return TemplateResponse(request, 'matrix.html', {'data': ''.join(data)})
+				table.append("%s</td><td>" % i)
+		table.append("%s</td></tr><tr><td>" % s2[-1])
+	return TemplateResponse(request, 'matrix.html', {'table': ''.join(table), 'related' : get_related_projects() })
 
 
-def show_related_projecs(request):
-	f=file('related_projects.html','w')
-	f.write('''
-	<table BORDER=0 CELLPADDING=3 CELLSPACING=1 RULES=COLS FRAME=BOX
-		><thead>
-	<tr><th>
-	''')
+def get_related_projects():
+	tab=[]
 	j=0
-	LASTLINE=9
-	for l in file(SRCFILE).readlines():
+	LASTLINE=17
+	for l in file(MATRIX_FILE).readlines():
 		j+=1
 		if j>=LASTLINE+1:
 			break
-		if j<5:
+		if j<4:
 			continue
 		#l=l.replace('&', '</td><td>')
 		if len(l)==1:
-			f.write("</td></tr><tr><td>\n")
+			tab.append("</td></tr><tr><td>\n")
 		if len(l)<=1:
 			continue
 		s=l.split(',')
-		if l.find('Bayes')>=0:
-			print s
 
 		s2=list()
-		for i in s[1:]:
+		for i in s[1:6]:
 			s2.append(i)
 
-		if l.find('shogun')>=0:
+		if l.find('created')>=0:
 			for i in s2[:-1]:
-				f.write("%s</th><th>" % i)
-			f.write("%s</th></tr></thead><tr><td>" % s2[-1])
+				tab.append("%s</th><th>" % i)
+			tab.append("%s</th></tr></thead><tr><td>" % s2[-1])
 		else:
 			for i in s2[:-1]:
-				f.write("%s</td><td>" % i)
+				tab.append("%s</td><td>" % i)
 			if j==LASTLINE:
-				f.write("%s</td></tr></table>" % s2[-1])
+				tab.append("%s</td></tr></table>" % s2[-1])
 			else:
-				f.write("%s</td></tr><tr><td>" % s2[-1])
+				tab.append("%s</td></tr><tr><td>" % s2[-1])
+	return ''.join(tab)
 
-	f.write('''</body></html>''')
 
 if __name__ == '__main__':
 	fetch_spreadsheet()
