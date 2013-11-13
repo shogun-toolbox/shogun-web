@@ -17,6 +17,8 @@ urlpatterns = patterns('',
 
     # Other urls:
 
+    url(r'^page/features', 'util.matrix.display_matrix'),
+
     # Notebooks
     url(r'^notebooks/list', 'util.export.list_notebooks'),
     url(r'^notebooks/thumb/(?P<nbnum>[\d]+)/', 'util.export.get_notebook_thumb'),

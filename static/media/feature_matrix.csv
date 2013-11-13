@@ -1,0 +1,154 @@
+,,,,,,,,,,,,,
+,shogun feature matrix,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch7,scikit-learn
+,created,1999,1997,04-2004,2006,09-2006,06-2004,08-2008,08-2004,02-2008,10-2008,01-2002,2007
+,last updated,10-2013,07-2013,11-2013,10-2013,03-2009,11-2013,07-2012,09-2013,03-2012,02-2013,11-2013,08-2013
+,Main Language,C++,java,R,C++,C++,python,java,C++; python,python,python,C++,python; cython
+,Main Focus,General Purpose ML Package with particular focus on large scale learning; Kernel Methods; Interfaces to various languages,General Purpose ML Package,Kernel Based Classification/Dimensionality Reduction,Portability; Correctness,Linear Regression; Ranking; Classification,Visual Data Analysis,Feature Selection,Kernel Methods,Basic Algorithms,Reinforcement Learning,Neural Networks,General Purpose with simple API and numpy / scipy idioms
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+General Features,Graphical User Interface,0,1,0,1,1,1,0,0,0,1,1,0
+,One Class Classification,1,1,1,1,0,0,0,1,0,0,0,1
+,Classification,1,1,1,1,1,1,1,1,1,1,1,1
+,Multiclass classification,1,1,1,0,1,0,1,1,1,1,1,1
+,Regression,1,1,1,1,1,1,0,1,0,1,1,1
+,Structured Output Learning,1,0,0,0,1,0,0,0,0,0,0,0
+,Pre-Processing,1,1,1,1,1,1,1,1,1,0,1,1
+,Built-in Model Selection Strategies,1,1,1,1,0,1,1,1,0,0,0,1
+,Visualization,0,1,0,0,1,1,0,1,1,1,1,1
+,Test Framework,1,1,0,1,1,?,1,0,0,0,0,1
+,Large Scale Learning,1,0,0,1,1,0,0,0,1,0,0,0
+,Semi-supervised Learning,0,0,0,0,0,0,0,0,0,0,0,0.5
+,Multitask Learning,1,0,0,0,0,0,0,0,0,0,0,0
+,Domain Adaptation,1,0,0,0,0,0,0,0,0,0,0,0
+,Serialization,1,1,1,1,1,1,1,1,1,1,0,1
+,Parallelized Code,1,1,0,1,0,0,0,0,0,0,0,1
+,Performance Measures (auROC etc),1,1,0,1,1,1,1,1,1,1,1,1
+,Image Processing,0,0,0,1,0,0,0,0,0,0,0,0.5
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Supported Operating Systems,Linux,1,1,1,1,1,1,1,1,1,1,1,1
+,Windows,1 (cygwin),1,1,1,1,1,1,0,1,1,1,1
+,Mac OSX,1,1,1,1,1,1,1,1,1,0,1,1
+,Other Unix,1,1,1,1,1,1,1,0,1,0,1,1
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Language Bindings,Python,1,0 (but Jython),0,0,1,1,0,1,1,1,0,1
+,R,1,0,1,0,0,0,0,0,0,0,0,0
+,Matlab,1,0,0,0,0,0,0,0,0,0,0,0
+,Octave,1,0,0,0,0,0,0,0,0,0,0,0
+,C/C++,1,0 (but GCJ),0,1,1,0,0,0,0,0,1,0
+,Command Line,1,0,0,0,0,0,0,0,1,1,1,0
+,Java,1,1,0,0,1,0,1,0,0,0,0,0
+,C#,1,0,0,0,0,0,0,0,0,0,0,0
+,Lua,1,0,0,0,0,0,0,0,0,0,0,0
+,Ruby,1,0,0,0,0,0,0,0,0,0,0,0
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+SVM Solvers,SVMLight,1,1,0,0,0,0,0,0,0,0,0,0
+,LibSVM,1,1,1,1,1,1,1,1,0,1,0,1
+,SVM Ocas,1,0,0,1,0,0,0,0,0,0,0,0
+,LibLinear,1,1,0,0,0,0,0,0,0,0,0,1
+,BMRM,1,0,0,0,0,0,0,0,0,0,0,0
+,LaRank,1,0,0,0,0,0,0,0,0,0,0,0
+,SVMPegasos,0,1,0,1,1,0,0,0,0,0,0,0
+,SVM SGD,1,0,0,0,0,0,0,0,0,0,0,1
+,other,1,0,1,0,0,0,0,1,1,0,1,0
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Regression,Kernel Ridge Regression,1,0,0,0,0,0,0,1,0,0,0,1
+,Support Vector Regression,1,1,1,0,0,0,0,1,0,0,1,1
+,Gaussian Processes,1,1,1,0,0,0,0,0,0,0,0,1
+,Relevance Vector Machine,0,1,1,1,0,0,0,0,0,0,0,0
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Multiple Kernel Learning,MKL,1,0,0,0,0,0,0,0,0,0,0,0
+,q-norm MKL,1,0,0,0,0,0,0,0,0,0,0,0
+,multiclass MKL,1,0,0,0,0,0,0,0,0,0,0,0
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Classifiers,Naive Bayes,1 (via MCs),1,0,0,0,1,0,0,0,1,1,1
+,Bayesian Networks,0,1,0,1,0,0,0,0,0,1,0,0
+,Multi Layer Perceptron,0,1,0,1,1,0,0,0,0,1,1,0
+,RBF Networks,0,1,0,1,0,0,0,0,0,1,0,0
+,Logistic Regression,1,1,?,0,1,1,0,0,0,0,0,1
+,LASSO,1,0,?,0,1,0,0,0,0,0,0,1
+,Decision Trees,0,1,0,0,0,1,1,0,0,0,0,0.5
+,k-NN,1,1,1,1,0,1,1,1,1,1,1,1
+,Gaussian Process Classification,1,1,1,0,0,0,1,0,0,0,0,1
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Linear Classifiers,Linear Programming Machine,1,0,0,0,0,0,0,0,0,0,0,0
+,LDA,1,0,0,0,0,0,0,0,1,0,0,1
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Distributions,Markov Chains,1,0,0,0,0,0,1,0,0,0,0,0
+,Hidden Markov Models,1,0,0,0,0,0,0,0,0,0,1,1
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Dimension Reduction,PCA,1,1,1,1,0,1,0,0,1,0,0,1
+,Kernel PCA,1,0,1,0,0,0,0,0,1,0,0,1
+,Isomap,1,0,0,0,0,0,0,0,0,0,0,1
+,Multidimensional scaling,1,0,0,0,0,1,0,0,0,0,0,1
+,Sammon mapping,0,0,0,1,0,1,0,0,0,0,0,0
+,Locally Linear Embedding,1,0,0,0,0,0,0,0,0,0,0,1
+,Diffusion Map,1,0,0,0,0,0,0,0,0,0,0,1
+,Local Tangent Space Alignment,1,0,0,0,0,0,0,0,0,0,0,1
+,Laplacian Eigenmaps,1,0,0,0,0,0,0,0,0,0,0,1
+,Barnes-Hut t-SNE,1,0,0,0,0,0,0,0,0,0,0,0
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Independent Component Analysis,FIXME,?,?,?,?,?,?,?,?,?,?,?,?
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Kernels,Linear,1,1,1,1,1,1,1,1,1,1,1,1
+,Gaussian,1,1,1,1,0,1,1,1,1,1,1,1
+,Polynomial,1,1,1,1,0,1,1,1,1,1,1,1
+,String Kernels,1,1,1,0,0,0,0,1,0,0,0,0
+,Sigmoid Kernel,1,1,0,1,0,1,0,0,0,0,0,1
+,Kernel Normalizer,1,?,1,0,0,0 ?,0,1,0,0,0,?
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Feature Selection,Forward,0,1,0,?,0,1,1,1,1,0 ?,0,1
+,Wrapper methods,0,1,0,?,0,?,1,1,1,0 ?,0,0
+,Recursive Feature Selection,0,1,0,1,0,?,1,1,1,0 ?,0,1
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Missing Features,Mean value imputation,0,1,0,0,0,1,1,0,1,0 ?,0,0
+,EM-based/model based imputation,0,1,0,0,0,1,0,0,0,0 ?,0,0
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Clustering,Hierarchical Clustering,1,1,0,0,0,1,0,0,1,0,0,1
+,k-means,1,1,1,1,0,1,1,1,1,1,1,1
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Optimization,BFGS,1,1,0,1,1,0,0,0,0,0,0,0
+,conjugate gradient,0,0,0,1,0,0,0,0,0,0,0,0
+,gradient descent,1,1,1,0,1,0,0,0,1,1,1,1
+,bindings to CPLEX,1,0,0,0,0,0,0,0,0,0,0,0
+,bindings to Mosek,1,0,0,0,0,0,0,0,0,0,0,0
+,bindings to other solver,1,0,1,0,0,1,0,1,0,0,0,1
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Structural Output Learning,Label Sequence Learning,1,0,?,1,?,?,?,?,?,?,?,0
+,Factor Graph Learning,1,0,?,1,?,?,?,?,?,?,?,0
+,SO-SGD,1,0,?,0,?,?,?,?,?,?,?,0
+,Latent SO-SVM,1,0,?,0,?,?,?,?,?,?,?,0
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Supported File Formats,Binary,1,1,0,0,0,0,0,0,0,1,0,1
+,Arff,0,1,0,0,0,0,1,0,0,0,0,0
+,HDF5,1,0,1,0,0,0,0,0,0,0,0,0
+,CSV,1,1,1,0,0,1,1,1,1,0,1,1
+,libSVM/ SVMLight format,1,1,0,1,1,0,0,1,0,1,0,1
+,Excel,0,0,1,0,0,1,0,0,0,0,0,0
+,Protobuf,1,0,0,0,0,0,0,0,0,0,0,0
+,,,,,,,,,,,,,
+,,shogun,weka,kernlab,dlib,nieme,orange,java-ml,pyML,mlpy,pybrain,torch3,scikit-learn
+Supported Data Types,Sparse Data Representation,1,1,0,1,1,1,1,1,1,1,0,1
+,Dense Matrices,1,1,1,1,0,1,1,1,1,1,1,1
+,Strings,1,1,1,1,0,0,0,0,0,0,1,1
+,Support for native (e.g. C) types (char; signed and unsigned int8;int16;int32;int64;float;double;long double),1,0,0,1,0,0,0,0,1,0,0,1

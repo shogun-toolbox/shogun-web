@@ -282,3 +282,38 @@ body {
 	background-color:#FFF;
 	clear: left;
 }
+
+.features table th, .features table td {
+	padding: 5px 5px;
+	border: 0px;
+}
+
+div.vertical
+{
+	margin-top: -15px;
+	margin-left: -95px;
+	position: absolute;
+	width: 200px;
+	text-align: left;
+
+	/* Safari/Chrome */
+	-webkit-transform: rotate(-90deg);
+
+	/* Firefox */
+	-moz-transform: rotate(-90deg);
+
+	/* Opera */
+	-o-transform: rotate(-90deg);
+
+	filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-0.6225);  /* IE6,IE7 */
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=-0.6225)"; /* IE8 */
+}
+
+th.vertical
+{
+	height: 15ex;
+	line-height: 14px;
+	padding-bottom: 0px;
+	text-align: left;
+}
