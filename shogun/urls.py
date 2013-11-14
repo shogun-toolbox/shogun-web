@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 
     # Other urls:
 
-    url(r'^page/features', 'util.matrix.display_matrix'),
+    url(r'^page/features', 'pages.views.matrix'),
 
     # Notebooks
     url(r'^notebooks/list', 'util.export.list_notebooks'),

@@ -1,8 +1,11 @@
 # Create your views here.
 
+from django.template.response import TemplateResponse
+
 import shogun.settings as settings
 import util.notebook
 import util.demo
+import util.matrix
 
 from django.http import HttpResponse,Http404
 
@@ -234,6 +237,30 @@ def irclogs(request):
 												 'all_subpages' : allsubpages,
 												 'irclogfiles' : all_entries,
 		                                         'news' : news})))
+
+def matrix(request):
+	allpages = Page.objects.order_by('sort_order')
+	news = get_news()[0]
+	allsubpages=[]
+
+	try:
+		parent_subpages = Subpage.objects.filter(rootpage__path__exact='features', is_top=True).order_by('sort_order')
+	except:
+		parent_subpages = None
+
+	current_parent=None
+	details={'current_page_path' : 'features',
+			 'current_subpage_path' : 'matrix',
+			 'all_pages' : allpages,
+			 'all_subpages' : allsubpages,
+			 'parent_subpages' : parent_subpages,
+			 'current_parent' : current_parent,
+			 'news' : news,
+			 'table' : util.matrix.get_matrix(),
+			 'related' : util.matrix.get_related_projects()
+			 }
+
+	return TemplateResponse(request, 'matrix.html', details)
 
 def demo(request):
 	try:

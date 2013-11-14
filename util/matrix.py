@@ -1,4 +1,3 @@
-from django.http import HttpResponse,Http404
 from django.template.response import TemplateResponse
 from shogun.settings import MATRIX_FILE
 
@@ -9,7 +8,8 @@ def fetch_spreadsheet():
 	csv = f.read()
 	file(MATRIX_FILE,'w').write(csv)
 
-def display_matrix(request):
+
+def get_matrix():
 	j=0
 	table=[]
 	for l in file(MATRIX_FILE).readlines():
@@ -52,7 +52,8 @@ def display_matrix(request):
 			else:
 				table.append("%s</td><td>" % i)
 		table.append("%s</td></tr><tr><td>" % s2[-1])
-	return TemplateResponse(request, 'matrix.html', {'table': ''.join(table), 'related' : get_related_projects() })
+
+	return ''.join(table)
 
 
 def get_related_projects():
