@@ -35,6 +35,9 @@ urlpatterns = patterns('',
     # Demos
     url(r'^page/documentation/demo', 'pages.views.demo'),
 
+    # README
+    url(r'^page/about/readme', 'pages.views.readme'),
+
     # irclogs
     url(r'^page/contact/irclogs/', 'pages.views.irclogs'),
 
