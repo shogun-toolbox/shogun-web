@@ -322,6 +322,42 @@ def notebook(request):
 												 'notebooks' : all_entries,
 												 'news' : news})))
 
+def readme(request):
+	try:
+		template = get_template("readme.html")
+		allpages = Page.objects.order_by('sort_order')
+		allsubpages=[]
+		news = get_news()[0]
+		all_entries = util.notebook.get_notebooks()
+
+		try:
+			parent_subpages = Subpage.objects.filter(rootpage__path__exact='documentation', is_top=True).order_by('sort_order')
+		except:
+			parent_subpages=None
+
+		try:
+			current_parent = Subpage.objects.filter(rootpage__path__exact='documentation', path__exact='readme')[0]
+		except:
+			current_parent=None
+
+	except IOError, err:
+		error(err)
+
+	import urllib2
+	from github import Github
+
+	g = Github()
+	readme_md = urllib2.urlopen('http://raw.github.com/shogun-toolbox/shogun/develop/README.md').read()
+	readme_html = g.render_markdown(readme_md)
+
+	return HttpResponse(template.render(Context({'current_page_path' : 'about',
+												 'current_subpage_path' : 'readme',
+												 'all_pages' : allpages,
+												 'all_subpages' : allsubpages,
+												 'parent_subpages' : parent_subpages,
+												 'current_parent' : current_parent,
+												 'readme_content' : readme_html })))
+
 def planet(request):
 	try:
 		template = get_template("planet.html")
