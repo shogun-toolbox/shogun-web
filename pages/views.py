@@ -322,6 +322,43 @@ def notebook(request):
 												 'notebooks' : all_entries,
 												 'news' : news})))
 
+def markdown(request):
+	if request.path[-1] == '/':
+		markdown_requested = request.path.split('/')[-2]
+		page = request.path.split('/')[-3]
+	else:
+		markdown_requested = request.path.split('/')[-1]
+		page = request.path.split('/')[-2]
+
+	try:
+		template = get_template("markdown.html")
+		allpages = Page.objects.order_by('sort_order')
+
+		try:
+			parent_subpages = Subpage.objects.filter(rootpage__path__exact=page, is_top=True).order_by('sort_order')
+		except:
+			parent_subpages = None
+
+		try:
+			current_parent = Subpage.objects.filter(rootpage__path__exact=page, path__exact=markdown_requested)[0]
+		except:
+			current_parent = None
+
+	except IOError, err:
+		error(err)
+
+	html_file = open('static/md2html/%s.html' % markdown_requested, 'r')
+	html_content = html_file.read()
+	html_file.close()
+
+	return HttpResponse(template.render(Context({'current_page_path' : page,
+							'current_subpage_path' : markdown_requested,
+							'all_pages' : allpages,
+							'all_subpages' : [],
+							'parent_subpages' : parent_subpages,
+							'current_parent' : current_parent,
+							'html_content' : html_content})))
+
 def planet(request):
 	try:
 		template = get_template("planet.html")
