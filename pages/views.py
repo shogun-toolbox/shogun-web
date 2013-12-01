@@ -347,17 +347,13 @@ def markdown(request):
 	except IOError, err:
 		error(err)
 
-	html_file = open('static/md2html/%s.html' % markdown_requested, 'r')
-	html_content = html_file.read()
-	html_file.close()
-
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 							'current_subpage_path' : markdown_requested,
 							'all_pages' : allpages,
 							'all_subpages' : [],
 							'parent_subpages' : parent_subpages,
 							'current_parent' : current_parent,
-							'html_content' : html_content})))
+							'html_fname' : "md2html/%s.html" % markdown_requested})))
 
 def planet(request):
 	try:

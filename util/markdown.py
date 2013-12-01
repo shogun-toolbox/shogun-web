@@ -21,14 +21,14 @@ def get_html_from_md(md_file='README'):
   return g.render_markdown(md_content)
 
 if __name__ == "__main__":
-  if not os.path.exists('static/md2html'):
-    os.mkdir('static/md2html')
-  elif os.path.isfile('static/md2html'):
-    print 'Cannot write output files. Please delete or rename the file static/md2html.'
+  if not os.path.exists('templates/md2html'):
+    os.mkdir('templates/md2html')
+  elif os.path.isfile('templates/md2html'):
+    print 'Cannot write output files. Please delete or rename the file templates/md2html.'
     sys.exit(0)
 
   for md_file in MD_FILES:
     html_content = get_html_from_md(md_file)
-    html_file = open("static/md2html/%s.html" % md_file, "w")
+    html_file = open("templates/md2html/%s.html" % md_file, "w")
     html_file.write(html_content)
     html_file.close()
