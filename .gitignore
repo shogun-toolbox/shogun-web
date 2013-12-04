@@ -1,1 +1,3 @@
 *.pyc
+templates/md2html/*
+static/notebook/*
