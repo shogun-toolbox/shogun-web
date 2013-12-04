@@ -46,7 +46,7 @@ if PRODUCTION:
     SHOGUN_IRCLOGS='/var/www/shogun-toolbox.org/irclogs/'
     NOTEBOOK_DIR='/home/shogun/static/notebook/current'
     DEMO_DIR='/home/shogun/shogun-demo'
-    SRC_DIR='/home/shogun/shogun'
+    SRC_DIR='/home/shogun/modshogun/shogun'
     MATRIX_FILE='/home/shogun/static/media/feature_matrix.csv'
 else:
     SHOGUN_PLANET='/home/sonne/shogun/planet-index.html'
