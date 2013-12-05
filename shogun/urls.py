@@ -36,10 +36,7 @@ urlpatterns = patterns('',
     url(r'^page/documentation/demo', 'pages.views.demo'),
 
     # Markdown files.
-    (r'^page/documentation/INSTALL', 'pages.views.markdown'),
-    (r'^page/documentation/README_cmake', 'pages.views.markdown'),
-    (r'^page/documentation/README_developer', 'pages.views.markdown'),
-    (r'^page/about/README', 'pages.views.markdown'),
+    (r'^page/documentation/md/(?P<mdfile>[\w|\d]+)', 'pages.views.markdown'),
 
     # irclogs
     url(r'^page/contact/irclogs/', 'pages.views.irclogs'),

@@ -322,15 +322,9 @@ def notebook(request):
 												 'notebooks' : all_entries,
 												 'news' : news})))
 
-def markdown(request):
-	if request.path[-1] == '/':
-		markdown_requested = request.path.split('/')[-2]
-		page = request.path.split('/')[-3]
-	else:
-		markdown_requested = request.path.split('/')[-1]
-		page = request.path.split('/')[-2]
-
-	markdown_requested.replace('.md','')
+def markdown(request, mdfile):
+	page='documentation'
+	markdown_requested=mdfile.replace('.md','')
 
 	try:
 		template = get_template("markdown.html")
