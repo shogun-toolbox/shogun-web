@@ -324,10 +324,10 @@ def notebook(request):
 
 def markdown(request):
 	if request.path[-1] == '/':
-		markdown_requested = request.path.split('/')[-2]
+		markdown_requested = request.path.split('/')[-2][:-3] # :-3 to get rid of .md
 		page = request.path.split('/')[-3]
 	else:
-		markdown_requested = request.path.split('/')[-1]
+		markdown_requested = request.path.split('/')[-1][:-3] # :-3 to get rid of .md
 		page = request.path.split('/')[-2]
 
 	try:
