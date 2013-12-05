@@ -330,6 +330,8 @@ def markdown(request):
 		markdown_requested = request.path.split('/')[-1]
 		page = request.path.split('/')[-2]
 
+	markdown_requested.replace('.md','')
+
 	try:
 		template = get_template("markdown.html")
 		allpages = Page.objects.order_by('sort_order')
