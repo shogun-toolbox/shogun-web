@@ -15,6 +15,11 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
+    # Main page.
+    (r'^$', 'pages.views.home'),
+    (r'^page/home', 'pages.views.home'),
+    (r'^home', 'pages.views.home'),
+
     # Other urls:
 
     url(r'^page/features', 'pages.views.matrix'),
@@ -52,12 +57,6 @@ urlpatterns = patterns('',
 
     # One new selected (ID):
     url(r'^new/(?P<newID>[\w|\d]+)', 'pages.views.showNew'),
-
-    # Main page.
-    (r'^(|/|home/)$', 'pages.views.home'),
-
-    # Main page.
-    (r'^/$', 'pages.views.home'),
 
     # Redirect documentation
     url(r'^(?P<doc>.*)', 'pages.views.docredirect')

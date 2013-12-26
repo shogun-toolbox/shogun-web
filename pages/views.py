@@ -501,6 +501,6 @@ def pageHandler(request,page,subpage):
 
 def docredirect(request, doc):
     from django.http import HttpResponseRedirect
-    if not doc.startswith('C'):
+    if not doc.startswith('SG') and not doc.startswith('C'):
         doc="C" + doc
     return HttpResponseRedirect('http://www.shogun-toolbox.org/doc/en/latest/classshogun_1_1%s.html' % doc)
