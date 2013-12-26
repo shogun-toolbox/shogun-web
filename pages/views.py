@@ -498,3 +498,9 @@ def pageHandler(request,page,subpage):
 												 'articles' : articles,
 		                                         'news' : news,
 		                                         'lastnew' : lastnew})))
+
+def docredirect(request, doc):
+    from django.http import HttpResponseRedirect
+    if not doc.startswith('C'):
+        doc="C" + doc
+    return HttpResponseRedirect('http://www.shogun-toolbox.org/doc/en/latest/classshogun_1_1%s.html' % doc)

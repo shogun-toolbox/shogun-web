@@ -54,5 +54,11 @@ urlpatterns = patterns('',
     url(r'^new/(?P<newID>[\w|\d]+)', 'pages.views.showNew'),
 
     # Main page.
-    (r'^', 'pages.views.home'),
+    (r'^(|/|home/)$', 'pages.views.home'),
+
+    # Main page.
+    (r'^/$', 'pages.views.home'),
+
+    # Redirect documentation
+    url(r'^(?P<doc>.*)', 'pages.views.docredirect')
 )
