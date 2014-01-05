@@ -53,8 +53,16 @@ def get_news():
 # ----------------------------------------------------------------------
 # To render correctly the main view (home).
 def home(request):
-	all_entries=util.demo.get_demos(False)
-	all_entries.extend(util.notebook.get_notebooks(False))
+	all_entries=[]
+	try:
+		all_entries=util.demo.get_demos(False)
+	except OSError:
+		pass
+
+	try:
+		all_entries.extend(util.notebook.get_notebooks(False))
+	except OSError:
+		pass
 
 	notebooks=[]
 	for i in xrange(0,len(all_entries),5):
