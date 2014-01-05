@@ -1,0 +1,35 @@
+<new>
+	<updated_date>2014-01-05</updated_date>
+	<author>Soeren Sonnenburg</author>
+	<mail>sonne@debian.org></mail>
+
+	<sg_ver>3.1.0</sg_ver>
+	<sg_bver>3.1.0</sg_bver>
+	<libshogun_ver>15.0</libshogun_ver>
+	<data_ver>0.7</data_ver>
+	<param_ver>1</param_ver>
+
+	<content>
+	* This release also contains several cleanups and bugfixes:
+	* Features:
+		- Add option to set k-means cluster centers [Parijat Mazumdar]
+		- Add leave one out crossvalidation scheme [Saurabh Mahindre]
+		- Add multiclass ipython notebook tutorials [Chiyuan Zhang]
+		- Add learning of StreamingSparseFeatures in OnlineLibLinear [Thoralf Klein]
+	* Bugfixes:
+		- Decrease memory footprint of SGObject
+		- Fix protobuf detection
+		- Fix doxygen files and various doxygen errors
+		- Fix compile error with directors
+		- Fix memory leak in modular interfaces and apply*()
+		- Fix leak in KNN::store_model_features
+		- Notebook fixes
+		- Allow custom kernel matrices of size 2^31-1 x 2^31-1 [Koen van de Sande]
+		- Fix Protobuf cmake detection
+		- Fix LabelsFactory methods' object ownership in SWIG interfaces with the %newobject directive.
+	* Cleanup and API Changes:
+		- Introduce slim SGRefObject for refcounted objects as base class of
+		SGObject [Thoralf Klein]
+	</content>
+</new>
+
