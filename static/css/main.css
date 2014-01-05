@@ -34,7 +34,7 @@ Page: Homepage
     .box-01 #twitter {position:absolute; top:272px; left:750px; height:30px; padding-top:33px; padding-left:65px; background:url("../design/box-01-twitter.gif") 0 0 no-repeat;}
     .box-01 #news {position:absolute; top:305px; right:255px;}
     .box-01 #news strong {margin-right:5px;}
-    .box-01 #slogan {position:absolute; right:5px; top:95px;}
+    .box-01 #slogan {position:absolute; right:35px; top:95px;}
     .box-01 #slogan h1 {position:relative; width:605px; height:110px; overflow:hidden; margin:0; padding:0; font-size:300%;}
     .box-01 #slogan h1 span {display:block; position:absolute; top:0; left:0; z-index:1; width:100%; height:100%; margin:0; padding:0; background:url("../design/slogan.png") 0 0 no-repeat;}
 
