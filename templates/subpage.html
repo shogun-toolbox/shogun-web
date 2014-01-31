@@ -5,40 +5,40 @@
     <hr class="noscreen" />
 
     <!-- Title + Subcategories -->
-    <div id="title" class="box">
+    <!-- <div id="title" class="box"> -->
 
-		{% if parent_subpages %}
-        <ul id="topnav">
-            {% for parent_subpage in parent_subpages %}
-                <li>
-                    <a href="/page/{{ current_page_path }}/{{ parent_subpage.path }}">
-                        {% ifequal parent_subpage.path current_parent.path  %}
-                            <strong>{{ parent_subpage.title }}</strong>
-                        {% else %}
-                            {{ parent_subpage.title }}
-                        {% endifequal %}
-					</a>
+		<!-- {% if parent_subpages %} -->
+        <!-- <ul id="topnav"> -->
+            <!-- {% for parent_subpage in parent_subpages %} -->
+                <!-- <li> -->
+                    <!-- <a href="/page/{{ current_page_path }}/{{ parent_subpage.path }}"> -->
+                        <!-- {% ifequal parent_subpage.path current_parent.path  %} -->
+                            <!-- <strong>{{ parent_subpage.title }}</strong> -->
+                        <!-- {% else %} -->
+                            <!-- {{ parent_subpage.title }} -->
+                        <!-- {% endifequal %} -->
+					<!-- </a> -->
 
 					<!-- If parent_subpage or any of its children is current_subpage -->
-					{% ifequal parent_subpage.path current_parent.path %}
-						<span id="subnav">
-							{% for children_subpage in parent_subpage.children.all %}
-								<a href="/page/{{ current_page_path }}/{{ children_subpage.path }}">
-									{% ifequal children_subpage.path current_subpage_path %}
-										<strong>{{ children_subpage.title }}</strong>
-									{% else %}
-										{{ children_subpage.title }}
-									{% endifequal %}
-								</a>
-							{% endfor %}
-						</span> <!-- /subnav -->
-					{% endifequal %}
-                </li>
-            {% endfor %}
-        </ul> <!-- /topnav -->
-		{% endif %}
+					<!-- {% ifequal parent_subpage.path current_parent.path %} -->
+						<!-- <span id="subnav"> -->
+							<!-- {% for children_subpage in parent_subpage.children.all %} -->
+								<!-- <a href="/page/{{ current_page_path }}/{{ children_subpage.path }}"> -->
+									<!-- {% ifequal children_subpage.path current_subpage_path %} -->
+										<!-- <strong>{{ children_subpage.title }}</strong> -->
+									<!-- {% else %} -->
+										<!-- {{ children_subpage.title }} -->
+									<!-- {% endifequal %} -->
+								<!-- </a> -->
+							<!-- {% endfor %} -->
+						<!-- </span> --> <!-- /subnav -->
+					<!-- {% endifequal %} -->
+                <!-- </li> -->
+            <!-- {% endfor %} -->
+        <!--</ul> --><!-- /topnav -->
+		<!-- {% endif %} -->
 
-    </div> 
+    <!-- </div> -->
     <!-- /title -->
 
     <!-- Breadcrumbs -->
@@ -67,8 +67,8 @@
             <!--<div class="perex"><p>Description of this section.</p></div>-->
             <!-- /perex -->
 
-            {% block content %} {% endblock %}          
-        </div> 
+            {% block content %} {% endblock %}
+        </div>
         <!-- /content -->
 
         <!-- Sidebar -->
@@ -86,27 +86,27 @@
                 {% endfor %}
 			</table>
             </div>
-            
+
             <p class="t-right"><a href="/page/news/newslist/"><img src="/static/design/btn-more.gif" alt="" /></a></p>
 
             <!--<h2>Newsletter</h2>
-            
+
             <div class="aside-box box">
-            
+
                 <form action="#" method="get">
                     <div class="f-left"><input type="text" size="30" name="" class="input" style="width:170px;" /></div>
                     <div class="f-right"><input type="image" src="/static/design/btn-ok.gif" value="OK" /></div>
                 </form>
-            
+
             </div>
 
             <h2>Mobile version</h2>
-            
+
             <div style="padding:25px 0 25px 100px; background:url(/static/tmp/70x80.gif) 15px 50% no-repeat;" class="box">
-            
+
                 <p><strong>Check our mobile version</strong><br />
                 Visit us here: <a href="#">m.server.com</a></p>
-            
+
 			</div>-->
 
         </div> <!-- /aside -->
