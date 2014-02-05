@@ -86,8 +86,6 @@ Page: Subpage
 #title {position:relative; width:955px; height:122px; background:url("../design/title.jpg") 0 0 no-repeat; overflow:hidden;}
 #title h1 {margin:0; padding:10px 25px 0 25px; font-size:340%; font-weight:bold; letter-spacing:-1px;}
 
-#breadcrumbs {margin:0; padding:13px 25px;}
-
 .cols-top {width:955px; height:6px; background:url("../design/cols-top.gif") 0 0 no-repeat; font-size:0; line-height:0;}
 .cols-bottom {width:955px; height:8px; background:url("../design/cols-bottom.gif") 0 0 no-repeat; font-size:0; line-height:0;}
 .cols {background:url("../design/cols.gif") 0 0 repeat-y;}

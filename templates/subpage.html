@@ -41,20 +41,29 @@
     <!-- </div> -->
     <!-- /title -->
 
+    <div id="title" class="box">
+        <ul id="topnav">
+            <li><strong><a href="/page/{{ current_subpage_path }}">{{ current_subpage_path.title }}</a></strong></li>
+        </ul>
+    </div>
+
+
     <!-- Breadcrumbs -->
-    <p id="breadcrumbs"><strong>You are here:</strong>
-		<a href="/page/{{ current_page_path }}">{{ current_page_path }}</a> &nbsp;/&nbsp;
-		{% ifequal current_subpage_path current_parent.path %}
+    <!-- <p id="breadcrumbs"><strong>You are here:</strong> -->
+		<!-- <a href="/page/{{ current_page_path }}">{{ current_page_path }}</a> &nbsp;/&nbsp; -->
+		<!-- {% ifequal current_subpage_path current_parent.path %} -->
 			<!-- We are in a parent page! -->
-			<strong>{{ current_subpage_path }}</strong>
-		{% else %}
+			<!-- <strong>{{ current_subpage_path }}</strong> -->
+		<!-- {% else %} -->
 			<!-- We are in a child page! -->
-			{% if current_parent.path %}
-			<strong>{{ current_parent.path }}</strong> &nbsp;/&nbsp;
-			{% endif %}
-			<strong>{{ current_subpage_path }}</strong>
-		{% endifequal %}
-	</p>
+			<!-- {% if current_parent.path %} -->
+			<!-- <strong>{{ current_parent.path }}</strong> &nbsp;/&nbsp; -->
+			<!-- {% endif %} -->
+			<!-- <strong>{{ current_subpage_path }}</strong> -->
+		<!-- {% endifequal %} -->
+	<!-- </p> -->
+
+    &nbsp;
 
      <!-- Columns -->
     <div class="cols-top"></div>
