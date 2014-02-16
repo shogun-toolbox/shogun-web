@@ -7,144 +7,123 @@
   <meta name="copyright" lang="en" content="Webdesign: Nuvio [www.nuvio.cz]; e-mail: ahoj@nuvio.cz" />
   <meta name="description" content="..." />
   <meta name="keywords" content="..." />
+
   <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="/static/css/reset.css" />
-  <link rel="stylesheet" media="screen,projection" type="text/css" href="/static/css/reset.css" />
-  <link rel="stylesheet" media="screen,projection" type="text/css" href="/static/css/main.css" />
-  <!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
-  <link rel="stylesheet" media="screen,projection" type="text/css" href="/static/css/style.css" />
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="/static/css/styles.css" />
+
   <title>The SHOGUN Machine Learning Toolbox</title>
 </head>
 
 <body>
-
-<div id="main">
-
-  <!-- Header -->
-  <div id="header" class="box">
-
-    <div id="logo"><p><a href="./" title="The Shogun Machine Learning Toolbox [Go to homepage]"><span></span></a></p></div>
-
-    <hr class="noscreen" />
-
-    <!-- Navigation -->
-    <!--
-    <ul id="nav">
-      {% for navpage in all_pages %}
-        {% ifequal navpage.path current_page_path  %}
-          <li class="active">
-        {% else %}
-          <li>
-        {% endifequal %}
-
-        <a href="/page/{{ navpage.path }}/{{ navpage.defaultSubpagePath }}"><span>{{ navpage.title }}</span></a></li>
-      {% endfor %}
-    </ul>
-    -->
-
-    <!-- Navigation2 -->
-    <ul class="nav nav-pills">
-      <li><a href="/page/home/"><span>Home</span></a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">About<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/page/about/information">Information</a></li>
-            <li><a href="/page/about/ourteam">Our Team</a></li>
-            <li><a href="/page/about/license">License</a></li>
-            <li><a href="/page/about/contributions">Contributions</a></li>
-          <li><a href="/page/about/examples">Examples</a></li>
-          <li><a href="/page/aboutrelated/">Related Projects</a></li>
-        </ul>
-      </li>
-      <li><a href="/page/features/"><span>Features</span></a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Documentation<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/page/documentation/information"><span>Information</span></a></li>
-          <li><a href="/page/documentation/dev"><span>Developer</span></a></li>
-            <li><a href="/page/documentation/contribute"><span> * Contribute</span></a></li>
-            <li><a href="/page/documentation/resources"><span> * Resources</span></a></li>
-          <li><a href="/page/documentation/faq"><span>FAQ</span></a></li>
-          <li><a href="/page/documentation/notebook"><span>Notebook</span></a></li>
-          <li><a href="/page/documentation/demo"><span>Demo</span></a></li>
-        </ul>
-      </li>
-      <li><a href="/page/contact/contacts"><span>Contact</span></a></li>
-      <li><a href="/page/planet/shogun"><span>Planet</span></a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">News<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/page/news/onenew"><span>New</span></a></li>
-          <li><a href="/page/news/2012"><span>2012</span></a></li>
-          <li><a href="/page/news/2011"><span>2011</span></a></li>
-          <li><a href="/page/news/2010"><span>2010</span></a></li>
-          <li><a href="/page/news/2009"><span>2009</span></a></li>
-          <li><a href="/page/news/2008"><span>2008</span></a></li>
-          <li><a href="/page/news/2007"><span>2007</span></a></li>
-          <li><a href="/page/news/2006"><span>2006</span></a></li>
-          <li><a href="/page/news/All"><span>All News</span></a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Events<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/page/Events/workshop2013"><span>Workshop 2013</span></a></li>
-            <li><a href="/page/Events/worskhop13_follow_up"><span> * Follow-Up</span></a></li>
-            <li><a href="/page/Events/workshop2013_videos"><span> * Videos</span></a></li>
-            <li><a href="/page/Events/workshop2013_program"><span> * Program</span></a></li>
-            <li><a href="/page/Events/registration"><span> * Registration</span></a></li>
-          <li><a href="/page/Events/gsoc2013"><span>GSoC2013</span></a></li>
-            <li><a href="/page/Events/gsoc2013_ideas"><span> * Ideas</span></a></li>
-          <li><a href="/page/Events/gsoc2012"><span>GSoC2012</span></a></li>
-            <li><a href="/page/Events/gsoc2012_follow_up"><span> * Follow-Up</span></a></li>
-            <li><a href="/page/Events/gsoc2012_ideas"><span> * Ideas</span></a></li>
-          <li><a href="/page/Events/gsoc2012"><span>GSoC2011</span></a></li>
-            <li><a href="/page/Events/gsoc2011_follow_up"><span> * Follow-Up</span></a></li>
-            <li><a href="/page/Events/gsoc2011_ideas"><span> * Ideas</span></a></li>
-        </ul>
-      </li>
-    </ul>
-
+  <div class="container">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <ul class="nav nav-tabs">
+            <li><a href="/page/home/"><span>Home</span></a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">About<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/page/about/information">Information</a></li>
+                  <li><a href="/page/about/ourteam">Our Team</a></li>
+                  <li><a href="/page/about/license">License</a></li>
+                  <li><a href="/page/about/contributions">Contributions</a></li>
+                <li><a href="/page/about/examples">Examples</a></li>
+                <li><a href="/page/aboutrelated/">Related Projects</a></li>
+              </ul>
+            </li>
+            <li><a href="/page/features/"><span>Features</span></a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Documentation<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/page/documentation/information"><span>Information</span></a></li>
+                <li><a href="/page/documentation/dev"><span>Developer</span></a></li>
+                  <li><a href="/page/documentation/contribute"><span> * Contribute</span></a></li>
+                  <li><a href="/page/documentation/resources"><span> * Resources</span></a></li>
+                <li><a href="/page/documentation/faq"><span>FAQ</span></a></li>
+                <li><a href="/page/documentation/notebook"><span>Notebook</span></a></li>
+                <li><a href="/page/documentation/demo"><span>Demo</span></a></li>
+              </ul>
+            </li>
+            <li><a href="/page/contact/contacts"><span>Contact</span></a></li>
+            <li><a href="/page/planet/shogun"><span>Planet</span></a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">News<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/page/news/onenew"><span>New</span></a></li>
+                <li><a href="/page/news/2012"><span>2012</span></a></li>
+                <li><a href="/page/news/2011"><span>2011</span></a></li>
+                <li><a href="/page/news/2010"><span>2010</span></a></li>
+                <li><a href="/page/news/2009"><span>2009</span></a></li>
+                <li><a href="/page/news/2008"><span>2008</span></a></li>
+                <li><a href="/page/news/2007"><span>2007</span></a></li>
+                <li><a href="/page/news/2006"><span>2006</span></a></li>
+                <li><a href="/page/news/All"><span>All News</span></a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Events<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/page/Events/workshop2013"><span>Workshop 2013</span></a></li>
+                  <li><a href="/page/Events/worskhop13_follow_up"><span> * Follow-Up</span></a></li>
+                  <li><a href="/page/Events/workshop2013_videos"><span> * Videos</span></a></li>
+                  <li><a href="/page/Events/workshop2013_program"><span> * Program</span></a></li>
+                  <li><a href="/page/Events/registration"><span> * Registration</span></a></li>
+                <li><a href="/page/Events/gsoc2013"><span>GSoC2013</span></a></li>
+                  <li><a href="/page/Events/gsoc2013_ideas"><span> * Ideas</span></a></li>
+                <li><a href="/page/Events/gsoc2012"><span>GSoC2012</span></a></li>
+                  <li><a href="/page/Events/gsoc2012_follow_up"><span> * Follow-Up</span></a></li>
+                  <li><a href="/page/Events/gsoc2012_ideas"><span> * Ideas</span></a></li>
+                <li><a href="/page/Events/gsoc2012"><span>GSoC2011</span></a></li>
+                  <li><a href="/page/Events/gsoc2011_follow_up"><span> * Follow-Up</span></a></li>
+                  <li><a href="/page/Events/gsoc2011_ideas"><span> * Ideas</span></a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav pull-right">
+            <div class="container">
+              {% load staticfiles %}
+              <a href="/" class="brand"><img alt ="" src="{% static "design/logo.png" %}" alt="My image"/></a>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- /header -->
 
+  <div class="container">
+    <!-- This block will be filled by the other templates. -->
+    {% block subpage %}
+    {% endblock %}
+  </div>
 
-  <!-- This block will be filled by the other templates. -->
-  {% block subpage %}{% endblock %}
-  <!-- Footer -->
-  <div id="footer" class="box">
+  <div class="container">
+    <footer class="footer">
+      <p class="pull-right"><a href="#"> RSS Feed</a></p>
+      <p class="pull-left">
+        <strong>&copy;&nbsp;2014 <a href="/">Shogun Toolbox Foundation</a></strong>
+       </p>
+    </footer>
+  </div>
 
-    <p class="f-right"><a href="#" class="footer-rss">RSS Feed</a></p>
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
 
-    <p class="f-left">
-      <strong>&copy;&nbsp;2013 <a href="/">Shogun Toolbox Foundation</a></strong><br />
-      <!-- PLEASE DON´T REMOVE THIS LINE (OR VISIT http://nuviotemplates.com/terms/) -->
-      <span class="smaller"><a href="http://www.nuviotemplates.com/">Free web templates</a> sponsored by <a href="http://www.nuviotemplates.com/admin-templates/">Free Admin Templates</a></span>
-      <!-- PLEASE DON´T REMOVE THIS LINE (OR VISIT http://nuviotemplates.com/terms/) -->
-     </p>
-
-  </div> <!-- /footer -->
-
-</div> <!-- /main -->
-
-<script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-  var pageTracker = _gat._getTracker("UA-4138452-1");
-  pageTracker._initData();
-  pageTracker._trackPageview();
-</script>
-
+  <script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-4138452-1");
+    pageTracker._initData();
+    pageTracker._trackPageview();
+  </script>
 </body>
 
-  <script src="/static/js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/static/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/static/js/loopedslider.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/static/js/overlay.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.1-latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <script type="text/javascript">
+<script src="/static/js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/overlay.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.1-latest/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript">
   init_mathjax = function() {
     if (window.MathJax) {
       // MathJax loaded
@@ -162,6 +141,6 @@
     }
   }
   init_mathjax();
-  </script>
+</script>
 
 </html>

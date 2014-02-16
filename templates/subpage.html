@@ -1,129 +1,46 @@
 {% extends "page.html" %}
 
-    {% block subpage %}
+{% block subpage %}
 
-    <hr class="noscreen" />
+<h2>
+{% if parent_subpages %}
+    {% for parent_subpage in parent_subpages %}
+        {% ifequal parent_subpage.path current_parent.path  %}
+            <strong>{{ parent_subpage.title }}</strong>
+        {% endifequal %}
+        {% ifequal parent_subpage.path current_parent.path %}
+            {% for children_subpage in parent_subpage.children.all %}
+                {% ifequal children_subpage.path current_subpage_path %}
+                    <strong>{{ children_subpage.title }}</strong>
+                {% endifequal %}
+            {% endfor %}
+        {% endifequal %}
+    {% endfor %}
+{% endif %}
+</h2>
 
-    <!-- Title + Subcategories -->
-    <!-- <div id="title" class="box"> -->
-
-		<!-- {% if parent_subpages %} -->
-        <!-- <ul id="topnav"> -->
-            <!-- {% for parent_subpage in parent_subpages %} -->
-                <!-- <li> -->
-                    <!-- <a href="/page/{{ current_page_path }}/{{ parent_subpage.path }}"> -->
-                        <!-- {% ifequal parent_subpage.path current_parent.path  %} -->
-                            <!-- <strong>{{ parent_subpage.title }}</strong> -->
-                        <!-- {% else %} -->
-                            <!-- {{ parent_subpage.title }} -->
-                        <!-- {% endifequal %} -->
-					<!-- </a> -->
-
-					<!-- If parent_subpage or any of its children is current_subpage -->
-					<!-- {% ifequal parent_subpage.path current_parent.path %} -->
-						<!-- <span id="subnav"> -->
-							<!-- {% for children_subpage in parent_subpage.children.all %} -->
-								<!-- <a href="/page/{{ current_page_path }}/{{ children_subpage.path }}"> -->
-									<!-- {% ifequal children_subpage.path current_subpage_path %} -->
-										<!-- <strong>{{ children_subpage.title }}</strong> -->
-									<!-- {% else %} -->
-										<!-- {{ children_subpage.title }} -->
-									<!-- {% endifequal %} -->
-								<!-- </a> -->
-							<!-- {% endfor %} -->
-						<!-- </span> --> <!-- /subnav -->
-					<!-- {% endifequal %} -->
-                <!-- </li> -->
-            <!-- {% endfor %} -->
-        <!--</ul> --><!-- /topnav -->
-		<!-- {% endif %} -->
-
-    <!-- </div> -->
-    <!-- /title -->
-
-    <div id="title" class="box">
-        <ul id="topnav">
-            <li><strong><a href="/page/{{ current_subpage_path }}">{{ current_subpage_path.title }}</a></strong></li>
-        </ul>
-    </div>
-
-
-    <!-- Breadcrumbs -->
-    <!-- <p id="breadcrumbs"><strong>You are here:</strong> -->
-		<!-- <a href="/page/{{ current_page_path }}">{{ current_page_path }}</a> &nbsp;/&nbsp; -->
-		<!-- {% ifequal current_subpage_path current_parent.path %} -->
-			<!-- We are in a parent page! -->
-			<!-- <strong>{{ current_subpage_path }}</strong> -->
-		<!-- {% else %} -->
-			<!-- We are in a child page! -->
-			<!-- {% if current_parent.path %} -->
-			<!-- <strong>{{ current_parent.path }}</strong> &nbsp;/&nbsp; -->
-			<!-- {% endif %} -->
-			<!-- <strong>{{ current_subpage_path }}</strong> -->
-		<!-- {% endifequal %} -->
-	<!-- </p> -->
-
-    &nbsp;
-
-     <!-- Columns -->
-    <div class="cols-top"></div>
-    <div class="cols box">
-
-        <!-- Content -->
-        <div class="content">
-
-            <!-- Perex -->
-            <!--<div class="perex"><p>Description of this section.</p></div>-->
-            <!-- /perex -->
-
-            {% block content %} {% endblock %}
+<div class="container">
+    <div class="row">
+        <div class="span8">
+            <div class="well">
+                {% block content %} {% endblock %}
+            </div>
         </div>
-        <!-- /content -->
-
-        <!-- Sidebar -->
-
-		{% if news %}
-        <div class="aside">
-
-            <h2>What´s New</h2>
-
-            <div class="ul-news">
-                <!-- Write the list of news (last articles) -->
-				<table>
-                {% for new in news %}
-				<tr><td><strong>{{ new.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td></tr>
-                {% endfor %}
-			</table>
+        {% if news %}
+            <div class="span4">
+                <div class="well">
+                    <h4>What´s New</h4>
+                    <div class="ul-news">
+                        <table>
+                            {% for new in news %}
+                            <tr><td><strong>{{ new.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td></tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
             </div>
+        {% endif %}
+    </div>
+</div>
 
-            <p class="t-right"><a href="/page/news/newslist/"><img src="/static/design/btn-more.gif" alt="" /></a></p>
-
-            <!--<h2>Newsletter</h2>
-
-            <div class="aside-box box">
-
-                <form action="#" method="get">
-                    <div class="f-left"><input type="text" size="30" name="" class="input" style="width:170px;" /></div>
-                    <div class="f-right"><input type="image" src="/static/design/btn-ok.gif" value="OK" /></div>
-                </form>
-
-            </div>
-
-            <h2>Mobile version</h2>
-
-            <div style="padding:25px 0 25px 100px; background:url(/static/tmp/70x80.gif) 15px 50% no-repeat;" class="box">
-
-                <p><strong>Check our mobile version</strong><br />
-                Visit us here: <a href="#">m.server.com</a></p>
-
-			</div>-->
-
-        </div> <!-- /aside -->
-		{% endif %}
-
-    </div> <!-- /cols -->
-    <div class="cols-bottom"></div>
-
-    <hr class="noscreen" />
-
-    {% endblock %}
+{% endblock %}

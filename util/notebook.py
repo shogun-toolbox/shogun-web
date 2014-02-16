@@ -91,6 +91,7 @@ def get_notebook_list(suffix=".html"):
 	nbdir=settings.NOTEBOOK_DIR
 	nburl=settings.NOTEBOOK_URL
 	nbs=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith(suffix) ]
+
 	nbs=[ nb for nb in nbs if nb.find('template')==-1 ]
 	nbs.sort()
 	nbs=[(nbs[i][:-5]+'.ipynb', \

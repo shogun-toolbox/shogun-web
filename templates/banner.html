@@ -1,0 +1,22 @@
+<div class="box-01">
+  <div class="overlay-bg">
+    <div class="overlay-header"><a class="overlay-new" href="#" target="_new">Open in new window</a>&nbsp;/&nbsp;<a class="overlay-cloud" href="http://cloud.shogun-toolbox.org" target="_cloud">Try shogun cloud</a></div>
+    <div class="overlay-content">
+      <div class="overlay-close"><a href="#"></a></div>
+      <iframe class="overlay-iframe"></iframe>
+    </div>
+  </div>
+  <!-- Slogan (design/hx-slogan.gif) -->
+  <div id="slogan"><h1><span></span><br /></h1></div>
+  <!-- Ribbon (design/box-01-ribbon.gif) -->
+  <div id="ribbon"><a href="https://github.com/shogun-toolbox/shogun"><img src="/static/design/box-01-ribbon.png" alt="fork me on github"/></a></div>
+  <!-- Button ("Purchase") -->
+  <p id="button"><a href="/new/{{ lastnew.pk }}"><img src="/static/design/box-01-button.png" alt="" /></a></p>
+  <hr class="noscreen" />
+    <!-- News -->
+  <div id="news"><strong>What´s New:</strong> <a href="/new/{{ lastnew.pk }}"> SHOGUN Release version
+        {{ lastnew.sg_ver }} (libshogun {{ lastnew.libshogun_ver }}, data {{ lastnew.data_ver }},
+        parameter {{ lastnew.param_ver }})</a></div>
+  <!-- Twitter -->
+  <div id="twitter"><a href="https://twitter.com/ShogunToolbox">Follow us on Twitter</a></div>
+</div>

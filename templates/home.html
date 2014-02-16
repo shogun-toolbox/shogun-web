@@ -1,165 +1,127 @@
 ﻿{% extends "page.html" %}
 
-    {% block subpage %}
+{% block subpage %}
 
-    <hr class="noscreen" />
+<div class="container">
+    {% include "banner.html" %}
+</div>
 
-
-    <!-- Box 01 -->
-    <div class="box-01">
-		{% include "overlay.html" %}
-
-        <!-- Slogan (design/hx-slogan.gif) -->
-        <div id="slogan"><h1><span></span><br /></h1></div>
-
-        <hr class="noscreen" />
-
-        <!-- Ribbon (design/box-01-ribbon.gif) -->
-		<div id="ribbon"><a href="https://github.com/shogun-toolbox/shogun"><img src="/static/design/box-01-ribbon.png" alt="fork me on github"/></a></div>
-
-        <!-- Button ("Purchase") -->
-        <p id="button"><a href="/new/{{ lastnew.pk }}"><img src="/static/design/box-01-button.png" alt="" /></a></p>
-
-        <hr class="noscreen" />
-
-        <!-- News -->
-        <div id="news"><strong>What´s New:</strong> <a href="/new/{{ lastnew.pk }}"> SHOGUN Release version 
-            {{ lastnew.sg_ver }} (libshogun {{ lastnew.libshogun_ver }}, data {{ lastnew.data_ver }}, 
-            parameter {{ lastnew.param_ver }})</a></div>
-
-        <!-- Twitter -->
-        <div id="twitter"><a href="https://twitter.com/ShogunToolbox">Follow us on Twitter</a></div>
-
-    </div> <!-- /box-01 -->
-
-    <hr class="noscreen" />
-
-    <!-- Box 04 -->
-	<div class="box-04 box">
-
-		<!--<div class="box-04-title"><h3><span>Check also these great products&hellip;</span></h3></div>-->
-		<div class="logo"><img src="/static/design/c-base.png"/></div>
-
-
-		<div class="box-04-title"><h3><span>Video Recordings and Slides!</span></h3></div>
-		<p class="box-04-links">
-		SHOGUN machine learning workshop 2013 slides and videos are now <a href="http://shogun-toolbox.org/page/Events/workshop2013">available</a>.
-		</p>
-	</div>
-
-    <hr class="noscreen" />
-
-    <!-- Box 02 -->
-    <div class="box-02-top"></div>
-
-    <div class="box-02 box">
-
-        <!-- Left column -->
-        <div class="col left">
-
-            <div class="in">
-            
-                <h2>Shogun Features</h2>
-                <p align="justify">
-                    <strong>A large scale machine learning toolbox.<br></strong> 
-
-					SHOGUN is designed for unified large-scale learning for a broad range of feature
-					types and learning settings, like classification, regression, or explorative data analysis.                
-            </div> <!-- /in -->
-
-            <p class="nom"><a href="/page/about/information/"><img src="/static/design/btn-more.gif" alt="More" /></a></p>
-
-        </div> <!-- /col -->
-
-        <!-- Center column -->
-        <div class="col center">
-
-            <div class="in">
-
-                <h2>Google Summer of Code 2014</h2>
-                <p align="justify">
-                    <strong>We have applied as a mentoring org.<br></strong>
-					Our list of project ideas this year is full of exciting and fun
-					projects. There is also a new guide for prospective students. Let's now keep
-					our fingers crossed until accepted mentoring orgs are announced!
-                </p>
-
-            </div> <!-- /in -->
-
-			<p class="nom"><a href="/page/Events/gsoc2014/"><img src="/static/design/btn-more.gif" alt="More" /></a></p>
-
-        </div> <!-- /col -->
-
-        <!-- Right column -->
-        <div class="col right">
-
-            <div class="in">
-                <h2>What´s New</h2>
-				<ul class="ul-news">
-					<!-- Write the list of news (last articles) -->
-					<table>
-					{% for new in news %}
-					<tr><td><strong>{{ new.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td></tr>
-					{% endfor %}
-				</table>
-				</ul>
-            </div> <!-- /in -->
-
-            <p class="nom"><a href="/page/news/newslist/"><img src="/static/design/btn-more.gif" alt="More" /></a></p>
-
-        </div> <!-- /col -->
-
-    </div> <!-- /box-02 -->
-    <div class="box-02-bottom"></div>
-
-    <hr class="noscreen" />
-
-
-    <!-- Box 03 -->
-    <div class="box-03-top"></div>
-    <div class="box-03 box">
-
-        <!-- Slider -->
-        <div id="loopedSlider" class="box">
-            <div class="container">
-                <div class="slides">
-					{% for notebookset in notebooks %}
-					<div>
-						<ul class="list box">
-						{% for notebook in notebookset %}
-						<li><a class="overlay" href="{{notebook.0|safe}}"><img width="140" height="105" src="{{notebook.1|safe}}" alt=""/></a></li>
-						{% endfor %}
-						</ul>
-					</div>
-					{% endfor %}
-                </div> <!-- /slides -->
-            </div> <!-- /container -->
-
-            <!-- Arrows (left, right) -->
-            <a href="#" class="previous"><img src="/static/design/arrow-left.gif" alt="&laquo;" /></a>
-            <a href="#" class="next"><img src="/static/design/arrow-right.gif" alt="&laquo;" /></a>
-
-            <!-- Pagination -->
-            <ul class="pagination">
-                <li><a href="#"><span>1</span></a></li>
-                <li><a href="#"><span>2</span></a></li>
-                <li><a href="#"><span>3</span></a></li>
-                <li><a href="#"><span>4</span></a></li>
-                <li><a href="#"><span>5</span></a></li>
+<div class="container">
+    <div class="row">
+    <div class="span12">
+        <div class="well span3">
+          <h4>Shogun Features</h4>
+          <strong>A large scale machine learning toolbox.<br></strong>
+            <p>SHOGUN is designed for unified large-scale learning for a broad range of feature
+            types and learning settings, like classification, regression, or explorative data analysis.</p>
+            <p><a class="btn btn-info" href="/page/about/information/">More&raquo;</a></p>
+        </div>
+        <div class="well span3">
+          <h4>Google Summer of Code</h4>
+          <strong>Summer of Code 2013 was a huge success.<br></strong>
+            <p>All our 8 students successfully passed GSoC 2013. Congratulations! Their code will be in the next release. Students  it has been a great pleasure! We look forward to continue working with you!</p>
+          <p><a class="btn btn-info" href="/page/Events/gsoc2013/">More&raquo;</a></p>
+        </div>
+        <div class="well span3">
+          <h4>What´s New</h4>
+            <ul class="ul-news">
+                <!-- Write the list of news (last articles) -->
+                <table>
+                {% for new in news %}
+                <tr><td><strong>{{ new.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td></tr>
+                {% endfor %}
+            </table>
             </ul>
-        </div> <!-- /looperslider -->
+        </div>
+    </div>
+    </div>
+</div>
 
-        <script type="text/javascript" charset="utf-8">
-        $(function(){
-        $('#loopedSlider').loopedSlider();
-        });
-        </script>
+<hr>
 
-    </div> <!-- /box-03 -->
-    <div class="box-03-bottom"></div>
+<!-- http://bootsnipp.com/snippets/featured/thumbnail-carousel -->
+<style>
+/* Removes the default 20px margin and creates some padding space for the indicators and controls */
+.carousel {
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
+}
+/* Reposition the controls slightly */
+.carousel-control {
+    left: -12px;
+}
+.carousel-control.right {
+    right: -12px;
+}
+/* Changes the position of the indicators */
+.carousel-indicators {
+    right: 50%;
+    top: auto;
+    bottom: 0px;
+    margin-right: -19px;
+}
+/* Changes the colour of the indicators */
+.carousel-indicators li {
+    background: #c0c0c0;
+}
+.carousel-indicators .active {
+background: #333333;
+}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <div class="well">
+                <div id="NotebookCarousel" class="carousel slide">
 
-    <hr class="noscreen" />
+                    <ol class="carousel-indicators">
+                        <li data-target="#NotebookCarousel" data-slide-to="0" class="active"></li>
+                        {% for notebookset in notebooks %}
+                            {% if forloop.counter > 1 %}
+                                <li data-target="#NotebookCarousel" data-slide-to="{{forloop.counter}}"></li>
+                            {% endif %}
+                        {% endfor %}
+                     </ol>
 
-    <hr class="noscreen" />
+                    <div class="carousel-inner">
+                        {% for notebookset in notebooks %}
+                            {% if forloop.counter == 1 %}
+                                <div class="active item">
+                            {% else %}
+                                <div class="item">
+                            {% endif %}
 
-    {% endblock %}
+                            <div class="row-fluid">
+                                {% load staticfiles %}
+                                {% for notebook in notebookset %}
+                                    <div class="span3">
+                                        <a href="{{notebook.0|safe}}">
+                                            <img src="{{notebook.1|safe}}" alt="" style="width:140px; height:105px"/>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Carousel nav -->
+                    <a class="carousel-control left" href="#NotebookCarousel" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right" href="#NotebookCarousel" data-slide="next">&rsaquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<script>
+$(document).ready(function() {
+    $('#myCarousel').carousel({
+        interval: 10000
+    })
+});
+</script>
+
+{% endblock %}

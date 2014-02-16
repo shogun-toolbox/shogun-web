@@ -65,8 +65,8 @@ def home(request):
 		pass
 
 	notebooks=[]
-	for i in xrange(0,len(all_entries),5):
-		notebooks.append(all_entries[i:(i+5)])
+	for i in xrange(0,len(all_entries),4):
+		notebooks.append(all_entries[i:(i+4)])
 
 	# choose the template.
 	template = get_template("home.html")
