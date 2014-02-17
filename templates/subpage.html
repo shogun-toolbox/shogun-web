@@ -2,22 +2,7 @@
 
 {% block subpage %}
 
-<h2>
-{% if parent_subpages %}
-    {% for parent_subpage in parent_subpages %}
-        {% ifequal parent_subpage.path current_parent.path  %}
-            <strong>{{ parent_subpage.title }}</strong>
-        {% endifequal %}
-        {% ifequal parent_subpage.path current_parent.path %}
-            {% for children_subpage in parent_subpage.children.all %}
-                {% ifequal children_subpage.path current_subpage_path %}
-                    <strong>{{ children_subpage.title }}</strong>
-                {% endifequal %}
-            {% endfor %}
-        {% endifequal %}
-    {% endfor %}
-{% endif %}
-</h2>
+<h2>{{current_page.title}}</h2>
 
 <div class="container">
     <div class="row">
