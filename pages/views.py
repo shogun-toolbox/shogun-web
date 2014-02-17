@@ -71,9 +71,6 @@ def home(request):
 	template = get_template("home.html")
 
 	try:
-		# Get all the pages.
-		allpages = ShogunPage.objects.all()
-
 		# Parse the news.
 		newsParser.parseNews()
 		news,lastnew=get_news()
@@ -81,7 +78,6 @@ def home(request):
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : "home",
-												 'all_pages' : allpages,
 												 'news' : news,
 												 'notebooks' : notebooks,
 												 'lastnew' : lastnew})))
@@ -98,9 +94,6 @@ def showNew(request,newID):
 
 	# Find the pages.
 	try:
-		# Get all the pages.
-		allpages = ShogunPage.objects.all()
-
 		# The new selected.
 		articles = New.objects.get(pk=newID)
 		news = get_news()[0]
@@ -110,7 +103,6 @@ def showNew(request,newID):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'news',
 												 'current_subpage_path' : 'onenew',
-												 'all_pages' : allpages,
 												 'articles' : [articles],
 		                     'news' : news})))
 
@@ -125,9 +117,6 @@ def showPicture(request,pictureName):
 
 	# Find the pages.
 	try:
-		# Get all the pages.
-		allpages = ShogunPage.objects.all()
-
 		# Get picture url.
 		picture_url = "/static/figures/" + pictureName
 
@@ -136,7 +125,6 @@ def showPicture(request,pictureName):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'bigpicture',
 												 'current_subpage_path' : 'bigpicture',
-												 'all_pages' : allpages,
 												 'picture_name' : pictureName,
 												 'picture_url' : picture_url})))
 
@@ -145,9 +133,6 @@ def irclog(request, year, month, day):
 	fname = '%s/#shogun.%s-%s-%s.log.html'  % (settings.SHOGUN_IRCLOGS, year, month, day)
 	try:
 		template = get_template("irclogs.html")
-
-		# Get all the pages.
-		allpages = Page.objects.order_by('sort_order')
 
 		news = get_news()[0]
 		html=file(fname).read()
@@ -158,7 +143,6 @@ def irclog(request, year, month, day):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
 												 'current_subpage_path' : 'irc / irclogs',
-												 'all_pages' : allpages,
 												 'logfile' : logfile,
 		                     'news' : news})))
 
@@ -221,7 +205,6 @@ def irclogs(request):
 		template = get_template("irclogs.html")
 
 		# Get all the pages.
-		allpages = ShogunPage.objects.all()
 		news = get_news()[0]
 		all_entries = get_calendar_logs(logfiles)
 
@@ -230,17 +213,14 @@ def irclogs(request):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
 												 'current_subpage_path' : 'irc/irclogs',
-												 'all_pages' : allpages,
 												 'irclogfiles' : all_entries,
-		                                         'news' : news})))
+		                      'news' : news})))
 
 def matrix(request):
-	allpages = ShogunPage.objects.all()
 	news = get_news()[0]
 
 	details={'current_page_path' : 'features',
 			 'current_subpage_path' : 'matrix',
-			 'all_pages' : allpages,
 			 'news' : news,
 			 'table' : util.matrix.get_matrix(),
 			 'related' : util.matrix.get_related_projects()
@@ -251,7 +231,6 @@ def matrix(request):
 def demo(request):
 	try:
 		template = get_template("notebooks.html")
-		allpages = ShogunPage.objects.all()
 		news = get_news()[0]
 		all_entries = util.demo.get_demos()
 
@@ -260,14 +239,12 @@ def demo(request):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
 												 'current_subpage_path' : 'demo',
-												 'all_pages' : allpages,
 												 'notebooks' : all_entries,
 												 'news' : news})))
 
 def notebook(request):
 	try:
 		template = get_template("notebooks.html")
-		allpages = ShogunPage.objects.all()
 		news = get_news()[0]
 		all_entries = util.notebook.get_notebooks()
 
@@ -276,7 +253,6 @@ def notebook(request):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
 												 'current_subpage_path' : 'notebook',
-												 'all_pages' : allpages,
 												 'notebooks' : all_entries,
 												 'news' : news})))
 
@@ -286,22 +262,17 @@ def markdown(request, mdfile):
 
 	try:
 		template = get_template("markdown.html")
-		allpages = ShogunPage.objects.all()
 
 	except IOError, err:
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 							'current_subpage_path' : markdown_requested,
-							'all_pages' : allpages,
 							'html_fname' : "md2html/%s.html" % markdown_requested})))
 
 def planet(request):
 	try:
 		template = get_template("planet.html")
-
-		# Get all the pages.
-		allpages = ShogunPage.objects.all()
 
 		news = get_news()[0]
 
@@ -319,7 +290,6 @@ def planet(request):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'planet',
 												 'current_subpage_path' : 'shogun',
-												 'all_pages' : allpages,
 												 'articles' : articles,
 		                     'news' : news})))
 
@@ -338,7 +308,6 @@ def news(request, subpage):
 	# choose the news template.
 	template = get_template(page + ".html")
 
-	all_pages=[]
 	articles=[]
 	news=[]
 	lastnew=[]
@@ -365,7 +334,6 @@ def news(request, subpage):
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 												 'current_subpage_path' : subpage,
-												 'all_pages' : allpages,
 												 'articles' : articles,
 		                     'news' : news,
 		                     'lastnew' : lastnew})))

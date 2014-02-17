@@ -189,27 +189,32 @@ body {
     clear: left;
 }
 
-.features table th, .features table td {
-    padding: 3px 3px;
+.related table th {
+    text-align:left;
+}
+
+.features table th {
+    padding: 1px 1px;
     border: 0px;
+    text-align:left;
 }
 
 div.vertical
 {
-    margin-top: -15px;
-    margin-left: -95px;
+    margin-top: -60px;
+    margin-left: -70px;
     position: absolute;
     width: 200px;
     text-align: left;
 
     /* Safari/Chrome */
-    -webkit-transform: rotate(-90deg);
+    -webkit-transform: rotate(-75deg);
 
     /* Firefox */
-    -moz-transform: rotate(-90deg);
+    -moz-transform: rotate(-75deg);
 
     /* Opera */
-    -o-transform: rotate(-90deg);
+    -o-transform: rotate(-75deg);
 
     filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=-0.6225);  /* IE6,IE7 */
 
@@ -223,7 +228,6 @@ th.vertical
     padding-bottom: 0px;
     text-align: left;
 }
-
 
 /* ----------------------------------------------------------------------------------------------------------
 Page: Homepage
