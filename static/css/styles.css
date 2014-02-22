@@ -189,12 +189,6 @@ body {
     clear: left;
 }
 
-.features table td {
-    text-align:left;
-    position: relative;
-    left: 5px;
-}
-
 div.vertical
 {
     margin-top: -110px;
