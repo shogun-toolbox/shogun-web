@@ -1,5 +1,12 @@
 from django.db import models
 
+class NavBar(models.Model):
+	html = models.TextField();
+
+	def __unicode__(self):
+	  return str("NavBar")
+
+
 class ShogunPage(models.Model):
 	title = models.CharField(max_length=20);
 	path = models.CharField(max_length=20);
