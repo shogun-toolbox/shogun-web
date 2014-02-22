@@ -14,6 +14,7 @@ from django.template.loader import get_template
 from django.template import Context,TemplateDoesNotExist
 
 # Data Base libraries.
+from pages.models import NavBar
 from pages.models import ShogunPage
 from pages.models import Article
 from pages.models import New
@@ -47,11 +48,20 @@ def get_news():
 
 	return news,latest
 
+def get_navbar():
+	navbar = NavBar.objects.get()
+	return navbar
+
 # ----------------------------------------------------------------------
 #                                HOME
 # ----------------------------------------------------------------------
 # To render correctly the main view (home).
 def home(request):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	all_entries=[]
 	try:
 		all_entries=util.demo.get_demos(False)
@@ -78,9 +88,10 @@ def home(request):
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : "home",
-												 'news' : news,
-												 'notebooks' : notebooks,
-												 'lastnew' : lastnew})))
+																							 'navbar' : navbar,
+																							 'news' : news,
+																							 'notebooks' : notebooks,
+																							 'lastnew' : lastnew})))
 
 
 # ----------------------------------------------------------------------
@@ -88,6 +99,10 @@ def home(request):
 # ----------------------------------------------------------------------
 # To render correctly the other views (about,documentation,contact,...)
 def showNew(request,newID):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
 	# Choose the template.
 	template = get_template("news.html")
@@ -102,15 +117,20 @@ def showNew(request,newID):
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'news',
-												 'current_subpage_path' : 'onenew',
-												 'articles' : [articles],
-		                     'news' : news})))
+																							 'current_subpage_path' : 'onenew',
+																							 'navbar' : navbar,
+																							 'articles' : [articles],
+													                     'news' : news})))
 
 # ----------------------------------------------------------------------
 #                             SHOW BIG PICTURE
 # ----------------------------------------------------------------------
 # To render correctly the other views (about,documentation,contact,...)
 def showPicture(request,pictureName):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
 	# Choose the template.
 	template = get_template("bigpicture.html")
@@ -125,11 +145,17 @@ def showPicture(request,pictureName):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'bigpicture',
 												 'current_subpage_path' : 'bigpicture',
+												 'navbar' : navbar,
 												 'picture_name' : pictureName,
 												 'picture_url' : picture_url})))
 
 
 def irclog(request, year, month, day):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	fname = '%s/#shogun.%s-%s-%s.log.html'  % (settings.SHOGUN_IRCLOGS, year, month, day)
 	try:
 		template = get_template("irclogs.html")
@@ -143,6 +169,7 @@ def irclog(request, year, month, day):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
 												 'current_subpage_path' : 'irc / irclogs',
+												 'navbar' : navbar,
 												 'logfile' : logfile,
 		                     'news' : news})))
 
@@ -197,9 +224,13 @@ def get_calendar_logs(logfiles):
 
 
 def irclogs(request):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	logfiles = [ f.replace('#shogun.','').replace('.log.html','') for f in os.listdir(settings.SHOGUN_IRCLOGS) if f.startswith('#shogun') ]
 	logfiles.sort()
-
 
 	try:
 		template = get_template("irclogs.html")
@@ -213,14 +244,21 @@ def irclogs(request):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
 												 'current_subpage_path' : 'irc/irclogs',
+												 'navbar' : navbar,
 												 'irclogfiles' : all_entries,
 		                      'news' : news})))
 
 def matrix(request):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	news = get_news()[0]
 
 	details={'current_page_path' : 'features',
 			 'current_subpage_path' : 'matrix',
+			 'navbar' : navbar,
 			 'news' : news,
 			 'table' : util.matrix.get_matrix(),
 			 'related' : util.matrix.get_related_projects()
@@ -239,10 +277,16 @@ def demo(request):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
 												 'current_subpage_path' : 'demo',
+												 'navbar' : navbar,
 												 'notebooks' : all_entries,
 												 'news' : news})))
 
 def notebook(request):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	try:
 		template = get_template("notebooks.html")
 		news = get_news()[0]
@@ -253,10 +297,16 @@ def notebook(request):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
 												 'current_subpage_path' : 'notebook',
+												 'navbar' : navbar,
 												 'notebooks' : all_entries,
 												 'news' : news})))
 
 def markdown(request, mdfile):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	page='documentation'
 	markdown_requested=mdfile.replace('.md','')
 
@@ -268,9 +318,15 @@ def markdown(request, mdfile):
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 							'current_subpage_path' : markdown_requested,
+							'navbar' : navbar,
 							'html_fname' : "md2html/%s.html" % markdown_requested})))
 
 def planet(request):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	try:
 		template = get_template("planet.html")
 
@@ -290,6 +346,7 @@ def planet(request):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'planet',
 												 'current_subpage_path' : 'shogun',
+												 'navbar' : navbar,
 												 'articles' : articles,
 		                     'news' : news})))
 
@@ -301,6 +358,10 @@ def planet(request):
 #   - 'newslist' : show the list with all the news.
 #   - Show the news of one year.
 def news(request, subpage):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
 	# Set the page we are.
 	page = "news"
@@ -334,6 +395,7 @@ def news(request, subpage):
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 												 'current_subpage_path' : subpage,
+												 'navbar' : navbar,
 												 'articles' : articles,
 		                     'news' : news,
 		                     'lastnew' : lastnew})))
@@ -343,6 +405,10 @@ def news(request, subpage):
 # ----------------------------------------------------------------------
 # To render correctly the other views (about,documentation,contact,...)
 def pageHandler(request,page,subpage):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
 	# Choose the template.
 	try:
@@ -370,6 +436,7 @@ def pageHandler(request,page,subpage):
 
 	return HttpResponse(template.render(Context({'current_page' : page,
 												                       'articles' : articles,
+												                       'navbar' : navbar,
 		                                           'news' : news,
 		                                           'lastnew' : lastnew})))
 
