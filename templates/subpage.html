@@ -6,23 +6,13 @@
 
 <div class="container">
     <div class="row">
-        <div class="span8">
-            <div class="well">
-                {% block content %} {% endblock %}
-            </div>
+        <div class="well span8">
+            {% block content %}
+            {% endblock %}
         </div>
         {% if news %}
-            <div class="span4">
-                <div class="well">
-                    <h4>What´s New</h4>
-                    <div class="ul-news">
-                        <table>
-                            {% for new in news %}
-                            <tr><td><strong>{{ new.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td></tr>
-                            {% endfor %}
-                        </table>
-                    </div>
-                </div>
+            <div class="well span3">
+                {% include "whats_new.html" %}
             </div>
         {% endif %}
     </div>

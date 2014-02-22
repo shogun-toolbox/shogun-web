@@ -6,32 +6,36 @@
     {% include "banner.html" %}
 </div>
 
+
+<style>
+.col{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+.col-wrap{
+    overflow: hidden;
+}
+</style>
 <div class="container">
-    <div class="row">
+    <div class="row col-wrap">
     <div class="span12">
-        <div class="well span3">
+        <div class="well span3 col">
           <h4>Shogun Features</h4>
           <strong>A large scale machine learning toolbox.<br></strong>
             <p>SHOGUN is designed for unified large-scale learning for a broad range of feature
             types and learning settings, like classification, regression, or explorative data analysis.</p>
+            &nbsp;
             <p><a class="btn btn-info" href="/page/about/information/">More&raquo;</a></p>
         </div>
-        <div class="well span3">
+        <div class="well span3 col">
           <h4>Google Summer of Code</h4>
           <strong>Summer of Code 2013 was a huge success.<br></strong>
             <p>All our 8 students successfully passed GSoC 2013. Congratulations! Their code will be in the next release. Students  it has been a great pleasure! We look forward to continue working with you!</p>
           <p><a class="btn btn-info" href="/page/Events/gsoc2013/">More&raquo;</a></p>
         </div>
-        <div class="well span3">
-          <h4>What´s New</h4>
-            <ul class="ul-news">
-                <!-- Write the list of news (last articles) -->
-                <table>
-                {% for new in news %}
-                <tr><td><strong>{{ new.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td></tr>
-                {% endfor %}
-            </table>
-            </ul>
+        <div class="well span3 col">
+            {% include "whats_new.html" %}
         </div>
     </div>
     </div>

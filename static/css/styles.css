@@ -243,14 +243,3 @@ Page: Homepage
     .box-01 #slogan h1 {position:relative; width:605px; height:110px; overflow:hidden; margin:0; padding:0; font-size:300%;}
     .box-01 #slogan h1 span {display:block; position:absolute; top:0; left:0; z-index:1; width:100%; height:100%; margin:0; padding:0; background:url("../design/slogan.png") 0 0 no-repeat;}
     .noscreen {display:none;}
-
-/* ----------------------------------------------------------------------------------------------------------
-Porlet: News
----------------------------------------------------------------------------------------------------------- */
-
-ul.ul-news {list-style:none; margin:15px 0;}
-ul.ul-news li {padding:2px 0;}
-ul.ul-news li strong {margin-right:3px; padding-right:17px; background:url("../design/ico-arrow.gif") 100% 50% no-repeat;}
-.ul-news th, .ul-news td {padding-left:7px; padding-right:7px;}
-.content .ul-news table {padding: 10px; border:0;}
-.content .ul-news table td {padding: 0 0 0 7px; border:0;}

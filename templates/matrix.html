@@ -1,41 +1,42 @@
 {% extends "subpage.html" %}
 {% block content %}
-<p>A comparison of shogun with the popular machine learning toolboxes weka, kernlab, dlib, nieme, orange, java-ml, pyML, mlpy, pybrain, torch3, scikit-learn. A '?' denotes unkown, '-' feature is missing. This table is availabe as a <a href="http://spreadsheets.google.com/ccc?key=0Aunb9cCVAP6NdDVBMzY1TjdPcmx4ei1EeUZNNGtKUHc&hl=en">google spreadsheet</a>. If you have additions please share an updated spreadsheet with us and we will integrate the changes.</p>
+
+	<p>A comparison of shogun with the popular machine learning toolboxes weka, kernlab, dlib, nieme, orange, java-ml, pyML, mlpy, pybrain, torch3, scikit-learn. A '?' denotes unkown, '-' feature is missing. This table is availabe as a <a href="http://spreadsheets.google.com/ccc?key=0Aunb9cCVAP6NdDVBMzY1TjdPcmx4ei1EeUZNNGtKUHc&hl=en">google spreadsheet</a>. If you have additions please share an updated spreadsheet with us and we will integrate the changes.</p>
 
 	<div class="related">
-	<table BORDER=0 CELLPADDING=2 CELLSPACING=0 RULES=COLS FRAME=BOX>
-	<thead>
-	<tr><th>
-		{{related|safe}}
-	</table>
+		<table BORDER=0 CELLPADDING=2 CELLSPACING=0 RULES=COLS FRAME=BOX>
+		<thead>
+		<tr><th>
+			{{related|safe}}
+		</table>
 	<div>
 
 	<div class="features">
-	<table>
-	<thead>
-	<tr>
-	<th></th>
-		<th class="vertical"><div class="vertical"></div></th>
-		<th class="vertical"><div class="vertical">shogun</div></th>
-		<th class="vertical"><div class="vertical">weka</div></th>
-		<th class="vertical"><div class="vertical">kernlab</div></th>
-		<th class="vertical"><div class="vertical">dlib</div></th>
-		<th class="vertical"><div class="vertical">nieme</div></th>
-		<th class="vertical"><div class="vertical">orange</div></th>
-		<th class="vertical"><div class="vertical">java-ml</div></th>
-		<th class="vertical"><div class="vertical">pyML</div></th>
-		<th class="vertical"><div class="vertical">mlpy</div></th>
-		<th class="vertical"><div class="vertical">pybrain</div></th>
-		<th class="vertical"><div class="vertical">torch3</div></th>
-		<th class="vertical"><div class="vertical">scikit-learn</div></th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr><td>
+		<table>
+		<thead>
+		<tr>
+		<th></th>
+			<th class="vertical"><div class="vertical"></div></th>
+			<th class="vertical"><div class="vertical">shogun</div></th>
+			<th class="vertical"><div class="vertical">weka</div></th>
+			<th class="vertical"><div class="vertical">kernlab</div></th>
+			<th class="vertical"><div class="vertical">dlib</div></th>
+			<th class="vertical"><div class="vertical">nieme</div></th>
+			<th class="vertical"><div class="vertical">orange</div></th>
+			<th class="vertical"><div class="vertical">java-ml</div></th>
+			<th class="vertical"><div class="vertical">pyML</div></th>
+			<th class="vertical"><div class="vertical">mlpy</div></th>
+			<th class="vertical"><div class="vertical">pybrain</div></th>
+			<th class="vertical"><div class="vertical">torch3</div></th>
+			<th class="vertical"><div class="vertical">scikit-learn</div></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>
 
-	{{table|safe}}
+		{{table|safe}}
 
-	</td></tr><tr><td colspan=14></td></tr></tbody>
-	</table>
-</div>
+		</td></tr><tr><td colspan=14></td></tr></tbody>
+		</table>
+	</div>
 {% endblock %}
