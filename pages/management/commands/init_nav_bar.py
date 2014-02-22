@@ -16,7 +16,7 @@ class Command(NoArgsCommand):
           <li><a href="/page/about/license">License</a></li>
           <li><a href="/page/about/contributions">Contributions</a></li>
           <li><a href="/page/about/examples">Examples</a></li>
-          <li><a href="/page/aboutrelated/">Related Projects</a></li>
+          <li><a href="/page/about/related/">Related Projects</a></li>
         </ul>
       </li>
       <li><a href="/page/features/"><span>Features</span></a></li>
