@@ -189,19 +189,15 @@ body {
     clear: left;
 }
 
-.related table th {
+.features table td {
     text-align:left;
-}
-
-.features table th {
-    padding: 1px 1px;
-    border: 0px;
-    text-align:left;
+    position: relative;
+    left: 5px;
 }
 
 div.vertical
 {
-    margin-top: -60px;
+    margin-top: -110px;
     margin-left: -70px;
     position: absolute;
     width: 200px;
