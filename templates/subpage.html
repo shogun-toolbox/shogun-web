@@ -2,6 +2,11 @@
 
 {% block subpage %}
 
+<p class="breadcrumbs">
+    You are here:
+    <a href="/page/{{ current_page.path }}">{{ current_page.path }}</a>
+</p>
+
 <h2>{{current_page.title}}</h2>
 
 <div class="container">
