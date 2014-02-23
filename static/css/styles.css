@@ -258,25 +258,6 @@ Page: Homepage
     .box-02 .col.center h2, .box-02 .col.center p, .box-02 .col.center ul {padding:0 20px;}
     .box-02 .col.right h2, .box-02 .col.right p, .box-02 .col.right ul {padding-left:20px;}
 
-.box-03-top {width:955px; height:6px; background:url("../design/box-03-top.gif") 0 0 no-repeat; font-size:0; line-height:0;}
-    .box-03-bottom {width:955px; height:8px; margin-bottom:18px; background:url("../design/box-03-bottom.gif") 0 0 no-repeat; font-size:0; line-height:0;}
-    .box-03 {padding:19px 27px 17px 25px; background:url("../design/box-03.gif") 0 0 repeat-y;}
-    .box-03 #loopedSlider {position:relative;}
-    .box-03 #loopedSlider .container {width:800px; height:135px; margin-left:49px; overflow:hidden; position:relative;}
-    .box-03 #loopedSlider .slides {position:absolute; top:0; left:0;}
-    .box-03 #loopedSlider .slides div {display:none; position:absolute; top:0; width:800px;}
-    .box-03 #loopedSlider ul.pagination {list-style-type:none; margin:0; padding:0; margin:0; width:75px;}
-    .box-03 #loopedSlider ul.pagination li {float:left; margin:0 3px;}
-    .box-03 #loopedSlider ul.pagination a {display:block; width:8px; height:8px; overflow:hidden; background-image:url("../design/pagination.gif"); background-position:0 0; background-repeat:no-repeat;}
-    .box-03 #loopedSlider ul.pagination a span {display:none;}
-    .box-03 #loopedSlider ul.pagination li.active a {background-position:0 -8px;}
-    .box-03 #loopedSlider ul.list {margin:0;}
-    .box-03 #loopedSlider ul.list li {display:block; float:left; width:140px; margin:0 10px;}
-    .box-03 #loopedSlider ul.list li img {display:block;}
-    .box-03 #loopedSlider .previous {position:absolute; top:45px; left:0;}
-    .box-03 #loopedSlider .next {position:absolute; top:45px; right:0;}
-    .box-03 #loopedSlider .pagination {position:absolute; bottom:0; left:425px;}
-
 .box-04 {position:relative; width:905px; height:82px; padding:0px 25px; margin-bottom:18px; background:url("../design/box-04.gif") 0 0 no-repeat; overflow:hidden;}
     .box-04 .box-04-title {float:left; display:block;padding-top:22px;}
     .box-04 .box-04-title h3 { color: white; float:left; margin:0; padding-left:8px; height:36px; overflow:hidden; background:url("../design/box-04-title-l.gif") 0 0 no-repeat; font-weight:bold; text-transform:uppercase; font-size:100%;}
@@ -284,3 +265,45 @@ Page: Homepage
     .box-04 .box-04-links {float:left; margin:0; padding:30px 0 0 22px;}
     .box-04 .box-04-links span {margin:0 10px;}
     .box-04 .logo img {float:right; display:block;margin:0; padding:0;}
+
+.box-03-top {width:955px; height:6px; background:url("../design/box-03-top.gif") 0 0 no-repeat; font-size:0; line-height:0;}
+    .box-03-bottom {width:955px; height:8px; margin-bottom:18px; background:url("../design/box-03-bottom.gif") 0 0 no-repeat; font-size:0; line-height:0;}
+    .box-03 {padding:19px 27px 17px 25px; background:url("../design/box-03.gif") 0 0 repeat-y;}
+
+/* http://bootsnipp.com/snippets/featured/thumbnail-carousel */
+/* Removes the default 20px margin and creates some padding space for the indicators and controls */
+.carousel {
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
+}
+/* Reposition the controls slightly */
+.carousel-control {
+    left: -8px;
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    line-height: 16px;
+    top: 70px;
+}
+.carousel-control.right {
+    right: -8px;
+}
+/* Changes the position of the indicators */
+.carousel-indicators {
+    right: 50%;
+    top: auto;
+    bottom: 0px;
+    margin-right: -19px;
+}
+/* Changes the colour of the indicators */
+.carousel-indicators li {
+    background: #c0c0c0;
+}
+.carousel-indicators .active {
+    background: #333333;
+}
+.carousel-inner {
+    position:relative;
+    right: -30px;
+    top: 4px;
+}
