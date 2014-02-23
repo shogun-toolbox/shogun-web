@@ -9,7 +9,7 @@ class NavBar(models.Model):
 
 class ShogunPage(models.Model):
 	title = models.CharField(max_length=20);
-	path = models.CharField(max_length=20);
+	path = models.CharField(max_length=40);
 	nav_tab = models.CharField(max_length=20);
 	description = models.TextField(max_length=200);
 
