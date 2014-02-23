@@ -91,7 +91,7 @@ def home(request):
 	except ValueError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : "home",
+	return HttpResponse(template.render(Context({'current_page' : fake_page('home'),
 																							 'navbar' : navbar,
 																							 'news' : news,
 																							 'notebooks' : notebooks,
@@ -120,8 +120,7 @@ def showNew(request,newID):
 	except ValueError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'news',
-																							 'current_subpage_path' : 'onenew',
+	return HttpResponse(template.render(Context({'current_page' : fake_page('news/onenew'),
 																							 'navbar' : navbar,
 																							 'articles' : [articles],
 													                     'news' : news})))
@@ -147,8 +146,7 @@ def showPicture(request,pictureName):
 	except ValueError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'bigpicture',
-												 'current_subpage_path' : 'bigpicture',
+	return HttpResponse(template.render(Context({'current_page' : fake_page('bigpicture'),
 												 'navbar' : navbar,
 												 'picture_name' : pictureName,
 												 'picture_url' : picture_url})))
@@ -171,8 +169,7 @@ def irclog(request, year, month, day):
 	except Exception, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
-												 'current_subpage_path' : 'irc / irclogs',
+	return HttpResponse(template.render(Context({'current_page' : fake_page('contact/irc/irclogs'),
 												 'navbar' : navbar,
 												 'logfile' : logfile,
 		                     'news' : news})))
@@ -246,8 +243,7 @@ def irclogs(request):
 	except IOError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
-												 'current_subpage_path' : 'irc/irclogs',
+	return HttpResponse(template.render(Context({'current_page' : fake_page('contact/irc/irclogs'),
 												 'navbar' : navbar,
 												 'irclogfiles' : all_entries,
 		                      'news' : news})))
@@ -283,8 +279,7 @@ def demo(request):
 	except IOError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
-												 'current_subpage_path' : 'demo',
+	return HttpResponse(template.render(Context({'current_page' : fake_page('documentation/demo'),
 												 'navbar' : navbar,
 												 'notebooks' : all_entries,
 												 'news' : news})))
@@ -303,8 +298,7 @@ def notebook(request):
 	except IOError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
-												 'current_subpage_path' : 'notebook',
+	return HttpResponse(template.render(Context({'current_page' : fake_page('documentation/notebook'),
 												 'navbar' : navbar,
 												 'notebooks' : all_entries,
 												 'news' : news})))
@@ -400,8 +394,7 @@ def news(request, subpage):
 	except ValueError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : page,
-												 'current_subpage_path' : subpage,
+	return HttpResponse(template.render(Context({'current_page' : fake_page(page+'/'+subpage),
 												 'navbar' : navbar,
 												 'articles' : articles,
 		                     'news' : news,
