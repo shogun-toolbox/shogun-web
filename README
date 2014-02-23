@@ -1,6 +1,12 @@
 Author : Shogun.
 Description : Shogun web, done in django.
 
+Adding Content
+==============
+
+From the admin page create a new ShogunPage and then create a new article that links to it. 
+You will also need to edit the navbar to add your new page to the navbar
+
 Explanation of directory content
 ================================
 
