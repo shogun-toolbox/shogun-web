@@ -2,35 +2,47 @@
 
 {% block content %}
 
-{% if irclogfiles %}
-	{% for year_name, year in irclogfiles %}
-	<h2>{{year_name}}</h2>
-		{% for month_name, months in year %}
-		<h3>{{month_name}}</h3>
-			{% for weeks in months %}
-				<table>
-					<tr><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td><td>Sun</td></tr>
-					{% for week in weeks %}
-					<tr>
-						{% for day,link,size in week %}
-						<td>
-							{% if day %}
-							{% if link %}
-							<a href="/page/contact/irclog/{{link}}/">{{day}}</a> ({{size}}kB)
-							{% else %}
-							{{day}}
-							{% endif %}
-							{% endif %}
-						</td>
+	{% if irclogfiles %}
+		{% for year_name, year in irclogfiles %}
+			<h2>{{year_name}}</h2>
+
+			{% for month_name, months in year %}
+				<h3>{{month_name}}</h3>
+
+				{% for weeks in months %}
+					<table class="table table-striped table-bordered">
+
+						<tr>
+							<td>Mon</td>
+							<td>Tue</td>
+							<td>Wed</td>
+							<td>Thu</td>
+							<td>Fri</td>
+							<td>Sat</td>
+							<td>Sun</td>
+						</tr>
+
+						{% for week in weeks %}
+							<tr>
+								{% for day,link,size in week %}
+									<td>
+										{% if day %}
+										{% if link %}
+										<a href="/page/contact/irclog/{{link}}/">{{day}}</a> ({{size}}kB)
+										{% else %}
+										{{day}}
+										{% endif %}
+										{% endif %}
+									</td>
+								{% endfor %}
+							</tr>
 						{% endfor %}
-					</tr>
-					{% endfor %}
-				</table>
+					</table>
+				{% endfor %}
 			{% endfor %}
 		{% endfor %}
-	{% endfor %}
-{% endif %}
+	{% endif %}
 
-{{logfile|safe}}
+	{{logfile|safe}}
 
 {% endblock %}

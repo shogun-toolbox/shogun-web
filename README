@@ -8,19 +8,17 @@ Explanation of directory content
 
   - /static :
      - /admin   : To allow admin user interface works outer than localhost.
-     - /css     : css given by www.nuvio-templates.com.
-     - /design  : images given by www.nuvio-templates.com.
-     - /tmp     : images given by www.nuvio-templates.com.
+     - /css     : css
+     - /design  : images
      - /figures : The images used in the articles.
      - /js :
          - /tiny_mce : HTML editor to make easier to add/edit content in the articles.
          - /editors  : Database fields with special configuration.
 
   - /templates : All templates for each different page .
-     - home.html    : Initial page.
      - page.html    : General html.
      - subpage.html : Extends page, html of the subpages.
-     - about.html, contact.html, ... : html for each subpage.
+     - home.html    : Initial page.
 
   - /pages :
      - views.py  : Handles the requests.
@@ -31,22 +29,47 @@ Explanation of directory content
      - settings.py : Configuration.
      - urls.py     : Urls and method in views.py that handles the url.
 
+  - /scripts :
+      Some useful scripts for working on the site
+
   - parserHTML.py : Parse the news in "/news" (HTML format).
 
 
 Explanation of the database
 ===========================
 
+  Current
+  -------
+  - ShogunPages : main page file
+  - Articles    : Content. Belongs to a ShogunPage
+  - NavBar      : The NavBar is stored in the DB
+  - News        : News loaded using parserHTML.py from /news.
+
+  Legacy
+  ------
 	- Pages    : Main possible views (home,about,documentation,references,...).
 	- Subpages : Views inside the pages, for documentation (Information, Samples, Downloads).
 	- News     : News loaded using parserHTML.py from /news.
 	- Articles : Content of each page/subpage.
+
 
 Explanation for execution
 =========================
 
 	- In root directory : python manage.py runserver port
 	- Admin ui access   : http://ip/port/admin/
+
+
+Development
+============
+
+  - Obtain a mysql dump from the production server from someone with access
+  - run the mysql2sqlite.sh script:
+
+    ./mysql2sqlite.sh mysql.dump | sqlite3 shogun.sqlite
+
+  - Do not commit the shogun.sqlite file as it contains real db user names etc.
+
 
 Notes
 =====

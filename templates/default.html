@@ -1,9 +1,8 @@
 ﻿{% extends "subpage.html" %}
 
-    {% block content %}
-            <!-- Write the list of articles -->
-            {% for article in articles %}
-                <dt><h3>{{ article.title }}</h3></dt>
-                <p align="justify">{{ article.content|safe }}</p><hr>
-            {% endfor %}
-    {% endblock %}
+  {% block content %}
+    {% for article in articles %}
+      <dt><h3>{{ article.title }}</h3></dt>
+      <p>{{ article.content|safe }}</p><hr>
+    {% endfor %}
+  {% endblock %}

@@ -14,8 +14,8 @@ from django.template.loader import get_template
 from django.template import Context,TemplateDoesNotExist
 
 # Data Base libraries.
-from pages.models import Page
-from pages.models import Subpage
+from pages.models import NavBar
+from pages.models import ShogunPage
 from pages.models import Article
 from pages.models import New
 
@@ -48,11 +48,20 @@ def get_news():
 
 	return news,latest
 
+def get_navbar():
+	navbar = NavBar.objects.get()
+	return navbar
+
 # ----------------------------------------------------------------------
 #                                HOME
 # ----------------------------------------------------------------------
 # To render correctly the main view (home).
 def home(request):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	all_entries=[]
 	try:
 		all_entries=util.demo.get_demos(False)
@@ -65,16 +74,13 @@ def home(request):
 		pass
 
 	notebooks=[]
-	for i in xrange(0,len(all_entries),5):
-		notebooks.append(all_entries[i:(i+5)])
+	for i in xrange(0,len(all_entries),4):
+		notebooks.append(all_entries[i:(i+4)])
 
 	# choose the template.
 	template = get_template("home.html")
 
 	try:
-		# Get all the pages.
-		allpages = Page.objects.order_by('sort_order')
-
 		# Parse the news.
 		newsParser.parseNews()
 		news,lastnew=get_news()
@@ -82,10 +88,10 @@ def home(request):
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : "home",
-												 'all_pages' : allpages,
-												 'news' : news,
-												 'notebooks' : notebooks,
-												 'lastnew' : lastnew})))
+																							 'navbar' : navbar,
+																							 'news' : news,
+																							 'notebooks' : notebooks,
+																							 'lastnew' : lastnew})))
 
 
 # ----------------------------------------------------------------------
@@ -93,21 +99,16 @@ def home(request):
 # ----------------------------------------------------------------------
 # To render correctly the other views (about,documentation,contact,...)
 def showNew(request,newID):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
 	# Choose the template.
 	template = get_template("news.html")
 
 	# Find the pages.
 	try:
-		# Get all the pages.
-		allpages = Page.objects.order_by('sort_order')
-
-		# Get default subpages.
-		defaultsubpages = Subpage.objects.filter(sort_order=1)
-
-		# Get all the subpages.
-		allsubpages = Subpage.objects.filter(rootpage__path__exact="news").order_by('sort_order')
-
 		# The new selected.
 		articles = New.objects.get(pk=newID)
 		news = get_news()[0]
@@ -116,27 +117,26 @@ def showNew(request,newID):
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'news',
-												 'current_subpage_path' : 'onenew',
-												 'default_subpages' : defaultsubpages,
-												 'all_pages' : allpages,
-												 'all_subpages' : allsubpages,
-												 'articles' : [articles],
-		                                         'news' : news})))
+																							 'current_subpage_path' : 'onenew',
+																							 'navbar' : navbar,
+																							 'articles' : [articles],
+													                     'news' : news})))
 
 # ----------------------------------------------------------------------
 #                             SHOW BIG PICTURE
 # ----------------------------------------------------------------------
 # To render correctly the other views (about,documentation,contact,...)
 def showPicture(request,pictureName):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
 	# Choose the template.
 	template = get_template("bigpicture.html")
 
 	# Find the pages.
 	try:
-		# Get all the pages.
-		allpages = Page.objects.order_by('sort_order')
-
 		# Get picture url.
 		picture_url = "/static/figures/" + pictureName
 
@@ -145,18 +145,20 @@ def showPicture(request,pictureName):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'bigpicture',
 												 'current_subpage_path' : 'bigpicture',
-												 'all_pages' : allpages,
+												 'navbar' : navbar,
 												 'picture_name' : pictureName,
 												 'picture_url' : picture_url})))
 
 
 def irclog(request, year, month, day):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	fname = '%s/#shogun.%s-%s-%s.log.html'  % (settings.SHOGUN_IRCLOGS, year, month, day)
 	try:
 		template = get_template("irclogs.html")
-
-		# Get all the pages.
-		allpages = Page.objects.order_by('sort_order')
 
 		news = get_news()[0]
 		html=file(fname).read()
@@ -167,10 +169,9 @@ def irclog(request, year, month, day):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
 												 'current_subpage_path' : 'irc / irclogs',
-												 'all_pages' : allpages,
-												 'all_subpages' : ['irclogs'],
+												 'navbar' : navbar,
 												 'logfile' : logfile,
-		                                         'news' : news})))
+		                     'news' : news})))
 
 
 def get_calendar_logs(logfiles):
@@ -223,16 +224,18 @@ def get_calendar_logs(logfiles):
 
 
 def irclogs(request):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	logfiles = [ f.replace('#shogun.','').replace('.log.html','') for f in os.listdir(settings.SHOGUN_IRCLOGS) if f.startswith('#shogun') ]
 	logfiles.sort()
-
 
 	try:
 		template = get_template("irclogs.html")
 
 		# Get all the pages.
-		allpages = Page.objects.order_by('sort_order')
-		allsubpages=[]
 		news = get_news()[0]
 		all_entries = get_calendar_logs(logfiles)
 
@@ -240,29 +243,22 @@ def irclogs(request):
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'contact',
-												 'current_subpage_path' : 'irc / irclogs',
-												 'all_pages' : allpages,
-												 'all_subpages' : allsubpages,
+												 'current_subpage_path' : 'irc/irclogs',
+												 'navbar' : navbar,
 												 'irclogfiles' : all_entries,
-		                                         'news' : news})))
+		                      'news' : news})))
 
 def matrix(request):
-	allpages = Page.objects.order_by('sort_order')
-	news = get_news()[0]
-	allsubpages=[]
-
 	try:
-		parent_subpages = Subpage.objects.filter(rootpage__path__exact='features', is_top=True).order_by('sort_order')
-	except:
-		parent_subpages = None
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
-	current_parent=None
+	news = get_news()[0]
+
 	details={'current_page_path' : 'features',
 			 'current_subpage_path' : 'matrix',
-			 'all_pages' : allpages,
-			 'all_subpages' : allsubpages,
-			 'parent_subpages' : parent_subpages,
-			 'current_parent' : current_parent,
+			 'navbar' : navbar,
 			 'news' : news,
 			 'table' : util.matrix.get_matrix(),
 			 'related' : util.matrix.get_related_projects()
@@ -273,98 +269,66 @@ def matrix(request):
 def demo(request):
 	try:
 		template = get_template("notebooks.html")
-		allpages = Page.objects.order_by('sort_order')
-		allsubpages=[]
 		news = get_news()[0]
 		all_entries = util.demo.get_demos()
-
-		try:
-			parent_subpages = Subpage.objects.filter(rootpage__path__exact='documentation', is_top=True).order_by('sort_order')
-		except:
-			parent_subpages = None
-
-		try:
-			current_parent = Subpage.objects.filter(rootpage__path__exact='documentation', path__exact='demo')[0]
-		except:
-			current_parent = None
 
 	except IOError, err:
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
 												 'current_subpage_path' : 'demo',
-												 'all_pages' : allpages,
-												 'all_subpages' : allsubpages,
-												 'parent_subpages' : parent_subpages,
-												 'current_parent' : current_parent,
+												 'navbar' : navbar,
 												 'notebooks' : all_entries,
 												 'news' : news})))
 
 def notebook(request):
 	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
+	try:
 		template = get_template("notebooks.html")
-		allpages = Page.objects.order_by('sort_order')
-		allsubpages=[]
 		news = get_news()[0]
 		all_entries = util.notebook.get_notebooks()
-
-		try:
-			parent_subpages = Subpage.objects.filter(rootpage__path__exact='documentation', is_top=True).order_by('sort_order')
-		except:
-			parent_subpages=None
-
-		try:
-			current_parent = Subpage.objects.filter(rootpage__path__exact='documentation', path__exact='notebook')[0]
-		except:
-			current_parent=None
 
 	except IOError, err:
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'documentation',
 												 'current_subpage_path' : 'notebook',
-												 'all_pages' : allpages,
-												 'all_subpages' : allsubpages,
-												 'parent_subpages' : parent_subpages,
-												 'current_parent' : current_parent,
+												 'navbar' : navbar,
 												 'notebooks' : all_entries,
 												 'news' : news})))
 
 def markdown(request, mdfile):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
 	page='documentation'
 	markdown_requested=mdfile.replace('.md','')
 
 	try:
 		template = get_template("markdown.html")
-		allpages = Page.objects.order_by('sort_order')
-
-		try:
-			parent_subpages = Subpage.objects.filter(rootpage__path__exact=page, is_top=True).order_by('sort_order')
-		except:
-			parent_subpages = None
-
-		try:
-			current_parent = Subpage.objects.filter(rootpage__path__exact=page, path__exact=markdown_requested)[0]
-		except:
-			current_parent = None
 
 	except IOError, err:
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 							'current_subpage_path' : markdown_requested,
-							'all_pages' : allpages,
-							'all_subpages' : [],
-							'parent_subpages' : parent_subpages,
-							'current_parent' : current_parent,
+							'navbar' : navbar,
 							'html_fname' : "md2html/%s.html" % markdown_requested})))
 
 def planet(request):
 	try:
-		template = get_template("planet.html")
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
-		# Get all the pages.
-		allpages = Page.objects.order_by('sort_order')
+	try:
+		template = get_template("planet.html")
 
 		news = get_news()[0]
 
@@ -382,10 +346,9 @@ def planet(request):
 
 	return HttpResponse(template.render(Context({'current_page_path' : 'planet',
 												 'current_subpage_path' : 'shogun',
-												 'all_pages' : allpages,
-												 'all_subpages' : ['planet'],
+												 'navbar' : navbar,
 												 'articles' : articles,
-		                                         'news' : news})))
+		                     'news' : news})))
 
 # ----------------------------------------------------------------------------------------------------
 #                                           NEWS
@@ -395,6 +358,10 @@ def planet(request):
 #   - 'newslist' : show the list with all the news.
 #   - Show the news of one year.
 def news(request, subpage):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
 	# Set the page we are.
 	page = "news"
@@ -402,22 +369,13 @@ def news(request, subpage):
 	# choose the news template.
 	template = get_template(page + ".html")
 
-	defaultsubpages=[]
-	all_pages=[]
-	all_subpages=[]
 	articles=[]
 	news=[]
 	lastnew=[]
 
 	try:
 		# Get all the pages.
-		allpages = Page.objects.order_by('sort_order')
-
-		# Get default subpages.
-		defaultsubpages = Subpage.objects.filter(sort_order=1)
-
-		# Get all the subpages.
-		allsubpages = Subpage.objects.filter(rootpage__path__exact=page).order_by('sort_order')
+		allpages = ShogunPage.objects.all()
 
 		# Finding the articles.
 		if subpage == 'onenew':
@@ -432,28 +390,25 @@ def news(request, subpage):
 
 		news,lastnew=get_news()
 
-		parent_subpages = Subpage.objects.filter(rootpage__path__exact=page, is_top=True).order_by('sort_order')
-		current_parent = Subpage.objects.filter(rootpage__path__exact=page, path__exact=subpage)[0]
-
 	except ValueError, err:
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page_path' : page,
 												 'current_subpage_path' : subpage,
-												 'default_subpages' : defaultsubpages,
-												 'all_pages' : allpages,
-												 'all_subpages' : allsubpages,
-												 'parent_subpages' : parent_subpages,
-												 'current_parent' : current_parent,
+												 'navbar' : navbar,
 												 'articles' : articles,
-		                                         'news' : news,
-		                                         'lastnew' : lastnew})))
+		                     'news' : news,
+		                     'lastnew' : lastnew})))
 
 # ----------------------------------------------------------------------
 #                             PAGE HANDLER
 # ----------------------------------------------------------------------
 # To render correctly the other views (about,documentation,contact,...)
 def pageHandler(request,page,subpage):
+	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
 
 	# Choose the template.
 	try:
@@ -464,48 +419,26 @@ def pageHandler(request,page,subpage):
 		except (TemplateDoesNotExist,ValueError), err:
 			error(err)
 
-	# Find the pages.
+	# Get the page
 	try:
-		# Get all the pages.
-		allpages = Page.objects.order_by('sort_order')
-
-		# Get default subpages.
-		defaultsubpages = Subpage.objects.filter(sort_order=1)
-
-		# Get all the top subpages.
-		parent_subpages = Subpage.objects.filter(rootpage__path__exact=page, is_top=True).order_by('sort_order')
-
-		# Get the current parent subpage (which may or may not be the current subpage, i.e. if the current is a child)
-		# Assume that the path formed by page/subpage is unique for every subpage
-		current_subpage = Subpage.objects.filter(rootpage__path__exact=page, path__exact=subpage)[0]
-		if current_subpage.is_top == True:
-			current_parent = current_subpage
-		else:
-			for parent in parent_subpages:
-				# Assume every child subpage only has one parent
-				if current_subpage in parent.children.all():
-					current_parent = parent
+		page = ShogunPage.objects.get(path__exact=page+'/'+subpage)
 
 		if subpage=="downloads":
 			# Get all the releases.
 			articles = New.objects.order_by('-sg_ver')
 		else :
 			# Get the articles that are in page/subpage.
-			articles = Article.objects.filter(rootsubpage__rootpage__path__exact=page, rootsubpage__path__exact=subpage)
-
+			articles = Article.objects.filter(shogunpage=page)
 		news, lastnew=get_news()
-	except (IndexError,ValueError) as err:
+
+	except(IndexError,ValueError) as err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : page,
-												 'current_subpage_path' : subpage,
-												 'default_subpages' : defaultsubpages,
-												 'all_pages' : allpages,
-												 'parent_subpages' : parent_subpages,
-												 'current_parent' : current_parent,
-												 'articles' : articles,
-		                                         'news' : news,
-		                                         'lastnew' : lastnew})))
+	return HttpResponse(template.render(Context({'current_page' : page,
+												                       'articles' : articles,
+												                       'navbar' : navbar,
+		                                           'news' : news,
+		                                           'lastnew' : lastnew})))
 
 def docredirect(request, doc):
     from django.http import HttpResponseRedirect

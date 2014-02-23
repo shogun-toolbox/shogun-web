@@ -1,60 +1,72 @@
 ﻿{% extends "subpage.html" %}
 
-    {% block content %}
-            {% ifequal current_subpage_path "newslist" %}   
-                    
-                <!-- write the list with the link for the news. -->
-                <dt><h3> List of news order by date. </h3></dt>
-                <ul class="ul-news">
-				<table>
+{% block content %}
+
+        {% ifequal current_subpage_path "newslist" %}
+
+            <!-- write the list with the link for the news. -->
+            <h3> List of news order by date.</h3>
+				<table class="table table-condensed table-striped table-hover">
                     {% for article in articles %}
-					<tr><td><strong>{{ article.updated_date }}</strong></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td>
-							<a href="/new/{{ article.pk }}/">
-								<font size=1>SHOGUN {{ article.sg_ver }}
-                                </font>
-							</a></td><td><img src="/static/design/ico-arrow.gif" alt="->"/></td><td>
-								<font size=1>{{ article.author }} - 
-                                             {{ article.mail }}
-                                </font>
-					</td></tr>
+    					<tr>
+                            <td><strong>{{ article.updated_date }}</strong></td>
+                            <td><img src="/static/design/ico-arrow.gif" alt="->"/></td>
+                            <td><a href="/new/{{ article.pk }}/"><font size=1>SHOGUN {{ article.sg_ver }}</font></a></td>
+                            <td><img src="/static/design/ico-arrow.gif" alt="->"/></td>
+                            <td><font size=1>{{ article.author }} - {{ article.mail }}</font></td>
+                        </tr>
                     {% endfor %}
 				</table>
-                </ul>
-            {% else %}
+        {% else %}
 
-                <!-- Write the list of articles -->
-                {% for article in articles %}
-                    <dt><h4>
-                        {{ article.updated_date }} -
-                        {{ article.author }} - 
-                        {{ article.mail }}</h4></dt>
+            <!-- Write the list of articles -->
+            {% for article in articles %}
+                <h4>{{ article.updated_date }} - {{ article.author }} - {{ article.mail }}</h4>
 
-                    {% ifnotequal article.sg_ver '0.0.0' %}
-                        <center>
-                            <table>
-                                <tr><th>FTP</th>
-                                    <td><a href="{{ article.ftp_source_code }}">Source</a></td>
-                                    <td><a href="{{ article.ftp_md5sum }}">MD5</a></td>
-                                    <td><a href="{{ article.ftp_PGP_signature }}">PGP</a></td>
-									<td><a href="{{ article.ftp_data }}">Data</a></td>
-                                    <th>HTTP</th>
-                                    <td><a href="{{ article.http_source_code }}">Source</a></td>
-                                    <td><a href="{{ article.http_md5sum }}">MD5</a></td>
-                                    <td><a href="{{ article.http_PGP_signature }}">PGP</a></td>
-									<td><a href="{{ article.http_data }}">Data</a></td>
-                                </tr>
-                            </table>
-                        </center>
-                    {% endifnotequal %}
-                        
-                    <p align="justify">
-                        SHOGUN Release version {{ article.sg_ver }} ( libshogun {{ article.libshogun_ver }},
-                            data {{ article.data_ver }}, parameter {{ article.param_ver }})
+                {% ifnotequal article.sg_ver '0.0.0' %}
+                    <hr>
+                    <center>
+                    <div class="btn-group">
+                        <button class="btn btn-mini btn-primary">FTP</button>
+                        <button class="btn btn-mini">
+                            <a href="{{ article.ftp_source_code }}">Source</a>
+                        </button>
+                        <button class="btn btn-mini">
+                            <a href="{{ article.ftp_md5sum }}">MD5</a>
+                        </button>
+                        <button class="btn btn-mini">
+                            <a href="{{ article.ftp_PGP_signature }}">PGP</a>
+                        </button>
+                        <button class="btn btn-mini">
+                            <a href="{{ article.ftp_data }}">Data</a>
+                        </button>
 
-                        <br>
+                        <button class="btn btn-mini btn-primary">HTTP</button>
+                        <button class="btn btn-mini">
+                            <a href="{{ article.http_source_code }}">Source</a>
+                        </button>
+                        <button class="btn btn-mini">
+                            <a href="{{ article.http_md5sum }}">MD5</a>
+                        </button>
+                        <button class="btn btn-mini">
+                            <a href="{{ article.http_PGP_signature }}">PGP</a>
+                        </button>
+                        <button class="btn btn-mini">
+                            <a href="{{ article.http_data }}">Data</a>
+                        </button>
+                    </div>
+                    </center>
+                    <hr>
+                {% endifnotequal %}
 
-                        {{ article.content|safe }}</p><hr>
-                {% endfor %}
-            {% endifequal %}
+                <p align="justify">
+                    SHOGUN Release version {{ article.sg_ver }} ( libshogun {{ article.libshogun_ver }},
+                        data {{ article.data_ver }}, parameter {{ article.param_ver }})
 
-    {% endblock %}
+                    <br>
+
+                    {{ article.content|safe }}</p><hr>
+            {% endfor %}
+        {% endifequal %}
+
+{% endblock %}
