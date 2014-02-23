@@ -268,6 +268,11 @@ def matrix(request):
 
 def demo(request):
 	try:
+		navbar = get_navbar()
+	except ValueError, err:
+		error(err)
+
+	try:
 		template = get_template("notebooks.html")
 		news = get_news()[0]
 		all_entries = util.demo.get_demos()
