@@ -1,1 +1,1 @@
-SEQUENCE = ['add_shogunpage_to_article']
+SEQUENCE = ['lengthen_shogunpage_path_field']
