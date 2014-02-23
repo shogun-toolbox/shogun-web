@@ -127,7 +127,7 @@
                             {% load staticfiles %}
                             {% for notebook in notebookset %}
                                 <div class="span3">
-                                    <a href="{{notebook.0|safe}}">
+                                    <a class="overlay" href="{{notebook.0|safe}}">
                                         <img src="{{notebook.1|safe}}" alt="" style="width:140px; height:105px"/>
                                     </a>
                                 </div>
