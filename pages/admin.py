@@ -1,5 +1,7 @@
 
 # Import objetts.
+from pages.models import NavBar
+from pages.models import ShogunPage
 from pages.models import Article
 from pages.models import Subpage
 from pages.models import Page
@@ -17,10 +19,14 @@ class NewOptions(admin.ModelAdmin):
 	class Media:
 		js = ('../static/js/tiny_mce/tiny_mce.js',
 			  '../static/js/editors/textfield.js')
-		
+
 # Objects editable by admin.
+admin.site.register(NavBar)
+admin.site.register(ShogunPage)
 admin.site.register(Article, ArticleOptions)
+admin.site.register(New, NewOptions)
+
+# legacy to be deleted
 admin.site.register(Subpage)
 admin.site.register(Page)
-admin.site.register(New, NewOptions)
 
