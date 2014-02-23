@@ -55,10 +55,15 @@
 }
 /* Reposition the controls slightly */
 .carousel-control {
-    left: -12px;
+    left: -8px;
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    line-height: 16px;
+    top: 70px;
 }
 .carousel-control.right {
-    right: -12px;
+    right: -8px;
 }
 /* Changes the position of the indicators */
 .carousel-indicators {
@@ -72,7 +77,12 @@
     background: #c0c0c0;
 }
 .carousel-indicators .active {
-background: #333333;
+    background: #333333;
+}
+.carousel-inner {
+    position:relative;
+    right: -30px;
+    top: 4px;
 }
 </style>
 <div class="container">
@@ -122,13 +132,5 @@ background: #333333;
 </div>
 
 <hr>
-
-<script>
-$(document).ready(function() {
-    $('#myCarousel').carousel({
-        interval: 10000
-    })
-});
-</script>
 
 {% endblock %}
