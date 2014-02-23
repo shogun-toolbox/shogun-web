@@ -1,6 +1,10 @@
 body {padding:35px 0; background:url("../design/bg.gif") 0 0 repeat-x; font:0.75em/1.6 "arial", sans-serif;}
 body {background-color:#E9E9E9; color:#000;}
 
+.well {
+    background-color: white;
+}
+
 /* shogun planet */
 .entrygroup { margin-right: -10px;}
 .entrygroup h4 {
