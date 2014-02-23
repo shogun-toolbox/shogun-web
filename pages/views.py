@@ -52,6 +52,10 @@ def get_navbar():
 	navbar = NavBar.objects.get()
 	return navbar
 
+class fake_page:
+		def __init__(self, path):
+				self.path = path
+
 # ----------------------------------------------------------------------
 #                                HOME
 # ----------------------------------------------------------------------
@@ -256,8 +260,7 @@ def matrix(request):
 
 	news = get_news()[0]
 
-	details={'current_page_path' : 'features',
-			 'current_subpage_path' : 'matrix',
+	details={'current_page' : fake_page('documentation/features'),
 			 'navbar' : navbar,
 			 'news' : news,
 			 'table' : util.matrix.get_matrix(),
@@ -345,12 +348,11 @@ def planet(request):
 			polished='<dt><h1>' + article.h2.string + '</h1></dt>'
 			articles.append(polished + unicode(article.div.div).replace('class="content"',"").replace('{tex}','\[').replace('{/tex}','\]'))
 
-
 	except Exception, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : 'planet',
-												 'current_subpage_path' : 'shogun',
+	return HttpResponse(template.render(Context({'current_page' : fake_page('planet'),
+
 												 'navbar' : navbar,
 												 'articles' : articles,
 		                     'news' : news})))
