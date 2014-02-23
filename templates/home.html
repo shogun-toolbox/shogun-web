@@ -10,38 +10,55 @@
     {% include "cbase_box.html" %}
 </div>
 
-<style>
-.col{
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-}
-
-.col-wrap{
-    overflow: hidden;
-}
-</style>
 <div class="container">
-    <div class="row col-wrap">
-    <div class="span12">
-        <div class="well span3 col">
-          <h4>Shogun Features</h4>
-          <strong>A large scale machine learning toolbox.<br></strong>
-            <p>SHOGUN is designed for unified large-scale learning for a broad range of feature
-            types and learning settings, like classification, regression, or explorative data analysis.</p>
-            &nbsp;
-            <p><a class="btn btn-info" href="/page/about/information/">More&raquo;</a></p>
+    <div class="box-02-top"></div>
+    <div class="box-02 box">
+
+        <div class="col left in">
+            <div class="in">
+                <h2>Shogun Features</h2>
+                <p align="justify">
+                    <strong>A large scale machine learning toolbox.</strong>
+                    <br>
+                    SHOGUN is designed for unified large-scale learning for a broad range of feature
+                    types and learning settings, like classification, regression, or explorative data analysis.
+                </p>
+            </div>
+            <p class="nom"><a href="/page/about/information/"><img src="/static/design/btn-more.gif" alt="More" /></a></p>
         </div>
-        <div class="well span3 col">
-          <h4>Google Summer of Code</h4>
-          <strong>Summer of Code 2013 was a huge success.<br></strong>
-            <p>All our 8 students successfully passed GSoC 2013. Congratulations! Their code will be in the next release. Students  it has been a great pleasure! We look forward to continue working with you!</p>
-          <p><a class="btn btn-info" href="/page/Events/gsoc2013/">More&raquo;</a></p>
+
+        <div class="col center">
+            <div class="in">
+                <h2>Google Summer of Code 2014</h2>
+                <p align="justify">
+                    <strong>We have applied as a mentoring org.<br></strong>
+                    Our list of project ideas this year is full of exciting and fun
+                    projects. There is also a new guide for prospective students. Let's now keep
+                    our fingers crossed until accepted mentoring orgs are announced!
+                </p>
+            </div>
+            <p class="nom"><a href="/page/Events/gsoc2014/"><img src="/static/design/btn-more.gif" alt="More" /></a></p>
         </div>
-        <div class="well span3 col">
-            {% include "whats_new.html" %}
+
+        <div class="col right">
+            <div class="in">
+                <h2>What´s New</h2>
+                <ul class="ul-news">
+                    <table>
+                    {% for new in news %}
+                        <tr>
+                            <td><strong>{{ new.updated_date }}</strong></td>
+                            <td><img src="/static/design/ico-arrow.gif" alt="->"/></td>
+                            <td><a href="/new/{{ new.pk }}/"><font size=1>SHOGUN {{ new.sg_ver }}</font></a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                </ul>
+            </div>
+            <p class="nom"><a href="/page/news/newslist/"><img src="/static/design/btn-more.gif" alt="More" /></a></p>
         </div>
     </div>
-    </div>
+    <div class="box-02-bottom"></div>
 </div>
 
 <hr>
