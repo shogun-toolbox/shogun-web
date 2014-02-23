@@ -351,7 +351,7 @@ def planet(request):
 	except Exception, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page' : fake_page('planet'),
+	return HttpResponse(template.render(Context({'current_page' : fake_page('planet/shogun'),
 
 												 'navbar' : navbar,
 												 'articles' : articles,
