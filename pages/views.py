@@ -169,7 +169,7 @@ def irclog(request, year, month, day):
 	except Exception, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page' : fake_page('contact/irc/irclogs'),
+	return HttpResponse(template.render(Context({'current_page' : fake_page(request.path[6:-1]+'/'),
 												 'navbar' : navbar,
 												 'logfile' : logfile,
 		                     'news' : news})))
@@ -243,7 +243,7 @@ def irclogs(request):
 	except IOError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page' : fake_page('contact/irc/irclogs'),
+	return HttpResponse(template.render(Context({'current_page' : fake_page('contact/irclogs//'),
 												 'navbar' : navbar,
 												 'irclogfiles' : all_entries,
 		                      'news' : news})))
