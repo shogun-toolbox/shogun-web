@@ -244,8 +244,8 @@ class myContentHandler(ContentHandler):
         # Set the last stored date to the actual date (Solve the
         # problem of loading news and not reset the server, note
         # that we need at least one second of difference).
-        time.sleep(1)
-        self.lastStoredDate = datetime.now().timetuple()
+        self.lastStoredDate = (datetime.now()+timedelta(0,1)).timetuple()
+
 
     ##
     # Method that list the content of the folder.
