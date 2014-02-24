@@ -256,7 +256,7 @@ def matrix(request):
 
 	news = get_news()[0]
 
-	details={'current_page' : fake_page('documentation/features'),
+	details={'current_page' : fake_page('features'),
 			 'navbar' : navbar,
 			 'news' : news,
 			 'table' : util.matrix.get_matrix(),
