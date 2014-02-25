@@ -431,7 +431,7 @@ def pageHandler(request,page,subpage):
 			articles = Article.objects.filter(shogunpage=page)
 		news, lastnew=get_news()
 
-	except(IndexError,ValueError) as err:
+	except(IndexError,ValueError,ShogunPage.DoesNotExist) as err:
 		error(err)
 
 	return HttpResponse(template.render(Context({'current_page' : page,
