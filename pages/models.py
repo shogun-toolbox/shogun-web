@@ -55,7 +55,6 @@ class Subpage(models.Model):
 
 
 class Article (models.Model):
-	rootsubpage = models.ForeignKey(Subpage, blank=True, null=True);
 	shogunpage = models.ForeignKey(ShogunPage, blank=True, null=True);
 	sort_order = models.IntegerField();
 	date = models.DateField();
