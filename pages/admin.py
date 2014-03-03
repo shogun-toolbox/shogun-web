@@ -25,4 +25,3 @@ admin.site.register(NavBar)
 admin.site.register(ShogunPage)
 admin.site.register(Article, ArticleOptions)
 admin.site.register(New, NewOptions)
-

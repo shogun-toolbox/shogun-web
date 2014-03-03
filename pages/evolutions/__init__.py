@@ -1,1 +1,1 @@
-SEQUENCE = ['lengthen_shogunpage_path_field']
+SEQUENCE = ['remove_rootpage_from_article']
