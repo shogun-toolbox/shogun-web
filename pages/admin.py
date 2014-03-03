@@ -26,7 +26,3 @@ admin.site.register(ShogunPage)
 admin.site.register(Article, ArticleOptions)
 admin.site.register(New, NewOptions)
 
-# legacy to be deleted
-admin.site.register(Subpage)
-admin.site.register(Page)
-
