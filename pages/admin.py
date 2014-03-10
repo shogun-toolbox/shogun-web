@@ -3,8 +3,6 @@
 from pages.models import NavBar
 from pages.models import ShogunPage
 from pages.models import Article
-from pages.models import Subpage
-from pages.models import Page
 from pages.models import New
 
 from django.contrib import admin
