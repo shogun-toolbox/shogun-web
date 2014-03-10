@@ -26,11 +26,8 @@ class Article (models.Model):
 	author = models.CharField(max_length=20);
 	content = models.TextField();
 
-	class Meta:
-		ordering = ['rootsubpage__rootpage__sort_order','rootsubpage__sort_order','sort_order']
-
 	def __unicode__(self):
-		return str(self.rootsubpage.rootpage.path) + "/" + str(self.rootsubpage.path) + " - " + str(self.title)
+		return str(self.shogunpage.path) + " - " + str(self.title)
 
 
 class New (models.Model):
