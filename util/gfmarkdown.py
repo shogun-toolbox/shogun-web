@@ -6,7 +6,7 @@ try:
   from shogun.settings import SRC_DIR
 except ImportError:
   print 'Module shogun.settings not found. Add the root directory of shogun-web to the PYTHONPATH.'
-  print 'For instance, from shogun-web\'s root directory do: PYTHONPATH=. util/markdown.py'
+  print 'For instance, from shogun-web\'s root directory do: PYTHONPATH=. util/gfmarkdown.py'
   sys.exit(0)
 
 try:
@@ -16,8 +16,10 @@ except ImportError:
   print 'or see the documentation at http://jacquev6.github.io/PyGithub/.'
   sys.exit(0)
 
+
 def print_help():
   print 'markdown.py -d <root directory to recursively look for md files>'
+
 
 def get_html_from_md(md_fname):
   md_file = open(md_fname, 'r')
@@ -26,6 +28,8 @@ def get_html_from_md(md_fname):
   g = Github()
   return g.render_markdown(md_content)
 
+
+# Main
 if __name__ == "__main__":
   rootdir = SRC_DIR
 

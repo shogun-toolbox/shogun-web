@@ -310,6 +310,11 @@ def markdown(request, mdfile):
 		error(err)
 
 	page='documentation'
+
+	# hack for nested markdown
+	if mdfile == 'doc':
+		mdfile = request.path.split('/')[-1]
+
 	markdown_requested=mdfile.replace('.md','')
 
 	try:
@@ -318,8 +323,8 @@ def markdown(request, mdfile):
 	except IOError, err:
 		error(err)
 
-	return HttpResponse(template.render(Context({'current_page_path' : page,
-							'current_subpage_path' : markdown_requested,
+	return HttpResponse(template.render(Context({
+							'current_page' : fake_page(page +'/' + markdown_requested),
 							'navbar' : navbar,
 							'html_fname' : "md2html/%s.html" % markdown_requested})))
 
