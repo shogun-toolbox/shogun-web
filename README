@@ -7,6 +7,13 @@ Adding Content
 From the admin page create a new ShogunPage and then create a new article that links to it. 
 You will also need to edit the navbar to add your new page to the navbar
 
+Adding Markdown pages from GitHub
+run:
+
+    PYTHONPATH=. util/gfmarkdown.py -d <path to shogun repo>
+
+from the shogun web / directory to get the latest markdown files and prepare them for the website
+
 Explanation of directory content
 ================================
 
