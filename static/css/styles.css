@@ -250,7 +250,7 @@ Page: Homepage
 
     .box-02 .col {position:relative; float:left; width:300px; padding-bottom:17px; margin-bottom:-6px; z-index:2; background-position:100% 100%; background-repeat:no-repeat;}
     .box-02 .col.left {background-image:url("../design/image-01.jpg");}
-    .box-02 .col.center {background-image:url("../design/soc-logo-190.png");}
+    /*.box-02 .col.center {background-image:url("../design/soc-logo-190.png");}*/
     .box-02 .col .in {min-height:180px; height:auto;}
     .box-02 .col h2 {margin:0; font-size:100%; font-weight:bold; text-transform:uppercase;}
     .box-02 .col p {margin:15px 0;}
