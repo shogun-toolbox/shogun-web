@@ -262,7 +262,7 @@ Page: Homepage
     .box-04 .box-04-title {float:left; display:block;padding-top:22px;}
     .box-04 .box-04-title h3 { color: white; float:left; margin:0; padding-left:8px; height:36px; overflow:hidden; background:url("../design/box-04-title-l.gif") 0 0 no-repeat; font-weight:bold; text-transform:uppercase; font-size:100%;}
     .box-04 .box-04-title h3 span {float:left; display:block; padding:0px 15px 9px 7px; background:url("../design/box-04-title-r.gif") 100% 0 no-repeat;}
-    .box-04 .box-04-links {float:left; margin:0; padding:30px 0 0 22px;}
+    .box-04 .box-04-links {margin:0; padding:24px 0 0 22px;}
     .box-04 .box-04-links span {margin:0 10px;}
     .box-04 .logo img {float:right; display:block;margin:0; padding:0;}
 
