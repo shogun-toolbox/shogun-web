@@ -1,5 +1,3 @@
-import shogun.settings as settings
-
 def decode_image(image):
 	import base64
 	return base64.b64decode(''.join(image))
@@ -9,7 +7,7 @@ def get_first_image_raw(fname, url):
 	image=None
 	for line in file(fname).readlines():
 		if image is not None:
-			if line.startswith('">'):
+			if line.startswith('">') or line.startswith('"'):
 				image.append('"/></a>')
 				return ''.join(image)
 			else:
@@ -37,7 +35,7 @@ def get_first_image(fname):
 	image=None
 	for line in file(fname).readlines():
 		if image is not None:
-			if line.startswith('">'):
+			if line.startswith('">') or line.startswith('"'):
 				return decode_image(image)
 			else:
 				image.append(line[:-1])
@@ -88,6 +86,7 @@ def get_notebooks(with_abstract=True):
 
 def get_notebook_list(suffix=".html"):
 	import os
+	import shogun.settings as settings
 	nbdir=settings.NOTEBOOK_DIR
 	nburl=settings.NOTEBOOK_URL
 	nbs=[ '%s/%s' % (nbdir, f) for f in os.listdir(nbdir) if f.endswith(suffix) ]
@@ -99,3 +98,7 @@ def get_notebook_list(suffix=".html"):
 		nburl + '/' + os.path.basename(nbs[i]), \
 		'/notebooks/thumb/%d/' % i) for i in xrange(len(nbs))]
 	return nbs
+
+if __name__ == '__main__':
+	x=get_first_image('/home/shogun/static/notebook/current/gaussian_processes.html')
+	print x
