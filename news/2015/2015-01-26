@@ -1,0 +1,20 @@
+<new>
+    <updated_date>2015-01-26</updated_date>
+    <author>Soeren Sonnenburg</author>
+    <sg_ver>4.0.0</sg_ver>
+    <sg_bver>4.0.0</sg_bver>
+    <libshogun_ver>17.0</libshogun_ver>
+    <data_ver>0.9</data_ver>
+    <param_ver>1</param_ver>
+    <content>
+
+	* This release also contains several cleanups and bugfixes:
+	* Features:
+		- New Shogun project description [Heiko Strathmann]
+	* Bugfixes:
+		- Fix R modular interface SWIG typemap (Requires SWIG >= 2.0.5) [Matt Huska]
+	* Cleanup and API Changes:
+		- Hide many methods from SWIG, reducing compile memory by 500MiB [Heiko Strathmann, Fernando Iglesias, Thoralf Klein]
+
+    </content>
+</new>

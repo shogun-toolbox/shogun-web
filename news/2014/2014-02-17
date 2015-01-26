@@ -1,0 +1,29 @@
+<new>
+    <updated_date>2014-02-17</updated_date>
+    <author>Soeren Sonnenburg</author>
+    <sg_ver>3.2.0</sg_ver>
+    <sg_bver>3.2.0</sg_bver>
+    <libshogun_ver>16.0</libshogun_ver>
+    <data_ver>0.8</data_ver>
+    <param_ver>1</param_ver>
+    <content>
+
+	* This release also contains several cleanups and bugfixes:
+	* Features:
+		- Fully support python3 now
+		- Add mini-batch k-means [Parijat Mazumdar]
+		- Add k-means++ [Parijat Mazumdar]
+		- Add sub-sequence string kernel [lambday]
+	* Bugfixes:
+		- Compile fixes for upcoming swig3.0
+		- Speedup for gaussian process' apply()
+		- Improve unit / integration test checks
+		- libbmrm uninitialized memory reads
+		- libocas uninitialized memory reads
+		- Octave 3.8 compile fixes [Orion Poplawski]
+		- Fix java modular compile error [Bjoern Esser]
+	* Cleanup and API Changes:
+		- None
+
+    </content>
+</new>
